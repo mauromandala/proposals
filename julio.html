@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partnership Commerciale — Mauro Mandalari</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy: #1e3a5f;
+            --gold: #c8a96e;
+            --text: #2d3748;
+            --text-light: #718096;
+            --bg: #f7f8fc;
+            --white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: var(--navy);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .hero-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .hero-sub {
+            font-size: 22px;
+            font-weight: 300;
+            opacity: 0.75;
+            margin-bottom: 36px;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            font-size: 16px;
+            opacity: 0.5;
+        }
+
+        /* ── LAYOUT ── */
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 64px 0;
+        }
+
+        .section + .section {
+            border-top: 1px solid var(--border);
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 31px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 20px;
+        }
+
+        .section-text {
+            font-size: 19px;
+            color: var(--text);
+            line-height: 1.8;
+            max-width: 700px;
+        }
+
+        .section-text + .section-text {
+            margin-top: 14px;
+        }
+
+        .highlight {
+            background: var(--navy);
+            color: white;
+            border-radius: 12px;
+            padding: 24px 32px;
+            margin-top: 32px;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        /* ── SERVICES ── */
+        .services-wrap {
+            background: var(--bg);
+        }
+
+        .services-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 28px 32px;
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .service-number {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .service-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .service-desc {
+            font-size: 17px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .service-desc ul {
+            margin: 8px 0 0 18px;
+        }
+
+        .service-desc li {
+            margin-bottom: 4px;
+        }
+
+        .service-note {
+            font-size: 16px;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 12px;
+        }
+
+        .service-price {
+            text-align: right;
+            white-space: nowrap;
+            padding-top: 4px;
+        }
+
+        .price-label {
+            font-size: 13px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .price-value {
+            font-size: 29px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        /* Analytics sub-cards */
+        .analytics-configs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .analytics-config {
+            background: var(--bg);
+            border-radius: 8px;
+            padding: 14px 16px;
+        }
+
+        .analytics-config-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+
+        .analytics-config-desc {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* ── COMMERCIAL MODEL ── */
+        .model-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 32px;
+        }
+
+        .model-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 18px;
+        }
+
+        .model-table td:first-child {
+            color: var(--text-light);
+            width: 42%;
+        }
+
+        .model-table td:last-child {
+            font-weight: 500;
+            color: var(--navy);
+        }
+
+        .model-table tr:first-child td {
+            border-top: 1px solid var(--border);
+        }
+
+        .fee-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .fee-note {
+            margin-top: 24px;
+            padding: 18px 24px;
+            background: var(--white);
+            border-radius: 8px;
+            border-left: 3px solid var(--gold);
+            font-size: 17px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* ── STEPS ── */
+        .steps-wrap {
+            background: var(--white);
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            margin-top: 40px;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 52px 1fr;
+            gap: 20px;
+            padding: 24px 0;
+        }
+
+        .step + .step {
+            border-top: 1px solid var(--border);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--navy);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-size: 19px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 6px;
+        }
+
+        .step-desc {
+            font-size: 17px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ── CONDITIONS ── */
+        .conditions-list {
+            list-style: none;
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .conditions-list li {
+            font-size: 18px;
+            color: var(--text);
+            padding: 14px 20px;
+            background: var(--white);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .conditions-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ── CTA ── */
+        .cta-section {
+            background: var(--navy);
+            color: white;
+            padding: 72px 40px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            font-size: 19px;
+            opacity: 0.75;
+            max-width: 560px;
+            margin: 0 auto 36px;
+            line-height: 1.8;
+        }
+
+        .contact-block {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 28px 48px;
+        }
+
+        .contact-name {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .contact-detail {
+            font-size: 17px;
+            opacity: 0.6;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            background: #0f1f38;
+            color: rgba(255,255,255,0.3);
+            text-align: center;
+            padding: 24px;
+            font-size: 14px;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 620px) {
+            .hero { padding: 52px 24px; }
+            .hero h1 { font-size: 28px; }
+            .hero-meta { flex-direction: column; gap: 6px; }
+            .service-card { grid-template-columns: 1fr; }
+            .service-price { text-align: left; }
+            .analytics-configs { grid-template-columns: 1fr; }
+            .section { padding: 48px 0; }
+            .cta-section { padding: 52px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-label">Proposta di Partnership Commerciale</div>
+    <h1>Posizionamento Digitale<br>per la Struttura Ricettiva</h1>
+    <div style="font-size: 17px; color: rgba(255,255,255,0.65); margin-bottom: 28px; font-weight: 400;">Sito web su misura con integrazione del booking engine esterno</div>
+    <div class="hero-sub">Preparata per Julio</div>
+    <div class="hero-meta">
+        <span>Mauro Mandalari</span>
+        <span>Maggio 2026</span>
+        <span>Validità 60 giorni</span>
+    </div>
+</div>
+
+<!-- CONTESTO -->
+<div class="container">
+    <div class="section">
+        <div class="section-label">Il Contesto</div>
+        <div class="section-title">Una partnership che ottimizza l'intero processo digitale di un hotel.</div>
+        <p class="section-text">Come revenue manager hai già il rapporto di fiducia con le strutture, la visione sui numeri e la capacità di identificare dove si perdono opportunità. Quello che questa partnership aggiunge è la componente tecnica e strategica del canale diretto: il sito come strumento di acquisizione autonomo, non come brochure.</p>
+        <p class="section-text">Ogni servizio — dalla UX all'integrazione con il booking engine — è pensato per lavorare in coordinamento con la tua attività di revenue management. Il risultato è un processo fluido: tu gestisci la strategia tariffaria, io consegno il processo digitale che la supporta.</p>
+        <p class="section-text">Non è una collaborazione nuova. Insieme abbiamo già sviluppato <a href="https://maisondeigreci.com/" target="_blank" style="color: var(--navy); font-weight: 600; text-decoration: underline;">Maison dei Greci</a> — una guesthouse boutique a Roma. Quel progetto definisce il livello qualitativo di UX e UI che porto su ogni struttura.</p>
+        <div class="highlight">
+            Non devi occuparti della parte tecnica. Non devi gestire fornitori. Segnali la struttura, io mi occupo del resto.
+        </div>
+    </div>
+</div>
+
+<!-- SERVIZI -->
+<div class="services-wrap">
+<div class="container">
+    <div class="section">
+        <div class="section-label">I Servizi</div>
+        <div class="section-title">Cinque interventi. Un sistema coerente.</div>
+        <p class="section-text">Ogni progetto viene calibrato sulla struttura specifica. Di seguito i servizi disponibili con il relativo prezzo netto di riferimento.</p>
+        <p class="section-text">Una precisazione importante: i prezzi che trovi qui sono volutamente calibrati al ribasso rispetto al valore reale di questa soluzione. UX professionale, accessibilità certificata, SEO tecnica hospitality, analytics avanzate, integrazione booking engine con coordinamento diretto — è un pacchetto premium che sul mercato vale considerevolmente di più. Ho scelto una tariffazione competitiva perché il modello funziona quando funziona per entrambi: il tuo 15% deve essere un margine concreto, non una cifra simbolica.</p>
+
+        <div class="services-grid">
+
+            <div class="service-card">
+                <div>
+                    <div class="service-number">01</div>
+                    <div class="service-title">Sito Web Multilingua — UX, UI e Sviluppo</div>
+                    <div class="service-desc">
+                        Progettazione dell'esperienza utente, design dell'interfaccia e sviluppo su CMS.
+                        <ul>
+                            <li>Architettura delle pagine orientata alla conversione, non alla vetrina</li>
+                            <li>Versione multilingua (IT + EN di base; ulteriori lingue a preventivo)</li>
+                            <li>Ottimizzazione mobile e Core Web Vitals</li>
+                            <li>Gestione autonoma di tutti i contenuti del sito in tutte le lingue, senza dipendere da un tecnico</li>
+                        </ul>
+                        <div class="service-note">Il prezzo varia in funzione del numero di pagine, lingue e livello di personalizzazione grafica.</div>
+                    </div>
+                </div>
+                <div class="service-price">
+                    <span class="price-label">a partire da</span>
+                    <span class="price-value">€3.000</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div>
+                    <div class="service-number">02</div>
+                    <div class="service-title">Conformità Accessibilità — WCAG 2.1 AA</div>
+                    <div class="service-desc">
+                        Adeguamento agli standard europei di accessibilità digitale. Obbligo già in vigore per strutture con più di 10 dipendenti o fatturato superiore a 2 milioni di euro.
+                        <ul>
+                            <li>Audit di conformità</li>
+                            <li>Correzioni tecniche</li>
+                            <li>Dichiarazione di accessibilità</li>
+                        </ul>
+                        <div class="service-note">Consigliato anche per strutture non obbligate: migliora il posizionamento organico e riduce il rischio legale futuro.</div>
+                    </div>
+                </div>
+                <div class="service-price">
+                    <span class="price-label">a partire da</span>
+                    <span class="price-value">€650</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div>
+                    <div class="service-number">03</div>
+                    <div class="service-title">SEO Tecnica — Schema.org Hospitality</div>
+                    <div class="service-desc">
+                        Implementazione del markup strutturato specifico per il settore hospitality.
+                        <ul>
+                            <li>Schema per tipologia di camere, servizi, prezzi e disponibilità</li>
+                            <li>LocalBusiness e LodgingBusiness markup</li>
+                            <li>Breadcrumb e FAQ strutturate</li>
+                        </ul>
+                        <div class="service-note">Risultato: maggiore visibilità nei risultati di ricerca arricchiti (rich snippet) e nei comparatori di Google.</div>
+                    </div>
+                </div>
+                <div class="service-price">
+                    <span class="price-label">a partire da</span>
+                    <span class="price-value">€700</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div>
+                    <div class="service-number">04</div>
+                    <div class="service-title">Analytics Avanzate</div>
+                    <div class="service-desc">
+                        Setup completo di misurazione senza cookie di terze parti. Due configurazioni disponibili:
+                        <div class="analytics-configs">
+                            <div class="analytics-config">
+                                <div class="analytics-config-title">Umami Analytics</div>
+                                <div class="analytics-config-desc">Soluzione open source cookieless. Dati di proprietà della struttura. Nessun costo ricorrente.</div>
+                            </div>
+                            <div class="analytics-config">
+                                <div class="analytics-config-title">GTM Server-Side</div>
+                                <div class="analytics-config-desc">Per strutture con campagne paid attive. Tracciamento conversioni accurato su Google Ads e Meta Ads.</div>
+                            </div>
+                        </div>
+                        <div class="service-note">GTM server-side richiede infrastruttura cloud dedicata (€15-30/mese a carico della struttura). Umami non ha costi ricorrenti.</div>
+                    </div>
+                </div>
+                <div class="service-price">
+                    <span class="price-label">a partire da</span>
+                    <span class="price-value">€550</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div>
+                    <div class="service-number">05</div>
+                    <div class="service-title">Integrazione Booking Engine e Channel Manager</div>
+                    <div class="service-desc">
+                        Connessione del sito con il sistema di prenotazione diretta e il channel manager già in uso dalla struttura.
+                        <ul>
+                            <li>Integrazione widget o API del booking engine</li>
+                            <li>Coordinamento diretto con i referenti tecnici del Booking Engine per un'integrazione custom all'interno del sito</li>
+                            <li>Verifica della coerenza tariffaria tra canali</li>
+                            <li>Test di flusso completo pre-go live</li>
+                        </ul>
+                        <div class="service-note">Il prezzo varia in funzione del booking engine e del channel manager specifici. Sistemi con API documentata rientrano nel prezzo base.</div>
+                    </div>
+                </div>
+                <div class="service-price">
+                    <span class="price-label">a partire da</span>
+                    <span class="price-value">€800</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- TOTALE -->
+        <div style="margin-top: 24px; background: var(--navy); border-radius: 12px; padding: 24px 32px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <div style="font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px;">Investimento totale</div>
+                <div style="font-size: 17px; color: rgba(255,255,255,0.65);">Tutti e cinque i servizi</div>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 13px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">a partire da</div>
+                <div style="font-size: 38px; font-weight: 700; color: white;">€5.700</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<!-- ASSISTENZA POST-LANCIO -->
+<div class="container">
+    <div class="section">
+        <div class="section-label">Dopo il lancio</div>
+        <div class="section-title">Due mesi di assistenza inclusa.</div>
+        <p class="section-text">Per i primi due mesi dalla messa online del sito, l'assistenza è inclusa nel progetto senza costi aggiuntivi. Correzioni, aggiustamenti, piccole modifiche ai contenuti, aggiornamenti software: la struttura non è lasciata sola nel momento in cui il sito inizia a lavorare.</p>
+        <p class="section-text" style="margin-top: 16px;">Al termine dei due mesi, è disponibile un piano di manutenzione continuativa a <strong>€150–200/mese</strong>, che include:</p>
+        <ul style="margin: 12px 0 0 20px; color: var(--text); font-size: 17px; line-height: 1.8;">
+            <li>Aggiornamenti software periodici</li>
+            <li>Backup automatici e ripristino garantito entro 24 ore</li>
+            <li>Monitoraggio di sicurezza e protezione da malware</li>
+        </ul>
+        <div class="highlight" style="margin-top: 24px;">
+            Il lancio non è la fine del progetto. È il momento in cui il sito comincia a produrre risultati — e in cui serve qualcuno disponibile se qualcosa va aggiustato.
+        </div>
+    </div>
+</div>
+
+<!-- MODELLO COMMERCIALE -->
+<div class="container">
+    <div class="section">
+        <div class="section-label">Il Modello Commerciale</div>
+        <div class="section-title">Semplice e trasparente.</div>
+
+        <table class="model-table">
+            <tr>
+                <td>Prezzi al cliente finale</td>
+                <td>Definiti insieme prima di ogni preventivo</td>
+            </tr>
+            <tr>
+                <td>Fee di partnership</td>
+                <td><span class="fee-value">15%</span> sul valore netto fatturato</td>
+            </tr>
+
+        </table>
+
+        <div class="fee-note">
+            La fee è riconosciuta su ogni servizio attivato, inclusi eventuali ampliamenti rispetto al progetto iniziale concordati entro 6 mesi dall'avvio. I prezzi netti sono costruiti per lasciare spazio reale al tuo margine — non devi giustificare il costo alla struttura, perché il rapporto qualità/prezzo è già dalla tua parte.
+        </div>
+    </div>
+</div>
+
+<!-- PROCESSO -->
+<div class="steps-wrap">
+<div class="container">
+    <div class="section">
+        <div class="section-label">Il Processo</div>
+        <div class="section-title">Come lavoriamo insieme.</div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>
+                    <div class="step-title">Segnalazione</div>
+                    <div class="step-desc">Mi presenti la struttura e il contesto: dimensione, esigenze, urgenza. Bastano poche righe.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>
+                    <div class="step-title">Sopralluogo digitale</div>
+                    <div class="step-desc">Analizzo il sito attuale e preparo un brief di progetto in 48 ore.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>
+                    <div class="step-title">Preventivo personalizzato</div>
+                    <div class="step-desc">Documento PDF con scope, timing e prezzo — pronto entro pochi minuti dalla call di analisi.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div>
+                    <div class="step-title">Avvio</div>
+                    <div class="step-desc">Una volta confermato il progetto dalla struttura, inizia l'esecuzione. La gestione commerciale verso la struttura rimane interamente tua.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- CONDIZIONI -->
+<div class="container">
+    <div class="section">
+        <div class="section-label">Condizioni</div>
+        <div class="section-title">Le basi del rapporto.</div>
+        <ul class="conditions-list">
+            <li>Ogni preventivo ha validità 30 giorni</li>
+            <li>Il pagamento della fee avviene entro 15 giorni dalla ricezione dell'acconto da parte della struttura</li>
+            <li>La partnership non è in esclusiva, salvo accordo diverso</li>
+            <li>È richiesta riservatezza reciproca sui prezzi netti</li>
+        </ul>
+    </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+    <h2>Prossimo passo</h2>
+    <p>Se il modello è chiaro e i termini sono condivisibili, identifichiamo insieme la prima struttura su cui testare la collaborazione. Un progetto pilota ci permette di calibrare il processo e costruire un caso concreto da cui partire.</p>
+    <div class="contact-block">
+        <span class="contact-name">Mauro Mandalari</span>
+        <span class="contact-detail">info@mauromandalari.it</span>
+        <span class="contact-detail">392 850 5348</span>
+    </div>
+</div>
+
+<div class="footer">
+    Proposta riservata — preparata per Julio &nbsp;·&nbsp; Maggio 2026 &nbsp;·&nbsp; Validità 60 giorni
+</div>
+
+</body>
+</html>
