@@ -242,12 +242,18 @@ body {
   border-bottom: 1px solid var(--border);
 }
 .abc-package.featured .abc-package-name { color: var(--gold); }
-.abc-package-price {
-  font-size: clamp(25px, 3.40vw, 46px);
-  color: var(--gold);
+.abc-package-price-old {
+  font-size: clamp(16px, 1.80vw, 24px);
+  color: var(--muted);
+  text-decoration: line-through;
   margin-top: 2.5vh;
   padding-top: 1.8vh;
   border-top: 1px solid var(--border);
+  margin-bottom: 0.2vh;
+}
+.abc-package-price {
+  font-size: clamp(25px, 3.40vw, 46px);
+  color: var(--gold);
   margin-bottom: 0.3vh;
 }
 .abc-package-price-note { font-size: clamp(12px, 1.32vw, 16px); color: var(--muted); }
@@ -681,7 +687,8 @@ body {
         <li class="out">Nessuna implementazione inclusa</li>
         <li class="out">Nessuna modifica al sito</li>
       </ul>
-      <div class="abc-package-price">€500 – €650</div>
+      <div class="abc-package-price-old">€950</div>
+      <div class="abc-package-price">€750</div>
       <div class="abc-package-price-note">Diagnosi e piano d'azione</div>
     </div>
     <div class="abc-package">
@@ -698,7 +705,8 @@ body {
         <li class="out">Analytics strutturate</li>
         <li class="out">SEO tecnica alimentare</li>
       </ul>
-      <div class="abc-package-price">€3.800 – €4.200</div>
+      <div class="abc-package-price-old">€4.750</div>
+      <div class="abc-package-price">€3.800</div>
       <div class="abc-package-price-note">Audit + intervento tattico immediato</div>
       <div class="abc-package-price-note" style="margin-top:0.6vh; color: var(--gold); opacity: 0.8;">Se parti dall'Audit A, il costo viene scalato integralmente.</div>
     </div>
@@ -714,7 +722,8 @@ body {
         <li>Formazione backend + documentazione operativa</li>
         <li>2 mesi assistenza post-lancio inclusi — aggiornamenti software, backup 24h, sicurezza/malware</li>
       </ul>
-      <div class="abc-package-price">€7.200 – €8.400</div>
+      <div class="abc-package-price-old">€8.150</div>
+      <div class="abc-package-price">€6.500</div>
       <div class="abc-package-price-note">Audit + soluzione integrata</div>
       <div class="abc-package-price-note" style="margin-top:0.6vh; color: var(--gold); opacity: 0.8;">Se parti dall'Audit A, il costo viene scalato integralmente.</div>
     </div>
