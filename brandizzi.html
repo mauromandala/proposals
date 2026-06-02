@@ -840,20 +840,21 @@ body {
 
     <!-- Destra: step + contatti -->
     <div style="display: flex; flex-direction: column; gap: 3vh;">
-      <div style="display: flex; flex-direction: column; gap: 2.4vh;">
+      <div style="display: flex; align-items: stretch; gap: 1.6vw;">
 
-        <div style="display: flex; gap: 1.4vw; align-items: flex-start;">
-          <div style="font-size: clamp(10px, 0.92vw, 12px); color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase; min-width: 2.4em; padding-top: 0.3vh; opacity: 0.75;">01</div>
+        <!-- Numeri + linea verticale connettore -->
+        <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+          <div style="font-size: clamp(13px, 1.20vw, 16px); color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase;">01</div>
+          <div style="width: 1px; flex: 1; background: rgba(231,178,84,0.30); margin: 0.6vh 0;"></div>
+          <div style="font-size: clamp(13px, 1.20vw, 16px); color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase;">02</div>
+          <div style="width: 1px; flex: 1; background: rgba(231,178,84,0.30); margin: 0.6vh 0;"></div>
+          <div style="font-size: clamp(13px, 1.20vw, 16px); color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase;">03</div>
+        </div>
+
+        <!-- Testi allineati con i numeri -->
+        <div style="display: flex; flex-direction: column; justify-content: space-between;">
           <div style="font-size: clamp(16px, 1.72vw, 22px); color: rgba(255,255,255,0.88); line-height: 1.4;">Condividi gli accessi admin al backend WooCommerce</div>
-        </div>
-
-        <div style="display: flex; gap: 1.4vw; align-items: flex-start;">
-          <div style="font-size: clamp(10px, 0.92vw, 12px); color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase; min-width: 2.4em; padding-top: 0.3vh; opacity: 0.75;">02</div>
           <div style="font-size: clamp(16px, 1.72vw, 22px); color: rgba(255,255,255,0.88); line-height: 1.4;">Audit tecnico + scelta dell'opzione → preventivo definitivo in 48 ore</div>
-        </div>
-
-        <div style="display: flex; gap: 1.4vw; align-items: flex-start;">
-          <div style="font-size: clamp(10px, 0.92vw, 12px); color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase; min-width: 2.4em; padding-top: 0.3vh; opacity: 0.75;">03</div>
           <div style="font-size: clamp(16px, 1.72vw, 22px); color: rgba(255,255,255,0.88); line-height: 1.4;">Kick-off — avvio Fase 0 entro 5 giorni lavorativi dalla conferma</div>
         </div>
 
