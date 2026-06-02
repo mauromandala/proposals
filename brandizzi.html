@@ -365,14 +365,16 @@ body {
 
 /* COMPARISON TABLE */
 .comp-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-.comp-head-opt { text-align: center; padding: 0 0.5vw 1.4vh; border-bottom: 1px solid var(--border-gold); font-size: clamp(11px, 1.18vw, 15px); color: var(--gold); text-transform: uppercase; letter-spacing: 0.14em; line-height: 1.5; }
-.comp-section-row td { padding: 1.1vh 0 0.3vh; font-size: clamp(9px, 0.88vw, 11px); color: var(--gold); text-transform: uppercase; letter-spacing: 0.18em; opacity: 0.55; }
-.comp-feat { font-size: clamp(12px, 1.15vw, 15px); color: rgba(255,255,255,0.72); padding: 0.48vh 0; line-height: 1.3; }
-.comp-check { text-align: center; font-size: clamp(13px, 1.20vw, 16px); color: var(--gold); padding: 0.48vh 0; }
-.comp-no { text-align: center; font-size: clamp(13px, 1.20vw, 16px); color: rgba(255,255,255,0.14); padding: 0.48vh 0; }
-.comp-price-row td { border-top: 1px solid var(--border-gold); padding-top: 1.5vh; }
-.comp-price-val { text-align: center; font-size: clamp(17px, 1.90vw, 24px); color: var(--gold); }
-.comp-price-sub { font-size: clamp(10px, 0.95vw, 12px); color: rgba(255,255,255,0.30); }
+.comp-head-col-opt { width: 16%; text-align: center; padding: 0 0.4vw 0.8vh; border-bottom: 1px solid var(--border-gold); }
+.comp-head-opt { font-size: clamp(11px, 1.15vw, 14px); color: var(--gold); text-transform: uppercase; letter-spacing: 0.14em; line-height: 1.4; }
+.comp-head-opt-sub { display: block; font-size: 0.78em; opacity: 0.60; letter-spacing: 0.08em; margin-top: 0.1vh; }
+.comp-section-row td { padding: 0.6vh 0 0.15vh; font-size: clamp(8px, 0.80vw, 10px); color: var(--gold); text-transform: uppercase; letter-spacing: 0.20em; opacity: 0.50; }
+.comp-feat { font-size: clamp(11px, 1.08vw, 14px); color: rgba(255,255,255,0.70); padding: 0.28vh 0; line-height: 1.25; }
+.comp-check { text-align: center; font-size: clamp(11px, 1.10vw, 14px); color: var(--gold); padding: 0.28vh 0; }
+.comp-no { text-align: center; font-size: clamp(11px, 1.10vw, 14px); color: rgba(255,255,255,0.13); padding: 0.28vh 0; }
+.comp-price-row td { border-top: 1px solid var(--border-gold); padding-top: 0.9vh; }
+.comp-price-val { text-align: center; font-size: clamp(15px, 1.70vw, 22px); color: var(--gold); }
+.comp-price-sub { font-size: clamp(9px, 0.88vw, 11px); color: rgba(255,255,255,0.28); }
 </style>
 </head>
 <body>
@@ -751,10 +753,10 @@ body {
 </section>
 
 <!-- ─── 12 CONFRONTO OPZIONI ─── -->
-<section class="slide" id="slide-13">
-  <div class="label">Riepilogo</div>
-  <div class="gold-bar"></div>
-  <h2 class="headline" style="font-size: clamp(15px, 1.70vw, 22px); margin-bottom: 2.2vh;">Cosa è incluso in ogni opzione — a colpo d'occhio.</h2>
+<section class="slide" id="slide-13" style="padding-top: 6vh; padding-bottom: 5vh;">
+  <div class="label" style="margin-bottom: 1vh;">Riepilogo</div>
+  <div class="gold-bar" style="margin-bottom: 1.8vh;"></div>
+  <h2 class="headline" style="font-size: clamp(13px, 1.45vw, 19px); margin-bottom: 1.5vh; opacity: 0.80;">Cosa è incluso in ogni opzione — a colpo d'occhio.</h2>
   <table class="comp-table">
     <colgroup>
       <col style="width:52%">
@@ -764,38 +766,38 @@ body {
     </colgroup>
     <thead>
       <tr>
-        <th></th>
-        <th class="comp-head-opt">A<br><span style="font-size:0.80em;opacity:0.70;">Audit</span></th>
-        <th class="comp-head-opt">B<br><span style="font-size:0.80em;opacity:0.70;">Checkout</span></th>
-        <th class="comp-head-opt">C<br><span style="font-size:0.80em;opacity:0.70;">Completo</span></th>
+        <th style="border-bottom: 1px solid var(--border-gold); padding-bottom: 0.8vh;"></th>
+        <th class="comp-head-col-opt"><span class="comp-head-opt">A<span class="comp-head-opt-sub">Audit</span></span></th>
+        <th class="comp-head-col-opt"><span class="comp-head-opt">B<span class="comp-head-opt-sub">Checkout</span></span></th>
+        <th class="comp-head-col-opt" style="background: rgba(231,178,84,0.06); border-radius: 4px 4px 0 0;"><span class="comp-head-opt" style="color:var(--gold);">C<span class="comp-head-opt-sub">Completo</span></span></th>
       </tr>
     </thead>
     <tbody>
       <tr class="comp-section-row"><td colspan="4">Audit Strategico</td></tr>
-      <tr><td class="comp-feat">Goal Discovery Session (call strutturata 1–2h)</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
-      <tr><td class="comp-feat">Diagnosi del funnel e-commerce</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
-      <tr><td class="comp-feat">Mappa delle priorità d'intervento</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
-      <tr><td class="comp-feat">Decision Document scritto</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
-      <tr><td class="comp-feat">Call di restituzione e raccomandazioni operative</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
-      <tr><td class="comp-feat">Esempio di Hero Section per la homepage</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
+      <tr><td class="comp-feat">Goal Discovery Session (call 1–2h)</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
+      <tr><td class="comp-feat">Diagnosi del funnel e-commerce</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
+      <tr><td class="comp-feat">Mappa delle priorità d'intervento</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
+      <tr><td class="comp-feat">Decision Document scritto</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
+      <tr><td class="comp-feat">Call di restituzione e raccomandazioni</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
+      <tr><td class="comp-feat">Esempio di Hero Section homepage</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
 
       <tr class="comp-section-row"><td colspan="4">Checkout + Mobile</td></tr>
-      <tr><td class="comp-feat">Checkout guidato — selezione punto ritiro (CAP)</td><td class="comp-no">—</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
-      <tr><td class="comp-feat">Ottimizzazione mobile dell'intero flusso</td><td class="comp-no">—</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
-      <tr><td class="comp-feat">Deploy staging → produzione + 1 mese assistenza</td><td class="comp-no">—</td><td class="comp-check">✓</td><td class="comp-check">✓</td></tr>
+      <tr><td class="comp-feat">Checkout guidato — selezione ritiro per CAP</td><td class="comp-no">—</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
+      <tr><td class="comp-feat">Ottimizzazione mobile dell'intero flusso</td><td class="comp-no">—</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
+      <tr><td class="comp-feat">Deploy staging → produzione + 1 mese assistenza</td><td class="comp-no">—</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
 
       <tr class="comp-section-row"><td colspan="4">Trasformazione Completa</td></tr>
-      <tr><td class="comp-feat">Homepage orientata alla conversione</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check">✓</td></tr>
-      <tr><td class="comp-feat">SEO tecnica — Schema.org alimentare</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check">✓</td></tr>
-      <tr><td class="comp-feat">Analytics avanzate (checkout, conversioni, abbandoni)</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check">✓</td></tr>
-      <tr><td class="comp-feat">Formazione backend + documentazione operativa</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check">✓</td></tr>
-      <tr><td class="comp-feat">2 mesi assistenza post-lancio inclusi</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check">✓</td></tr>
+      <tr><td class="comp-feat">Homepage orientata alla conversione</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
+      <tr><td class="comp-feat">SEO tecnica — Schema.org alimentare</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
+      <tr><td class="comp-feat">Analytics avanzate (checkout, conversioni, abbandoni)</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
+      <tr><td class="comp-feat">Formazione backend + documentazione operativa</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
+      <tr><td class="comp-feat">2 mesi assistenza post-lancio inclusi</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
 
       <tr class="comp-price-row">
         <td class="comp-price-sub">Investimento</td>
         <td class="comp-price-val">€750</td>
         <td class="comp-price-val">€3.800</td>
-        <td class="comp-price-val">€6.500</td>
+        <td class="comp-price-val" style="background:rgba(231,178,84,0.04);">€6.500</td>
       </tr>
     </tbody>
   </table>
