@@ -349,6 +349,20 @@ body {
   letter-spacing: 0.04em;
 }
 
+/* SLIDE CONTENT BLOCKS */
+.block { padding: 1.6vh 2vw; border-radius: 0 4px 4px 0; margin-bottom: 1.6vh; }
+.block-label { font-size: clamp(9px, 0.88vw, 11px); text-transform: uppercase; letter-spacing: 0.20em; margin-bottom: 0.7vh; }
+.block-risk { background: rgba(220,70,70,0.07); border-left: 3px solid rgba(210,80,70,0.42); }
+.block-risk .block-label { color: rgba(230,110,100,0.80); }
+.block-transform { background: var(--surface-gold); border-left: 3px solid var(--border-gold); }
+.block-transform .block-label { color: var(--gold); opacity: 0.75; }
+.block-deliver { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 1.4vh 2vw; }
+.block-deliver .block-label { color: var(--gold); opacity: 0.65; }
+.deliver-list { list-style: none; display: flex; flex-direction: column; gap: 0.45vh; margin-top: 0.3vh; }
+.deliver-list li { font-size: clamp(13px, 1.35vw, 17px); color: rgba(255,255,255,0.74); padding-left: 1.3em; position: relative; line-height: 1.35; }
+.deliver-list li::before { content: '→'; color: var(--gold); position: absolute; left: 0; font-size: 0.82em; }
+.slide-body { font-size: clamp(14px, 1.50vw, 19px); color: rgba(255,255,255,0.58); line-height: 1.6; margin-bottom: 1.8vh; max-width: 82%; }
+
 /* COMPARISON TABLE */
 .comp-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
 .comp-head-opt { text-align: center; padding: 0 0.5vw 1.4vh; border-bottom: 1px solid var(--border-gold); font-size: clamp(11px, 1.18vw, 15px); color: var(--gold); text-transform: uppercase; letter-spacing: 0.14em; line-height: 1.5; }
@@ -471,17 +485,14 @@ body {
 <section class="slide" id="slide-04">
   <div class="label">Capitolo 2 — Il Problema</div>
   <div class="gold-bar"></div>
-  <h2 class="headline" style="font-size: clamp(20px, 2.60vw, 35px); margin-bottom: 2vh;"><span style="color:var(--gold);font-size:0.80em;">Problema 1.</span><br>Il carrello è un labirinto — e ogni errore è un'ora di lavoro manuale.</h2>
-  <div style="display: flex; flex-direction: column; gap: 1.4vh; margin-bottom: 2vh;">
-    <div class="verbatim">"Quando il cliente sceglie il punto di ritiro si trova fuori sparata una lista immensa di cose."</div>
-    <div class="verbatim">"Lo devo mandare su WhatsApp, poi aspettare che mi risponda, poi variare l'ordine... è un lavoro della Madonna."</div>
-    <div class="verbatim">"Ci trovano due ordini e spesso e volentieri hanno preparato due volte lo stesso ordine."</div>
+  <h2 class="headline" style="font-size: clamp(20px, 2.60vw, 35px); margin-bottom: 1.4vh;"><span style="color:var(--gold);font-size:0.80em;">Problema 1.</span><br>Il checkout è un labirinto — ogni errore diventa lavoro manuale.</h2>
+  <p class="slide-body">Il flusso di acquisto chiede al cliente di fare scelte che non capisce. Ogni ambiguità si trasforma in un messaggio WhatsApp da gestire a mano.</p>
+  <div class="block block-risk">
+    <div class="block-label">Il rischio</div>
+    <p class="body-text" style="font-size: clamp(14px, 1.50vw, 19px); line-height: 1.6;">Con 10–20 ordini al giorno, anche solo il 10% di errori significa 1–2 interventi manuali quotidiani. WhatsApp, modifica backend, doppia preparazione, comunicazione al caseificio. Ogni stagione che cresce porta più volume — e più errori. Ore che non tornano mai, gestite da una persona sola.</p>
   </div>
-  <div style="background: var(--surface); border-left: 3px solid rgba(255,80,80,0.5); padding: 1.6vh 2vw;">
-    <p class="body-text" style="font-size: clamp(14px, 1.56vw, 19px);">
-      Con 10–20 ordini al giorno, anche solo il 10% di errori significa 1–2 interventi manuali ogni giorno. WhatsApp, modifica backend, comunicazione al caseificio, rischio doppia preparazione. Ore che non tornano mai — gestite da una persona sola.
-    </p>
-  </div>
+  <div class="verbatim" style="margin-bottom: 0.8vh;">"Lo devo mandare su WhatsApp, poi aspettare che mi risponda, poi variare l'ordine... è un lavoro della Madonna."</div>
+  <div class="verbatim">"Ci trovano due ordini e spesso e volentieri hanno preparato due volte lo stesso ordine."</div>
   <div class="slide-footer"><div class="footer-num">04 / 13</div></div>
 </section>
 
@@ -489,25 +500,14 @@ body {
 <section class="slide" id="slide-05">
   <div class="label">Capitolo 2 — Il Problema</div>
   <div class="gold-bar"></div>
-  <h2 class="headline" style="font-size: clamp(20px, 2.60vw, 35px); margin-bottom: 2vh;"><span style="color:var(--gold);font-size:0.80em;">Problema 2.</span><br>Il sito non è progettato per convertire — e il tuo cliente tipo lo usa sul mobile.</h2>
-  <div class="two-col" style="gap: 4vw; align-items: start;">
-    <div>
-      <div class="verbatim" style="margin-bottom: 1.5vh;">"È una costruzione fatta nel tempo appiccicando pezzi — non c'è una strategia."</div>
-      <div class="verbatim">"L'anziano davanti al computer... bisogna renderlo più fruibile."</div>
-    </div>
-    <div>
-      <ul class="bullet-list" style="gap: 1.4vh;">
-        <li>Nessun menù di navigazione above the fold — si vede solo dopo lo scroll</li>
-        <li>Nessuna sezione "perché comprare da noi" — il cliente arriva e non capisce il valore</li>
-        <li>Stai vendendo cibo: la fiducia è un prerequisito dell'acquisto, non un optional</li>
-        <li>Mobile pesante — per il tuo cliente anziano è una barriera che non si supera</li>
-        <li>Nessun dato analytics — voli cieco sul comportamento degli utenti</li>
-      </ul>
-    </div>
+  <h2 class="headline" style="font-size: clamp(20px, 2.60vw, 35px); margin-bottom: 1.4vh;"><span style="color:var(--gold);font-size:0.80em;">Problema 2.</span><br>Il sito non è progettato per convertire — e il tuo cliente tipo lo usa sul mobile.</h2>
+  <p class="slide-body">L'e-commerce è cresciuto costruendo un pezzo alla volta. Non esiste una struttura pensata per far comprare le persone — e si vede.</p>
+  <div class="block block-risk">
+    <div class="block-label">Il rischio</div>
+    <p class="body-text" style="font-size: clamp(14px, 1.50vw, 19px); line-height: 1.6;">Ogni cliente che abbandona il sito perché non riesce a navigarlo è un ordine perso in silenzio — senza lasciare traccia nei dati. Stai vendendo cibo: la fiducia è un prerequisito dell'acquisto. Senza navigazione visibile, senza sezione di valore, senza ottimizzazione mobile, stai perdendo esattamente il cliente che ti ha seguito fin qui.</p>
   </div>
-  <div style="margin-top: 2vh; padding: 1.4vh 2vw; background: var(--surface); border-left: 3px solid rgba(255,80,80,0.5);">
-    <p class="body-text muted" style="font-size: clamp(13px, 1.43vw, 17px);">Ogni cliente che abbandona il sito perché non riesce a navigarlo è un ordine perso. Questi ordini non lasciano traccia — spariscono in silenzio.</p>
-  </div>
+  <div class="verbatim" style="margin-bottom: 0.8vh;">"È una costruzione fatta nel tempo appiccicando pezzi — non c'è una strategia."</div>
+  <div class="verbatim">"L'anziano davanti al computer... bisogna renderlo più fruibile."</div>
   <div class="slide-footer"><div class="footer-num">05 / 13</div></div>
 </section>
 
@@ -515,42 +515,37 @@ body {
 <section class="slide" id="slide-06">
   <div class="label">Capitolo 2 — Il Problema</div>
   <div class="gold-bar"></div>
-  <h2 class="headline" style="font-size: clamp(20px, 2.60vw, 35px); margin-bottom: 2vh;"><span style="color:var(--gold);font-size:0.80em;">Problema 3.</span><br>Non riesci a gestire il tuo sito in autonomia — e lo shop è diventato vitale.</h2>
-  <div style="display: flex; flex-direction: column; gap: 1.4vh; margin-bottom: 2.5vh;">
-    <div class="verbatim">"Non riesco dal backend ad arrivare manco a cambiare una parola."</div>
-    <div class="verbatim">"Siamo poco soddisfatti delle soluzioni e dei tempi di intervento."</div>
-    <div class="verbatim">"Lo shop è diventato vitale per noi."</div>
+  <h2 class="headline" style="font-size: clamp(20px, 2.60vw, 35px); margin-bottom: 1.4vh;"><span style="color:var(--gold);font-size:0.80em;">Problema 3.</span><br>Non riesci a gestire il tuo sito in autonomia — e lo shop è diventato vitale.</h2>
+  <p class="slide-body">Il canale che genera fatturato è in mano a un tecnico esterno che non risponde con la velocità che l'operatività richiede.</p>
+  <div class="block block-risk">
+    <div class="block-label">Il rischio</div>
+    <p class="body-text" style="font-size: clamp(14px, 1.50vw, 19px); line-height: 1.6;">Aggiornare un CAP, attivare uno sconto, lanciare una promozione: ogni operazione elementare richiede un intermediario. In un settore dove le disponibilità cambiano in poche ore e le promozioni hanno vita breve, questa dipendenza è un freno reale — ogni giorno, ogni settimana. E il canale vitale per il business resta fuori dal tuo controllo.</p>
   </div>
-  <div style="background: var(--surface); border-radius: 6px; padding: 2vh 2.5vw;">
-    <p class="body-text" style="font-size: clamp(14px, 1.56vw, 19px); line-height: 1.7;">
-      Il canale che gestisce il fatturato dipende da un consulente che non risponde nei tempi che ti servono. Aggiornare un CAP, attivare uno sconto, lanciare una promozione: ogni operazione elementare richiede un intermediario. In un settore alimentare dove le disponibilità cambiano e le promozioni hanno vita breve, questa dipendenza è un freno operativo reale — ogni giorno.
-    </p>
-  </div>
+  <div class="verbatim" style="margin-bottom: 0.8vh;">"Non riesco dal backend ad arrivare manco a cambiare una parola."</div>
+  <div class="verbatim">"Siamo poco soddisfatti delle soluzioni e dei tempi di intervento."</div>
   <div class="slide-footer"><div class="footer-num">06 / 13</div></div>
 </section>
 
-<!-- ─── 07 SOLUZIONE 1: CHECKOUT GUIDATO ─── -->
+<!-- ─── 07 SOLUZIONE 1: AUDIT STRATEGICO ─── -->
 <section class="slide" id="slide-07">
   <div class="label">Capitolo 3 — La Soluzione</div>
   <div class="gold-bar"></div>
-  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 2.5vh;"><span style="color:var(--gold);font-size:0.80em;">Opzione A.</span><br>Prima di toccare il sito, capiamo esattamente cosa è rotto e perché — e lo mettiamo per iscritto.</h2>
-  <div class="two-col" style="gap: 4vw; align-items: start;">
-    <div>
-      <ul class="bullet-list" style="gap: 1vh;">
-        <li>Goal Discovery Session — call strutturata per mappare obiettivi, priorità e vincoli reali</li>
-        <li>Diagnosi del funnel e-commerce — checkout, mobile, conversione: tutto analizzato e documentato</li>
-        <li>Mappa delle priorità di intervento — cosa va risolto prima e perché</li>
-        <li>Decision Document scritto — il piano consegnato, non spiegato a voce</li>
-        <li>Call di restituzione — commentiamo insieme i risultati e definiamo i passi successivi</li>
-        <li>Esempio di Hero Section — una bozza concreta di come potrebbe comunicare il sito</li>
-      </ul>
-    </div>
-    <div>
-      <div style="padding: 2.5vh 2vw; background: var(--surface-gold); border: 1px solid var(--border-gold); border-radius: 6px;">
-        <div class="label" style="margin-bottom: 1vh;">Il risultato che ottieni</div>
-        <p class="body-text" style="font-size: clamp(14px, 1.56vw, 19px); line-height: 1.7;">Sai esattamente dove stai perdendo ordini e perché. Hai un piano scritto e una direzione chiara — indipendentemente da cosa sceglierai di fare dopo. Se procedi con B o C, questo costo viene scalato integralmente.</p>
-      </div>
-    </div>
+  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 1.4vh;"><span style="color:var(--gold);font-size:0.80em;">Opzione A.</span><br>Prima di toccare il sito, capiamo esattamente cosa è rotto e perché — e lo mettiamo per iscritto.</h2>
+  <p class="slide-body">L'Audit Strategico è il punto di partenza: una diagnosi completa che ti consegna un piano, non un'opinione.</p>
+  <div class="block block-transform">
+    <div class="block-label">La trasformazione</div>
+    <p class="body-text" style="font-size: clamp(14px, 1.50vw, 19px); line-height: 1.6;">Sai esattamente dove stai perdendo ordini e perché. Hai un documento scritto con le priorità chiare — non una lista di ipotesi a voce. Qualunque cosa tu scelga di fare dopo, parti da una mappa precisa, non dal buio. Se procedi con B o C, questo investimento viene scalato integralmente.</p>
+  </div>
+  <div class="block-deliver">
+    <div class="block-label">I deliverable</div>
+    <ul class="deliver-list">
+      <li>Goal Discovery Session — call strutturata 1–2h per mappare obiettivi, priorità e vincoli reali</li>
+      <li>Diagnosi del funnel e-commerce — checkout, mobile, conversione: analizzato e documentato</li>
+      <li>Mappa delle priorità d'intervento — cosa va risolto prima e perché</li>
+      <li>Decision Document scritto — il piano consegnato, non spiegato a voce</li>
+      <li>Call di restituzione e raccomandazioni operative</li>
+      <li>Esempio di Hero Section per la homepage — struttura narrativa e CTA</li>
+    </ul>
   </div>
   <div class="slide-footer"><div class="footer-num">07 / 13</div></div>
 </section>
@@ -559,24 +554,22 @@ body {
 <section class="slide" id="slide-08">
   <div class="label">Capitolo 3 — La Soluzione</div>
   <div class="gold-bar"></div>
-  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 2.5vh;"><span style="color:var(--gold);font-size:0.80em;">Opzione B.</span><br>Il checkout diventa un percorso guidato — gli errori diventano quasi impossibili.</h2>
-  <div class="two-col" style="gap: 4vw; align-items: start;">
-    <div>
-      <ul class="bullet-list" style="gap: 1vh;">
-        <li>Selezione punto di ritiro per CAP — il cliente vede solo le opzioni rilevanti per la sua zona</li>
-        <li>Separazione netta delle modalità: domicilio / punto di ritiro / ritiro in azienda — UI dedicata per ciascuna</li>
-        <li>Navigazione above the fold — menu, carrello e CTA visibili senza scorrere</li>
-        <li>Flusso step-by-step mobile-first, testato su dispositivi reali prima del go-live</li>
-        <li>Ambiente di staging: il sito attuale rimane online per tutta la durata dello sviluppo</li>
-        <li>1 mese di assistenza post-lancio incluso</li>
-      </ul>
-    </div>
-    <div>
-      <div style="padding: 2.5vh 2vw; background: var(--surface-gold); border: 1px solid var(--border-gold); border-radius: 6px;">
-        <div class="label" style="margin-bottom: 1vh;">Il risultato che ottieni</div>
-        <p class="body-text" style="font-size: clamp(14px, 1.56vw, 19px); line-height: 1.7;">Il cliente arriva al punto di ritiro giusto da solo. I messaggi WhatsApp di correzione si riducono drasticamente. Il caseificio riceve ordini puliti. Le ore recuperate ogni settimana restano tue.</p>
-      </div>
-    </div>
+  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 1.4vh;"><span style="color:var(--gold);font-size:0.80em;">Opzione B.</span><br>Il checkout diventa un percorso guidato — gli errori diventano quasi impossibili.</h2>
+  <p class="slide-body">Audit Strategico completo, poi interveniamo sul punto più critico: il flusso d'acquisto e l'esperienza mobile.</p>
+  <div class="block block-transform">
+    <div class="block-label">La trasformazione</div>
+    <p class="body-text" style="font-size: clamp(14px, 1.50vw, 19px); line-height: 1.6;">Il cliente arriva al punto di ritiro giusto da solo. I messaggi WhatsApp di correzione si riducono drasticamente. Il caseificio riceve ordini puliti, il backend non richiede correzioni continue. Le ore recuperate ogni settimana restano tue — senza dipendere da nessuno.</p>
+  </div>
+  <div class="block-deliver">
+    <div class="block-label">I deliverable</div>
+    <ul class="deliver-list">
+      <li>Tutto di A — Audit Strategico completo (incluso nel costo)</li>
+      <li>Checkout guidato con selezione punto di ritiro per CAP</li>
+      <li>Separazione modalità: domicilio / punto ritiro / ritiro in azienda — UI dedicata</li>
+      <li>Flusso mobile-first step-by-step, testato su dispositivi reali prima del go-live</li>
+      <li>Ambiente di staging attivo — il sito corrente rimane online durante lo sviluppo</li>
+      <li>1 mese di assistenza post-lancio incluso</li>
+    </ul>
   </div>
   <div class="slide-footer"><div class="footer-num">08 / 13</div></div>
 </section>
@@ -585,31 +578,22 @@ body {
 <section class="slide" id="slide-09">
   <div class="label">Capitolo 3 — La Soluzione</div>
   <div class="gold-bar"></div>
-  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 2.5vh;"><span style="color:var(--gold);font-size:0.80em;">Opzione C.</span><br>Il sito diventa uno strumento di vendita e il backend diventa tuo.</h2>
-  <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2vw; margin-bottom: 2vh;">
-    <div style="background: var(--surface); padding: 1.6vh 1.4vw; border-top: 2px solid var(--gold);">
-      <div style="font-size: clamp(12px, 1.32vw, 16px); color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5vh;">Homepage</div>
-      <p style="font-size: clamp(14px, 1.49vw, 18px); color: var(--muted); line-height: 1.4;">Sezioni orientate alla conversione — hero, perché noi, come funziona, punti ritiro, fiducia</p>
-    </div>
-    <div style="background: var(--surface); padding: 1.6vh 1.4vw; border-top: 2px solid var(--gold);">
-      <div style="font-size: clamp(12px, 1.32vw, 16px); color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5vh;">Prodotti</div>
-      <p style="font-size: clamp(14px, 1.49vw, 18px); color: var(--muted); line-height: 1.4;">Categorie e schede prodotto ottimizzate — SEO Schema.org alimentare, recensioni strutturate</p>
-    </div>
-    <div style="background: var(--surface); padding: 1.6vh 1.4vw; border-top: 2px solid var(--gold);">
-      <div style="font-size: clamp(12px, 1.32vw, 16px); color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5vh;">Analytics</div>
-      <p style="font-size: clamp(14px, 1.49vw, 18px); color: var(--muted); line-height: 1.4;">Eventi checkout, selezione ritiro, conversioni, abbandoni — smetti di volare cieco</p>
-    </div>
-    <div style="background: var(--surface); padding: 1.6vh 1.4vw; border-top: 2px solid var(--gold);">
-      <div style="font-size: clamp(12px, 1.32vw, 16px); color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5vh;">Backend</div>
-      <p style="font-size: clamp(14px, 1.49vw, 18px); color: var(--muted); line-height: 1.4;">CAP, sconti, campagne: le operazioni quotidiane gestibili in autonomia senza tecnici</p>
-    </div>
-    <div style="background: var(--surface); padding: 1.6vh 1.4vw; border-top: 2px solid var(--gold);">
-      <div style="font-size: clamp(12px, 1.32vw, 16px); color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5vh;">Assistenza</div>
-      <p style="font-size: clamp(14px, 1.49vw, 18px); color: var(--muted); line-height: 1.4;">2 mesi inclusi post-lancio — aggiornamenti software, backup 24h, sicurezza/malware</p>
-    </div>
+  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 1.4vh;"><span style="color:var(--gold);font-size:0.80em;">Opzione C.</span><br>Il sito diventa uno strumento di vendita. Il backend diventa tuo.</h2>
+  <p class="slide-body">Audit + Checkout e Mobile (tutto di B), più la trasformazione completa del sito e la piena autonomia operativa.</p>
+  <div class="block block-transform">
+    <div class="block-label">La trasformazione</div>
+    <p class="body-text" style="font-size: clamp(14px, 1.50vw, 19px); line-height: 1.6;">Un canale di vendita che lavora anche quando tu non ci sei. Il sito acquisisce, il checkout converte, il backend lo gestisci tu — CAP, sconti, promozioni. Nessuna dipendenza da tecnici per le operazioni quotidiane. Per la prima volta, il controllo del canale vitale è interamente tuo.</p>
   </div>
-  <div style="padding: 2vh 2vw; background: var(--surface-gold); border: 1px solid var(--border-gold); border-radius: 6px; max-width: 75%;">
-    <p class="body-text" style="font-size: clamp(14px, 1.56vw, 19px); line-height: 1.7;">Un canale di vendita che lavora anche quando tu non ci sei. Il sito acquisisce, il checkout converte, il backend lo gestisci tu. Nessuna dipendenza da tecnici per le operazioni quotidiane.</p>
+  <div class="block-deliver">
+    <div class="block-label">I deliverable</div>
+    <ul class="deliver-list">
+      <li>Tutto di B — Audit Strategico + Checkout e Mobile (incluso nel costo)</li>
+      <li>Homepage orientata alla conversione — hero, valore, come funziona, punti ritiro, fiducia</li>
+      <li>Categorie e schede prodotto con SEO tecnica Schema.org alimentare e recensioni strutturate</li>
+      <li>Analytics avanzate — eventi checkout, selezione ritiro, conversioni, abbandoni</li>
+      <li>Formazione backend completa + documentazione operativa</li>
+      <li>2 mesi di assistenza post-lancio inclusi — aggiornamenti software, backup 24h, sicurezza/malware</li>
+    </ul>
   </div>
   <div class="slide-footer"><div class="footer-num">09 / 13</div></div>
 </section>
