@@ -363,18 +363,22 @@ body {
 .deliver-list li::before { content: '→'; color: var(--gold); position: absolute; left: 0; font-size: 0.82em; }
 .slide-body { font-size: clamp(14px, 1.50vw, 19px); color: rgba(255,255,255,0.58); line-height: 1.6; margin-bottom: 1.8vh; max-width: 82%; }
 
-/* COMPARISON TABLE */
-.comp-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-.comp-head-col-opt { width: 16%; text-align: center; padding: 0 0.4vw 0.8vh; border-bottom: 1px solid var(--border-gold); }
-.comp-head-opt { font-size: clamp(11px, 1.15vw, 14px); color: var(--gold); text-transform: uppercase; letter-spacing: 0.14em; line-height: 1.4; }
-.comp-head-opt-sub { display: block; font-size: 0.78em; opacity: 0.60; letter-spacing: 0.08em; margin-top: 0.1vh; }
-.comp-section-row td { padding: 0.6vh 0 0.15vh; font-size: clamp(8px, 0.80vw, 10px); color: var(--gold); text-transform: uppercase; letter-spacing: 0.20em; opacity: 0.50; }
-.comp-feat { font-size: clamp(11px, 1.08vw, 14px); color: rgba(255,255,255,0.70); padding: 0.28vh 0; line-height: 1.25; }
-.comp-check { text-align: center; font-size: clamp(11px, 1.10vw, 14px); color: var(--gold); padding: 0.28vh 0; }
-.comp-no { text-align: center; font-size: clamp(11px, 1.10vw, 14px); color: rgba(255,255,255,0.13); padding: 0.28vh 0; }
-.comp-price-row td { border-top: 1px solid var(--border-gold); padding-top: 0.9vh; }
-.comp-price-val { text-align: center; font-size: clamp(15px, 1.70vw, 22px); color: var(--gold); }
-.comp-price-sub { font-size: clamp(9px, 0.88vw, 11px); color: rgba(255,255,255,0.28); }
+/* COMPARISON TABLE V2 */
+.comp-v2-wrap { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 8px; overflow: hidden; width: 100%; }
+.comp-v2-header { display: grid; grid-template-columns: 1fr 9% 9% 9%; padding: 0.9vh 2vw; border-bottom: 1px solid rgba(255,255,255,0.10); align-items: center; }
+.comp-v2-col-label { font-size: clamp(8px, 0.76vw, 10px); text-transform: uppercase; letter-spacing: 0.24em; color: rgba(255,255,255,0.26); }
+.comp-v2-opt-label { font-size: clamp(9px, 0.82vw, 11px); text-transform: uppercase; letter-spacing: 0.20em; color: rgba(255,255,255,0.38); text-align: center; }
+.comp-v2-row { display: grid; grid-template-columns: 1fr 9% 9% 9%; padding: 1.15vh 2vw; border-bottom: 1px solid rgba(255,255,255,0.055); align-items: center; }
+.comp-v2-row:last-child { border-bottom: none; }
+.comp-v2-name { font-size: clamp(12px, 1.22vw, 16px); color: rgba(255,255,255,0.86); margin-bottom: 0.18vh; }
+.comp-v2-desc { font-size: clamp(10px, 0.98vw, 13px); color: rgba(255,255,255,0.30); font-style: italic; line-height: 1.3; }
+.comp-v2-dot { display: flex; align-items: center; justify-content: center; }
+.dot-on { width: clamp(8px, 0.88vw, 11px); height: clamp(8px, 0.88vw, 11px); border-radius: 50%; background: var(--gold); box-shadow: 0 0 5px rgba(231,178,84,0.30); }
+.dot-off { width: clamp(8px, 0.88vw, 11px); height: clamp(8px, 0.88vw, 11px); border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.14); }
+.comp-v2-price-row { display: grid; grid-template-columns: 1fr 9% 9% 9%; padding: 1.1vh 2vw; border-top: 1px solid rgba(231,178,84,0.28); align-items: center; background: rgba(231,178,84,0.04); }
+.comp-v2-price-label { font-size: clamp(9px, 0.85vw, 11px); text-transform: uppercase; letter-spacing: 0.20em; color: rgba(255,255,255,0.28); }
+.comp-v2-price-val { font-size: clamp(14px, 1.55vw, 20px); color: var(--gold); text-align: center; }
+.comp-v2-note { font-size: clamp(9px, 0.90vw, 12px); color: rgba(255,255,255,0.22); font-style: italic; margin-top: 1.3vh; text-align: center; }
 </style>
 </head>
 <body>
@@ -754,53 +758,77 @@ body {
 
 <!-- ─── 12 CONFRONTO OPZIONI ─── -->
 <section class="slide" id="slide-13" style="padding-top: 6vh; padding-bottom: 5vh;">
-  <div class="label" style="margin-bottom: 1vh;">Riepilogo</div>
-  <div class="gold-bar" style="margin-bottom: 1.8vh;"></div>
-  <h2 class="headline" style="font-size: clamp(13px, 1.45vw, 19px); margin-bottom: 1.5vh; opacity: 0.80;">Cosa è incluso in ogni opzione — a colpo d'occhio.</h2>
-  <table class="comp-table">
-    <colgroup>
-      <col style="width:52%">
-      <col style="width:16%">
-      <col style="width:16%">
-      <col style="width:16%">
-    </colgroup>
-    <thead>
-      <tr>
-        <th style="border-bottom: 1px solid var(--border-gold); padding-bottom: 0.8vh;"></th>
-        <th class="comp-head-col-opt"><span class="comp-head-opt">A<span class="comp-head-opt-sub">Audit</span></span></th>
-        <th class="comp-head-col-opt"><span class="comp-head-opt">B<span class="comp-head-opt-sub">Checkout</span></span></th>
-        <th class="comp-head-col-opt" style="background: rgba(231,178,84,0.06); border-radius: 4px 4px 0 0;"><span class="comp-head-opt" style="color:var(--gold);">C<span class="comp-head-opt-sub">Completo</span></span></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="comp-section-row"><td colspan="4">Audit Strategico</td></tr>
-      <tr><td class="comp-feat">Goal Discovery Session (call 1–2h)</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-      <tr><td class="comp-feat">Diagnosi del funnel e-commerce</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-      <tr><td class="comp-feat">Mappa delle priorità d'intervento</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-      <tr><td class="comp-feat">Decision Document scritto</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-      <tr><td class="comp-feat">Call di restituzione e raccomandazioni</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-      <tr><td class="comp-feat">Esempio di Hero Section homepage</td><td class="comp-check">✓</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-
-      <tr class="comp-section-row"><td colspan="4">Checkout + Mobile</td></tr>
-      <tr><td class="comp-feat">Checkout guidato — selezione ritiro per CAP</td><td class="comp-no">—</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-      <tr><td class="comp-feat">Ottimizzazione mobile dell'intero flusso</td><td class="comp-no">—</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-      <tr><td class="comp-feat">Deploy staging → produzione + 1 mese assistenza</td><td class="comp-no">—</td><td class="comp-check">✓</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-
-      <tr class="comp-section-row"><td colspan="4">Trasformazione Completa</td></tr>
-      <tr><td class="comp-feat">Homepage orientata alla conversione</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-      <tr><td class="comp-feat">SEO tecnica — Schema.org alimentare</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-      <tr><td class="comp-feat">Analytics avanzate (checkout, conversioni, abbandoni)</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-      <tr><td class="comp-feat">Formazione backend + documentazione operativa</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-      <tr><td class="comp-feat">2 mesi assistenza post-lancio inclusi</td><td class="comp-no">—</td><td class="comp-no">—</td><td class="comp-check" style="background:rgba(231,178,84,0.04);">✓</td></tr>
-
-      <tr class="comp-price-row">
-        <td class="comp-price-sub">Investimento</td>
-        <td class="comp-price-val">€750</td>
-        <td class="comp-price-val">€3.800</td>
-        <td class="comp-price-val" style="background:rgba(231,178,84,0.04);">€6.500</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="label" style="margin-bottom: 0.8vh;">Riepilogo</div>
+  <h2 class="headline" style="font-size: clamp(22px, 2.90vw, 40px); line-height: 1.15; margin-bottom: 2vh;">Le voci che compongono <span style="color: var(--gold);">ogni opzione.</span></h2>
+  <div class="comp-v2-wrap">
+    <div class="comp-v2-header">
+      <div class="comp-v2-col-label">Componente del lavoro</div>
+      <div class="comp-v2-opt-label">A</div>
+      <div class="comp-v2-opt-label">B</div>
+      <div class="comp-v2-opt-label">C</div>
+    </div>
+    <div class="comp-v2-row">
+      <div><div class="comp-v2-name">Goal Discovery + Diagnosi funnel</div><div class="comp-v2-desc">Call strutturata 1–2h, analisi checkout, mobile e conversione: tutto documentato</div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+    </div>
+    <div class="comp-v2-row">
+      <div><div class="comp-v2-name">Decision Document scritto</div><div class="comp-v2-desc">Mappa delle priorità e piano d'azione consegnato in forma scritta, non a voce</div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+    </div>
+    <div class="comp-v2-row">
+      <div><div class="comp-v2-name">Call di restituzione e raccomandazioni</div><div class="comp-v2-desc">Commentiamo insieme i risultati e definiamo i passi successivi</div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+    </div>
+    <div class="comp-v2-row">
+      <div><div class="comp-v2-name">Esempio di Hero Section</div><div class="comp-v2-desc">Bozza concreta della homepage: struttura narrativa, posizionamento e CTA</div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+    </div>
+    <div class="comp-v2-row">
+      <div><div class="comp-v2-name">Checkout guidato — selezione ritiro per CAP</div><div class="comp-v2-desc">UI dedicata per modalità di consegna: domicilio, ritiro per CAP, ritiro in azienda</div></div>
+      <div class="comp-v2-dot"><div class="dot-off"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+    </div>
+    <div class="comp-v2-row">
+      <div><div class="comp-v2-name">Ottimizzazione mobile del flusso</div><div class="comp-v2-desc">Step-by-step mobile-first, testato su dispositivi reali prima del go-live</div></div>
+      <div class="comp-v2-dot"><div class="dot-off"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+    </div>
+    <div class="comp-v2-row">
+      <div><div class="comp-v2-name">Deploy + 1 mese assistenza post-lancio</div><div class="comp-v2-desc">Staging attivo durante lo sviluppo, sito corrente mai interrotto</div></div>
+      <div class="comp-v2-dot"><div class="dot-off"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+    </div>
+    <div class="comp-v2-row">
+      <div><div class="comp-v2-name">Homepage + SEO tecnica + Analytics</div><div class="comp-v2-desc">Sezioni di conversione, Schema.org alimentare, eventi checkout e abbandoni</div></div>
+      <div class="comp-v2-dot"><div class="dot-off"></div></div>
+      <div class="comp-v2-dot"><div class="dot-off"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+    </div>
+    <div class="comp-v2-row">
+      <div><div class="comp-v2-name">Formazione backend + 2 mesi assistenza estesa</div><div class="comp-v2-desc">Autonomia operativa documentata, backup 24h, sicurezza e malware inclusi</div></div>
+      <div class="comp-v2-dot"><div class="dot-off"></div></div>
+      <div class="comp-v2-dot"><div class="dot-off"></div></div>
+      <div class="comp-v2-dot"><div class="dot-on"></div></div>
+    </div>
+    <div class="comp-v2-price-row">
+      <div class="comp-v2-price-label">Investimento</div>
+      <div class="comp-v2-price-val">€750</div>
+      <div class="comp-v2-price-val">€3.800</div>
+      <div class="comp-v2-price-val">€6.500</div>
+    </div>
+  </div>
+  <p class="comp-v2-note">Le tre opzioni si compongono progressivamente. C eredita tutto da B, che a sua volta eredita tutto da A.</p>
   <div class="slide-footer"><div class="footer-num">13 / 14</div></div>
 </section>
 
