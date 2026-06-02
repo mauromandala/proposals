@@ -707,6 +707,7 @@ body {
 <script>
 const slides = document.querySelectorAll('.slide');
 const N = slides.length;
+const STORAGE_KEY = 'brandizzi-slide';
 let cur = 0;
 
 function show(i) {
@@ -714,6 +715,7 @@ function show(i) {
   cur = Math.max(0, Math.min(N - 1, i));
   slides[cur].classList.add('active');
   document.getElementById('progress').style.width = ((cur + 1) / N * 100) + '%';
+  localStorage.setItem(STORAGE_KEY, cur);
 }
 
 function go(d) { show(cur + d); }
@@ -727,7 +729,7 @@ document.addEventListener('click', e => {
   if (!e.target.closest('.nav-controls')) go(1);
 });
 
-show(0);
+show(parseInt(localStorage.getItem(STORAGE_KEY)) || 0);
 </script>
 </body>
 </html>
