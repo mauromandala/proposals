@@ -168,6 +168,46 @@ body {
   line-height: 1.45;
 }
 
+/* TIMELINE */
+.tl-wrap { position: relative; width: 100%; margin: 1.5vh 0; }
+.tl-axis {
+  position: absolute;
+  top: 8px;
+  left: 0; right: 0;
+  height: 2px;
+  background: rgba(255,255,255,0.10);
+  z-index: 0;
+}
+.tl-phases {
+  display: flex;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  align-items: flex-start;
+}
+.tl-phase { display: flex; flex-direction: column; padding-right: 1.2vw; min-width: 0; }
+.tl-node {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--navy);
+  border: 2px solid rgba(255,255,255,0.30);
+  flex-shrink: 0;
+  margin-bottom: 1.4vh;
+}
+.tl-phase.is-deploy .tl-node {
+  width: 22px; height: 22px;
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 18px rgba(231,178,84,0.55);
+  margin-left: -3px;
+}
+.tl-num  { display: block; font-size: clamp(11px,1.15vw,14px); color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.35vh; }
+.tl-name { display: block; font-size: clamp(14px,1.56vw,20px); line-height: 1.2; margin-bottom: 0.35vh; }
+.tl-phase.is-deploy .tl-name { color: var(--gold); }
+.tl-dur  { display: block; font-size: clamp(12px,1.25vw,16px); color: rgba(255,255,255,0.38); margin-bottom: 0.5vh; }
+.tl-phase.is-deploy .tl-dur { color: rgba(231,178,84,0.70); }
+.tl-desc { display: block; font-size: clamp(12px,1.25vw,15px); color: var(--muted); line-height: 1.4; }
+
 /* ABC GRID */
 .abc-grid {
   display: grid;
@@ -571,36 +611,44 @@ body {
   <div class="label">Capitolo 4 — L'Esecuzione</div>
   <div class="gold-bar"></div>
   <h2 class="headline" style="font-size: clamp(19px, 2.34vw, 31px); margin-bottom: 3vh;">7 settimane. Il sito attuale rimane online per tutta la durata.</h2>
-  <div class="phases-row">
-    <div class="phase-box featured">
-      <div class="phase-box-num">Fase 0</div>
-      <div class="phase-box-title">Accessi e audit tecnico</div>
-      <div class="phase-box-dur">1 settimana</div>
-      <div class="phase-box-desc">Report backend, stato plugin, dipendenze. Setup ambiente staging.</div>
-    </div>
-    <div class="phase-box">
-      <div class="phase-box-num">Fase 1</div>
-      <div class="phase-box-title">Strategia e architettura UX</div>
-      <div class="phase-box-dur">1 settimana</div>
-      <div class="phase-box-desc">Sitemap, wireframe checkout, architettura sezioni. Brief validato.</div>
-    </div>
-    <div class="phase-box">
-      <div class="phase-box-num">Fase 2</div>
-      <div class="phase-box-title">Design e sviluppo</div>
-      <div class="phase-box-dur">3 settimane</div>
-      <div class="phase-box-desc">Pagine disegnate e sviluppate su staging. UI completa.</div>
-    </div>
-    <div class="phase-box">
-      <div class="phase-box-num">Fase 3</div>
-      <div class="phase-box-title">Test e revisioni</div>
-      <div class="phase-box-dur">1 settimana</div>
-      <div class="phase-box-desc">Test su dispositivi reali, flusso ordine end-to-end. Finestra correzioni.</div>
-    </div>
-    <div class="phase-box">
-      <div class="phase-box-num">Fase 4</div>
-      <div class="phase-box-title">Deploy e formazione</div>
-      <div class="phase-box-dur">1 settimana</div>
-      <div class="phase-box-desc">Messa in produzione. Sessione formazione backend. Documentazione.</div>
+  <div class="tl-wrap">
+    <div class="tl-axis"></div>
+    <div class="tl-phases">
+      <div class="tl-phase" style="flex:1">
+        <div class="tl-node"></div>
+        <span class="tl-num">Fase 0</span>
+        <span class="tl-name">Accessi e audit tecnico</span>
+        <span class="tl-dur">Settimana 1</span>
+        <span class="tl-desc">Report backend, stato plugin, dipendenze. Setup ambiente staging.</span>
+      </div>
+      <div class="tl-phase" style="flex:1">
+        <div class="tl-node"></div>
+        <span class="tl-num">Fase 1</span>
+        <span class="tl-name">Strategia e architettura UX</span>
+        <span class="tl-dur">Settimana 2</span>
+        <span class="tl-desc">Sitemap, wireframe checkout, architettura sezioni. Brief validato.</span>
+      </div>
+      <div class="tl-phase" style="flex:3">
+        <div class="tl-node"></div>
+        <span class="tl-num">Fase 2</span>
+        <span class="tl-name">Design e sviluppo</span>
+        <span class="tl-dur">Settimane 3 – 5</span>
+        <span class="tl-desc">Pagine disegnate e sviluppate su staging. UI completa e integrazione WooCommerce.</span>
+      </div>
+      <div class="tl-phase" style="flex:1">
+        <div class="tl-node"></div>
+        <span class="tl-num">Fase 3</span>
+        <span class="tl-name">Test e revisioni</span>
+        <span class="tl-dur">Settimana 6</span>
+        <span class="tl-desc">Test su dispositivi reali, flusso ordine end-to-end. Finestra correzioni.</span>
+      </div>
+      <div class="tl-phase is-deploy" style="flex:1">
+        <div class="tl-node"></div>
+        <span class="tl-num">Fase 4 — Go-live</span>
+        <span class="tl-name">Deploy e formazione</span>
+        <span class="tl-dur">Settimana 7</span>
+        <span class="tl-desc">Messa in produzione. Formazione backend. Documentazione operativa.</span>
+      </div>
     </div>
   </div>
   <p class="body-text muted" style="margin-top: 2.5vh; font-size: clamp(13px, 1.37vw, 17px);">Il go-live avviene solo dopo validazione completa sull'ambiente di staging. Nessuna interruzione del servizio durante lo sviluppo.</p>
