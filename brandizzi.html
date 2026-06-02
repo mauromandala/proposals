@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documento di Soluzione — Brandizzi Caseificio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #09264e;
+  --gold: #e7b254;
+  --white: #ffffff;
+  --muted: rgba(255,255,255,0.55);
+  --surface: rgba(255,255,255,0.06);
+  --surface-gold: rgba(231,178,84,0.1);
+  --border: rgba(255,255,255,0.12);
+  --border-gold: rgba(231,178,84,0.35);
+  --font: 'Questrial', sans-serif;
+}
+
+body {
+  background: #000;
+  font-family: var(--font);
+  color: var(--white);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  user-select: none;
+}
+
+.slide {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background: var(--navy);
+  padding: 10vh 8vw 8vh;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.slide.active { display: flex; animation: fadeIn 0.22s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(7px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.label {
+  font-size: clamp(11px, 1.30vw, 15px);
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.5vh;
+}
+.gold-bar {
+  width: 48px;
+  height: 3px;
+  background: var(--gold);
+  margin-bottom: 2.5vh;
+}
+.headline {
+  font-size: clamp(24px, 3.50vw, 48px);
+  line-height: 1.25;
+  max-width: 82%;
+  margin-bottom: 2vh;
+}
+.subheadline {
+  font-size: clamp(15px, 1.80vw, 23px);
+  color: var(--muted);
+  max-width: 70%;
+  line-height: 1.55;
+  margin-bottom: 2vh;
+}
+.body-text {
+  font-size: clamp(15px, 1.65vw, 21px);
+  line-height: 1.65;
+  color: rgba(255,255,255,0.82);
+}
+.highlight { color: var(--gold); }
+.muted { color: var(--muted); }
+
+.bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2vh;
+}
+.bullet-list li {
+  font-size: clamp(15px, 1.70vw, 21px);
+  line-height: 1.5;
+  padding-left: 1.6em;
+  position: relative;
+  color: rgba(255,255,255,0.88);
+}
+.bullet-list li::before {
+  content: '—';
+  color: var(--gold);
+  position: absolute;
+  left: 0;
+}
+
+.big-number {
+  font-size: clamp(42px, 6.50vw, 88px);
+  color: var(--gold);
+  line-height: 1;
+}
+.big-number-label {
+  font-size: clamp(11px, 1.20vw, 15px);
+  color: var(--muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 0.6vh;
+  line-height: 1.5;
+}
+
+.quote-block {
+  padding: 2vh 2.5vw;
+  background: var(--surface);
+  border-left: 3px solid var(--gold);
+  font-style: italic;
+}
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; align-items: start; }
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2vw; align-items: start; }
+
+/* PHASES TIMELINE */
+.phases-row {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  margin-top: 2vh;
+}
+.phase-box {
+  flex: 1;
+  background: var(--surface);
+  padding: 2.2vh 2vw;
+  position: relative;
+  border-left: 1px solid var(--border);
+}
+.phase-box:first-child { border-left: none; }
+.phase-box.featured {
+  background: var(--surface-gold);
+  border-left-color: var(--border-gold);
+}
+.phase-box-num {
+  font-size: clamp(10px, 1.10vw, 13px);
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.5vh;
+}
+.phase-box-title {
+  font-size: clamp(14px, 1.56vw, 20px);
+  margin-bottom: 0.5vh;
+  line-height: 1.3;
+}
+.phase-box-dur {
+  font-size: clamp(11px, 1.17vw, 14px);
+  color: var(--gold);
+  margin-bottom: 0.5vh;
+}
+.phase-box-desc {
+  font-size: clamp(12px, 1.24vw, 15px);
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+/* ABC GRID */
+.abc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5vw;
+  margin-top: 1.5vh;
+  align-items: start;
+}
+.abc-package {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2vh 1.8vw;
+}
+.abc-package.featured {
+  background: var(--surface-gold);
+  border-color: var(--border-gold);
+}
+.abc-package-label {
+  font-size: clamp(10px, 1.10vw, 13px);
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 0.3vh;
+}
+.abc-package-name {
+  font-size: clamp(16px, 1.82vw, 23px);
+  margin-bottom: 0.3vh;
+}
+.abc-package.featured .abc-package-name { color: var(--gold); }
+.abc-package-price {
+  font-size: clamp(24px, 3.25vw, 44px);
+  color: var(--gold);
+  margin: 0.8vh 0 0.3vh;
+}
+.abc-package-price-note { font-size: clamp(10px, 1.10vw, 13px); color: var(--muted); margin-bottom: 1.2vh; }
+.abc-items { list-style: none; display: flex; flex-direction: column; gap: 0.6vh; }
+.abc-items li {
+  font-size: clamp(12px, 1.30vw, 16px);
+  color: rgba(255,255,255,0.78);
+  padding-left: 1.4em;
+  position: relative;
+  line-height: 1.4;
+}
+.abc-items li::before { content: '✓'; color: var(--gold); position: absolute; left: 0; font-size: 0.85em; }
+.abc-items li.out { text-decoration: line-through; color: rgba(255,255,255,0.22); }
+.abc-items li.out::before { content: '—'; color: rgba(255,255,255,0.18); }
+
+/* STEPS */
+.steps-list { display: flex; flex-direction: column; gap: 2vh; margin-top: 2vh; }
+.step-item { display: flex; align-items: center; gap: 2.5vw; }
+.step-number {
+  width: 2.4em; height: 2.4em;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: clamp(16px, 1.95vw, 25px);
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.step-text { font-size: clamp(16px, 1.82vw, 23px); }
+
+/* NUMBERS ROW */
+.numbers-row {
+  display: flex;
+  align-items: center;
+  gap: 4vw;
+  margin: 3vh 0;
+}
+.numbers-op { font-size: clamp(26px, 3.50vw, 46px); color: var(--gold); flex-shrink: 0; }
+
+/* LOGO */
+.logo-fixed {
+  position: fixed;
+  top: 2.5vh;
+  left: 8vw;
+  z-index: 50;
+  pointer-events: none;
+}
+.logo-fixed svg { width: 130px; height: auto; opacity: 0.8; }
+
+/* FOOTER */
+.slide-footer {
+  position: absolute;
+  bottom: 2.5vh;
+  right: 8vw;
+}
+.footer-num { font-size: clamp(11px, 1.20vw, 15px); color: rgba(255,255,255,0.2); }
+
+/* PROGRESS + NAV */
+.progress-bar {
+  position: fixed;
+  bottom: 0; left: 0;
+  height: 3px;
+  background: var(--gold);
+  transition: width 0.28s ease;
+  z-index: 100;
+  box-shadow: 0 0 8px rgba(231,178,84,0.4);
+}
+.nav-controls {
+  position: fixed;
+  bottom: 2.5vh; right: 2.5vw;
+  display: flex; gap: 0.8vw;
+  z-index: 100;
+}
+.nav-btn {
+  width: 2.8em; height: 2.8em;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  color: var(--white);
+  font-size: clamp(16px, 1.70vw, 21px);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.18s;
+}
+.nav-btn:hover { background: rgba(255,255,255,0.14); }
+
+/* VERBATIM */
+.verbatim {
+  background: var(--surface);
+  border-left: 3px solid var(--gold);
+  padding: 1.4vh 2vw;
+  font-style: italic;
+  font-size: clamp(14px, 1.56vw, 19px);
+  color: rgba(255,255,255,0.78);
+  line-height: 1.55;
+  margin-bottom: 1.2vh;
+}
+
+/* SOLUTION CARD */
+.solution-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2vh 2vw;
+}
+.solution-card-title {
+  font-size: clamp(15px, 1.70vw, 21px);
+  color: var(--gold);
+  margin-bottom: 1vh;
+  letter-spacing: 0.04em;
+}
+</style>
+</head>
+<body>
+
+<!-- ─── 00 COVER ─── -->
+<section class="slide active" id="slide-00">
+  <div class="label">Documento di Soluzione</div>
+  <div class="gold-bar"></div>
+  <h1 style="font-size: clamp(32px, 5vw, 68px); line-height: 1.2; max-width: 75%;">
+    Brandizzi Caseificio<br>
+    <span style="color: var(--gold);">E-commerce che converte.</span>
+  </h1>
+  <p style="margin-top: 1.5vh; font-size: clamp(16px, 1.82vw, 23px); color: var(--muted); max-width: 58%;">
+    Diagnosi, soluzione e piano d'azione per trasformare lo shop in un canale di vendita che funziona da solo.
+  </p>
+  <div style="margin-top: auto; padding-top: 3vh; border-top: 1px solid var(--border-gold);">
+    <div style="font-size: clamp(11px, 1.20vw, 15px); letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8vh;">Preparato per</div>
+    <div style="font-size: clamp(20px, 2.60vw, 34px);">Giuseppe Brandizzi</div>
+    <div style="font-size: clamp(13px, 1.37vw, 17px); color: var(--muted); margin-top: 0.4vh;">Giugno 2026</div>
+  </div>
+  <div class="slide-footer"><div class="footer-num">00 / 12</div></div>
+</section>
+
+<!-- ─── 01 LO STRATEGIST — CHI SONO ─── -->
+<section class="slide" id="slide-01">
+  <div class="label">Capitolo 1 — Lo Strategist</div>
+  <div class="gold-bar"></div>
+  <div class="two-col" style="align-items: center; gap: 6vw;">
+    <div>
+      <h2 style="font-size: clamp(22px, 2.86vw, 38px); line-height: 1.3; margin-bottom: 2.5vh;">
+        Mauro Mandalari<br>
+        <span style="color: var(--gold); font-size: 0.7em;">Architetto della Presenza Digitale</span>
+      </h2>
+      <ul class="bullet-list">
+        <li>Non vendo estetica — risolvo il gap tra qualità reale e percezione di mercato</li>
+        <li>UX, UI e CRO come leve strategiche di conversione, non come decorazione</li>
+        <li>Regia diretta su ogni progetto — un interlocutore, zero deleghe cieche</li>
+        <li>Il touchpoint digitale deve lavorare mentre il titolare non c'è</li>
+      </ul>
+    </div>
+    <div>
+      <div style="background: var(--surface-gold); border: 1px solid var(--border-gold); border-radius: 8px; padding: 3vh 2.5vw;">
+        <div class="label" style="margin-bottom: 1.5vh;">Il metodo</div>
+        <p class="body-text" style="font-size: clamp(15px, 1.62vw, 20px); line-height: 1.7;">
+          "Aiuto le aziende con servizi eccellenti ma mal percepiti dal mercato a trasformare i propri touchpoint digitali in asset che generano autorità, lead qualificati e conversioni autonome."
+        </p>
+        <div style="margin-top: 2vh; padding-top: 1.5vh; border-top: 1px solid var(--border-gold); font-size: clamp(11px, 1.20vw, 14px); color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase;">Metodo Prisma</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="footer-num">01 / 12</div></div>
+</section>
+
+<!-- ─── 02 I MIEI NUMERI ─── -->
+<section class="slide" id="slide-02">
+  <div class="label">Capitolo 1 — I miei numeri</div>
+  <div class="gold-bar"></div>
+  <h2 class="headline" style="margin-bottom: 4vh;">Il track record che porta garanzie reali.</h2>
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5vw;">
+    <div>
+      <div class="big-number">15+</div>
+      <div class="big-number-label">anni di regia<br>digitale</div>
+    </div>
+    <div>
+      <div class="big-number" style="font-size: clamp(34px, 4.80vw, 65px);">100M+</div>
+      <div class="big-number-label">fatturato aziende<br>seguite (€)</div>
+    </div>
+    <div>
+      <div class="big-number">1</div>
+      <div class="big-number-label">interlocutore diretto<br>per ogni progetto</div>
+    </div>
+    <div>
+      <div class="big-number">0</div>
+      <div class="big-number-label">deleghe al buio —<br>regia sempre mia</div>
+    </div>
+  </div>
+  <div style="margin-top: 4vh; padding-top: 3vh; border-top: 1px solid var(--border);">
+    <p class="body-text muted" style="max-width: 70%; font-size: clamp(15px, 1.65vw, 20px);">
+      Settori: hospitality, retail alimentare, tech B2B, servizi professionali. Aziende da startup a strutture con centinaia di milioni di fatturato. Il metodo è lo stesso — il problema da risolvere cambia.
+    </p>
+  </div>
+  <div class="slide-footer"><div class="footer-num">02 / 12</div></div>
+</section>
+
+<!-- ─── 03 LE TESTIMONIANZE ─── -->
+<section class="slide" id="slide-03">
+  <div class="label">Capitolo 1 — Le testimonianze</div>
+  <div class="gold-bar"></div>
+  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 3vh;">Non parole — risultati che esistono già.</h2>
+  <div style="display: flex; flex-direction: column; gap: 2.2vh;">
+    <div class="quote-block">
+      <p class="body-text" style="font-size: clamp(14px, 1.56vw, 20px);">"Il sito che ci ha consegnato non era solo bello — era pensato per vendere. Ogni sezione risponde a una domanda precisa del cliente. Da quando è online, la qualità delle richieste che riceviamo è completamente diversa."</p>
+      <div style="margin-top: 1vh; font-size: clamp(11px, 1.20vw, 14px); color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; font-style: normal;">Cliente — settore hospitality, Roma</div>
+    </div>
+    <div class="quote-block">
+      <p class="body-text" style="font-size: clamp(14px, 1.56vw, 20px);">"Finalmente ho un sito che non devo spiegare. Prima dedicavo tempo a supportare il cliente nel capire come funzionava. Adesso funziona da solo."</p>
+      <div style="margin-top: 1vh; font-size: clamp(11px, 1.20vw, 14px); color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; font-style: normal;">Cliente — settore food & retail</div>
+    </div>
+  </div>
+  <div style="margin-top: 2.5vh; padding: 1.8vh 2vw; background: var(--surface-gold); border: 1px solid var(--border-gold); border-radius: 6px; display: flex; align-items: center; gap: 2vw;">
+    <div>
+      <div class="label" style="margin-bottom: 0.3vh;">Progetto di riferimento — settore hospitality</div>
+      <p class="body-text" style="font-size: clamp(13px, 1.43vw, 17px);">Maison dei Greci (maisondeigreci.com) — guesthouse boutique a Roma. Progettazione UX/UI completa, struttura a conversione, multilingua. Il benchmark qualitativo su ogni progetto hospitality.</p>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="footer-num">03 / 12</div></div>
+</section>
+
+<!-- ─── 04 PROBLEMA 1: IL CARRELLO ─── -->
+<section class="slide" id="slide-04">
+  <div class="label">Capitolo 2 — Il Problema</div>
+  <div class="gold-bar"></div>
+  <h2 class="headline" style="font-size: clamp(20px, 2.60vw, 35px); margin-bottom: 2vh;">Problema 1. Il carrello è un labirinto — e ogni errore è un'ora di lavoro manuale.</h2>
+  <div style="display: flex; flex-direction: column; gap: 1.4vh; margin-bottom: 2vh;">
+    <div class="verbatim">"Quando il cliente sceglie il punto di ritiro si trova fuori sparata una lista immensa di cose."</div>
+    <div class="verbatim">"Lo devo mandare su WhatsApp, poi aspettare che mi risponda, poi variare l'ordine... è un lavoro della Madonna."</div>
+    <div class="verbatim">"Ci trovano due ordini e spesso e volentieri hanno preparato due volte lo stesso ordine."</div>
+  </div>
+  <div style="background: var(--surface); border-left: 3px solid rgba(255,80,80,0.5); padding: 1.6vh 2vw;">
+    <p class="body-text" style="font-size: clamp(14px, 1.56vw, 19px);">
+      Con 10–20 ordini al giorno, anche solo il 10% di errori significa 1–2 interventi manuali ogni giorno. WhatsApp, modifica backend, comunicazione al caseificio, rischio doppia preparazione. Ore che non tornano mai — gestite da una persona sola.
+    </p>
+  </div>
+  <div class="slide-footer"><div class="footer-num">04 / 12</div></div>
+</section>
+
+<!-- ─── 05 PROBLEMA 2: SITO NON CONVERTE ─── -->
+<section class="slide" id="slide-05">
+  <div class="label">Capitolo 2 — Il Problema</div>
+  <div class="gold-bar"></div>
+  <h2 class="headline" style="font-size: clamp(20px, 2.60vw, 35px); margin-bottom: 2vh;">Problema 2. Il sito non è progettato per convertire — e il tuo cliente tipo lo usa sul mobile.</h2>
+  <div class="two-col" style="gap: 4vw; align-items: start;">
+    <div>
+      <div class="verbatim" style="margin-bottom: 1.5vh;">"È una costruzione fatta nel tempo appiccicando pezzi — non c'è una strategia."</div>
+      <div class="verbatim">"L'anziano davanti al computer... bisogna renderlo più fruibile."</div>
+    </div>
+    <div>
+      <ul class="bullet-list" style="gap: 1.4vh;">
+        <li>Nessun menù di navigazione above the fold — si vede solo dopo lo scroll</li>
+        <li>Nessuna sezione "perché comprare da noi" — il cliente arriva e non capisce il valore</li>
+        <li>Stai vendendo cibo: la fiducia è un prerequisito dell'acquisto, non un optional</li>
+        <li>Mobile pesante — per il tuo cliente anziano è una barriera che non si supera</li>
+        <li>Nessun dato analytics — voli cieco sul comportamento degli utenti</li>
+      </ul>
+    </div>
+  </div>
+  <div style="margin-top: 2vh; padding: 1.4vh 2vw; background: var(--surface); border-left: 3px solid rgba(255,80,80,0.5);">
+    <p class="body-text muted" style="font-size: clamp(13px, 1.43vw, 17px);">Ogni cliente che abbandona il sito perché non riesce a navigarlo è un ordine perso. Questi ordini non lasciano traccia — spariscono in silenzio.</p>
+  </div>
+  <div class="slide-footer"><div class="footer-num">05 / 12</div></div>
+</section>
+
+<!-- ─── 06 PROBLEMA 3: BACKEND ─── -->
+<section class="slide" id="slide-06">
+  <div class="label">Capitolo 2 — Il Problema</div>
+  <div class="gold-bar"></div>
+  <h2 class="headline" style="font-size: clamp(20px, 2.60vw, 35px); margin-bottom: 2vh;">Problema 3. Non riesci a gestire il tuo sito in autonomia — e lo shop è diventato vitale.</h2>
+  <div style="display: flex; flex-direction: column; gap: 1.4vh; margin-bottom: 2.5vh;">
+    <div class="verbatim">"Non riesco dal backend ad arrivare manco a cambiare una parola."</div>
+    <div class="verbatim">"Siamo poco soddisfatti delle soluzioni e dei tempi di intervento."</div>
+    <div class="verbatim">"Lo shop è diventato vitale per noi."</div>
+  </div>
+  <div style="background: var(--surface); border-radius: 6px; padding: 2vh 2.5vw;">
+    <p class="body-text" style="font-size: clamp(14px, 1.56vw, 19px); line-height: 1.7;">
+      Il canale che gestisce il fatturato dipende da un consulente che non risponde nei tempi che ti servono. Aggiornare un CAP, attivare uno sconto, lanciare una promozione: ogni operazione elementare richiede un intermediario. In un settore alimentare dove le disponibilità cambiano e le promozioni hanno vita breve, questa dipendenza è un freno operativo reale — ogni giorno.
+    </p>
+  </div>
+  <div class="slide-footer"><div class="footer-num">06 / 12</div></div>
+</section>
+
+<!-- ─── 07 SOLUZIONE 1: CHECKOUT GUIDATO ─── -->
+<section class="slide" id="slide-07">
+  <div class="label">Capitolo 3 — La Soluzione</div>
+  <div class="gold-bar"></div>
+  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 2.5vh;">Soluzione 1. Il checkout diventa un percorso guidato — gli errori diventano quasi impossibili.</h2>
+  <div class="two-col" style="gap: 4vw; align-items: start;">
+    <div>
+      <div class="solution-card">
+        <div class="solution-card-title">Cosa cambia</div>
+        <ul class="bullet-list" style="gap: 1vh;">
+          <li>Selezione punto di ritiro per CAP — il cliente vede solo le opzioni rilevanti per la sua zona</li>
+          <li>Separazione netta delle modalità: domicilio / punto di ritiro / ritiro in azienda — UI dedicata per ciascuna</li>
+          <li>Flusso step-by-step mobile-first, testato su dispositivi reali prima del go-live</li>
+          <li>Area di staging: il sito attuale rimane online e operativo per tutta la durata dello sviluppo</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div style="padding: 2.5vh 2vw; background: var(--surface-gold); border: 1px solid var(--border-gold); border-radius: 6px;">
+        <div class="label" style="margin-bottom: 1vh;">Il risultato che ottieni</div>
+        <p class="body-text" style="font-size: clamp(14px, 1.56vw, 19px); line-height: 1.7;">Il cliente arriva al punto di ritiro giusto da solo. I messaggi WhatsApp di correzione si riducono drasticamente. Il caseificio riceve ordini puliti. Le ore recuperate ogni settimana restano tue.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="footer-num">07 / 12</div></div>
+</section>
+
+<!-- ─── 08 SOLUZIONE 2: SITO COME ASSET ─── -->
+<section class="slide" id="slide-08">
+  <div class="label">Capitolo 3 — La Soluzione</div>
+  <div class="gold-bar"></div>
+  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 2.5vh;">Soluzione 2. Il sito diventa uno strumento di vendita — non una brochure da spiegare.</h2>
+  <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2vw; margin-bottom: 2vh;">
+    <div style="background: var(--surface); padding: 1.6vh 1.4vw; border-top: 2px solid var(--gold);">
+      <div style="font-size: clamp(10px, 1.10vw, 13px); color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5vh;">Hero</div>
+      <p style="font-size: clamp(12px, 1.24vw, 15px); color: var(--muted); line-height: 1.4;">Menù visibile, carrello accessibile, CTA chiara — above the fold</p>
+    </div>
+    <div style="background: var(--surface); padding: 1.6vh 1.4vw; border-top: 2px solid var(--gold);">
+      <div style="font-size: clamp(10px, 1.10vw, 13px); color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5vh;">Perché noi</div>
+      <p style="font-size: clamp(12px, 1.24vw, 15px); color: var(--muted); line-height: 1.4;">Freschezza, qualità, provenienza, filiera — espressi in modo immediato</p>
+    </div>
+    <div style="background: var(--surface); padding: 1.6vh 1.4vw; border-top: 2px solid var(--gold);">
+      <div style="font-size: clamp(10px, 1.10vw, 13px); color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5vh;">Come funziona</div>
+      <p style="font-size: clamp(12px, 1.24vw, 15px); color: var(--muted); line-height: 1.4;">I passi dell'ordine spiegati semplici — rassicura e riduce i dubbi prima del carrello</p>
+    </div>
+    <div style="background: var(--surface); padding: 1.6vh 1.4vw; border-top: 2px solid var(--gold);">
+      <div style="font-size: clamp(10px, 1.10vw, 13px); color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5vh;">Dove ritiro</div>
+      <p style="font-size: clamp(12px, 1.24vw, 15px); color: var(--muted); line-height: 1.4;">Mappa o lista geografica accessibile prima del carrello — nessuna sorpresa in checkout</p>
+    </div>
+    <div style="background: var(--surface); padding: 1.6vh 1.4vw; border-top: 2px solid var(--gold);">
+      <div style="font-size: clamp(10px, 1.10vw, 13px); color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5vh;">Fiducia</div>
+      <p style="font-size: clamp(12px, 1.24vw, 15px); color: var(--muted); line-height: 1.4;">Recensioni, storia del caseificio — il cliente che compra cibo vuole sapere da chi compra</p>
+    </div>
+  </div>
+  <p class="body-text muted" style="font-size: clamp(13px, 1.43vw, 17px); max-width: 75%;">
+    Deliverable: wireframe, design UI, sviluppo WordPress/WooCommerce, ottimizzazione Core Web Vitals e performance mobile.
+  </p>
+  <div class="slide-footer"><div class="footer-num">08 / 12</div></div>
+</section>
+
+<!-- ─── 09 SOLUZIONE 3: BACKEND AUTONOMO ─── -->
+<section class="slide" id="slide-09">
+  <div class="label">Capitolo 3 — La Soluzione</div>
+  <div class="gold-bar"></div>
+  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 2.5vh;">Soluzione 3. Il backend diventa tuo — gestisci in autonomia le operazioni che contano.</h2>
+  <div class="two-col" style="gap: 4vw; align-items: start;">
+    <div>
+      <ul class="bullet-list" style="gap: 1.4vh;">
+        <li>Audit del backend attuale — pulizia delle configurazioni non necessarie e mappatura dello stato reale</li>
+        <li>CAP, sconti, campagne: le operazioni che fai più spesso semplificate e rese accessibili senza tecnici</li>
+        <li>Documentazione operativa scritta per te — non per un tecnico</li>
+        <li>Sessione di formazione diretta su di te e sulla tua collaboratrice</li>
+        <li>Accesso strutturato per livelli: cosa puoi toccare tu, cosa richiede intervento tecnico</li>
+      </ul>
+    </div>
+    <div>
+      <div style="padding: 2.5vh 2vw; background: var(--surface-gold); border: 1px solid var(--border-gold); border-radius: 6px;">
+        <div class="label" style="margin-bottom: 1vh;">Il risultato che ottieni</div>
+        <p class="body-text" style="font-size: clamp(14px, 1.56vw, 19px); line-height: 1.7;">Smetti di dipendere da un consulente per operazioni elementari. Il tuo canale principale di vendita lo gestisci tu — nei tempi che servono a te, non a chi ti risponde quando ha voglia.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="footer-num">09 / 12</div></div>
+</section>
+
+<!-- ─── 10 L'ESECUZIONE ─── -->
+<section class="slide" id="slide-10">
+  <div class="label">Capitolo 4 — L'Esecuzione</div>
+  <div class="gold-bar"></div>
+  <h2 class="headline" style="font-size: clamp(19px, 2.34vw, 31px); margin-bottom: 3vh;">7 settimane. Il sito attuale rimane online per tutta la durata.</h2>
+  <div class="phases-row">
+    <div class="phase-box featured">
+      <div class="phase-box-num">Fase 0</div>
+      <div class="phase-box-title">Accessi e audit tecnico</div>
+      <div class="phase-box-dur">1 settimana</div>
+      <div class="phase-box-desc">Report backend, stato plugin, dipendenze. Setup ambiente staging.</div>
+    </div>
+    <div class="phase-box">
+      <div class="phase-box-num">Fase 1</div>
+      <div class="phase-box-title">Strategia e architettura UX</div>
+      <div class="phase-box-dur">1 settimana</div>
+      <div class="phase-box-desc">Sitemap, wireframe checkout, architettura sezioni. Brief validato.</div>
+    </div>
+    <div class="phase-box">
+      <div class="phase-box-num">Fase 2</div>
+      <div class="phase-box-title">Design e sviluppo</div>
+      <div class="phase-box-dur">3 settimane</div>
+      <div class="phase-box-desc">Pagine disegnate e sviluppate su staging. UI completa.</div>
+    </div>
+    <div class="phase-box">
+      <div class="phase-box-num">Fase 3</div>
+      <div class="phase-box-title">Test e revisioni</div>
+      <div class="phase-box-dur">1 settimana</div>
+      <div class="phase-box-desc">Test su dispositivi reali, flusso ordine end-to-end. Finestra correzioni.</div>
+    </div>
+    <div class="phase-box">
+      <div class="phase-box-num">Fase 4</div>
+      <div class="phase-box-title">Deploy e formazione</div>
+      <div class="phase-box-dur">1 settimana</div>
+      <div class="phase-box-desc">Messa in produzione. Sessione formazione backend. Documentazione.</div>
+    </div>
+  </div>
+  <p class="body-text muted" style="margin-top: 2.5vh; font-size: clamp(13px, 1.37vw, 17px);">Il go-live avviene solo dopo validazione completa sull'ambiente di staging. Nessuna interruzione del servizio durante lo sviluppo.</p>
+  <div class="slide-footer"><div class="footer-num">10 / 12</div></div>
+</section>
+
+<!-- ─── 11 LE OPZIONI ─── -->
+<section class="slide" id="slide-11">
+  <div class="label">Capitolo 5 — Le Opzioni</div>
+  <div class="gold-bar"></div>
+  <h2 class="headline" style="font-size: clamp(18px, 2.10vw, 28px); margin-bottom: 1.5vh;">Tre livelli di intervento. La differenza non è la qualità — è la profondità della trasformazione.</h2>
+  <div class="abc-grid">
+    <div class="abc-package">
+      <div class="abc-package-label">Opzione A</div>
+      <div class="abc-package-name">Checkout e Mobile</div>
+      <div class="abc-package-price">—</div>
+      <div class="abc-package-price-note">Core: risolve il problema immediato</div>
+      <ul class="abc-items">
+        <li>Checkout guidato — punto di ritiro per CAP</li>
+        <li>Ottimizzazione mobile dell'intero flusso</li>
+        <li>Navigazione above the fold</li>
+        <li>Deploy staging → produzione</li>
+        <li>1 mese assistenza post-lancio</li>
+        <li class="out">Ristrutturazione sezioni di marketing</li>
+        <li class="out">Analytics — continui a volare cieco</li>
+        <li class="out">Formazione e autonomia backend</li>
+        <li class="out">SEO tecnica alimentare</li>
+      </ul>
+    </div>
+    <div class="abc-package">
+      <div class="abc-package-label">Opzione B</div>
+      <div class="abc-package-name">Checkout + Sito Convertente</div>
+      <div class="abc-package-price">—</div>
+      <div class="abc-package-price-note">Core + struttura marketing</div>
+      <ul class="abc-items">
+        <li>Tutto di A</li>
+        <li>Homepage con sezioni orientate alla conversione (hero, value, come funziona, punti ritiro, fiducia)</li>
+        <li>Ottimizzazione categorie e schede prodotto</li>
+        <li>Analytics base (Umami — nessun cookie, nessun costo ricorrente)</li>
+        <li>Formazione backend + documentazione operativa</li>
+        <li class="out">SEO tecnica strutturata</li>
+        <li class="out">Analytics avanzate con eventi personalizzati</li>
+        <li class="out">2 mesi assistenza post-lancio</li>
+      </ul>
+    </div>
+    <div class="abc-package featured">
+      <div class="abc-package-label">Opzione C</div>
+      <div class="abc-package-name">Trasformazione Completa</div>
+      <div class="abc-package-price">—</div>
+      <div class="abc-package-price-note">Soluzione integrata</div>
+      <ul class="abc-items">
+        <li>Tutto di B</li>
+        <li>SEO tecnica con Schema.org alimentare (prodotti, provenienza, recensioni strutturate)</li>
+        <li>Analytics avanzate — eventi checkout, selezione ritiro, conversioni, abbandoni</li>
+        <li>Schede prodotto con struttura narrativa e CTA orientate alla conversione</li>
+        <li>2 mesi assistenza post-lancio inclusi — aggiornamenti software, backup 24h, sicurezza/malware</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="footer-num">11 / 12</div></div>
+</section>
+
+<!-- ─── 12 IL PASSO SUCCESSIVO ─── -->
+<section class="slide" id="slide-12">
+  <div class="label">Il passo successivo</div>
+  <div class="gold-bar"></div>
+  <h2 class="headline" style="margin-bottom: 4vh;">"Da questa call a un e-commerce che funziona da solo."</h2>
+  <div class="steps-list">
+    <div class="step-item">
+      <div class="step-number">1</div>
+      <div class="step-text">Condividi gli accessi admin al backend WooCommerce</div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">2</div>
+      <div class="step-text">In 48 ore: audit tecnico + scelta dell'opzione → preventivo definitivo</div>
+    </div>
+    <div class="step-item">
+      <div class="step-number">3</div>
+      <div class="step-text">Kick-off — avvio Fase 0 entro 5 giorni lavorativi dalla conferma</div>
+    </div>
+  </div>
+  <div style="margin-top: auto; padding-top: 3vh; border-top: 1px solid var(--border-gold); display: flex; justify-content: space-between; align-items: flex-end;">
+    <div>
+      <div style="font-size: clamp(18px, 2.34vw, 30px);">Mauro Mandalari</div>
+      <div style="font-size: clamp(14px, 1.56vw, 19px); color: var(--muted); margin-top: 0.4vh;">info@mauromandalari.it &nbsp;·&nbsp; 392 850 5348</div>
+    </div>
+    <p class="body-text highlight" style="font-size: clamp(16px, 1.95vw, 25px); text-align: right; max-width: 40%;">
+      "Lo shop è diventato vitale per voi.<br>È il momento di trattarlo come tale."
+    </p>
+  </div>
+  <div class="slide-footer"><div class="footer-num">12 / 12</div></div>
+</section>
+
+<!-- ─── LOGO FISSO ─── -->
+<div class="logo-fixed"><svg width="127" height="97" viewBox="0 0 127 97" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="mask0_155_40" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="35" y="0" width="25" height="44"><path d="M35.4661 0.0258789H59.8839V43.978H35.4661V0.0258789Z" fill="white"/></mask><g mask="url(#mask0_155_40)"><path d="M36.7453 43.8681C36.0477 43.8681 35.4829 43.3238 35.4829 42.6516L35.496 1.81196C35.496 1.11087 35.9318 0.481877 36.6069 0.213337C37.2783 -0.0570045 38.0489 0.0907825 38.5632 0.588211L59.091 20.2024C59.5847 20.6746 59.5884 21.446 59.0984 21.9218C58.6066 22.3994 57.808 22.403 57.3124 21.929L38.019 3.49528L38.0077 42.6516C38.0077 43.3256 37.4411 43.8681 36.7453 43.8681ZM36.7809 2.31119C36.7827 2.31299 36.7846 2.31479 36.7846 2.3166L36.7809 2.31119Z" fill="white"/></g><mask id="mask1_155_40" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="57" y="0" width="25" height="44"><path d="M81.8589 0H57.441V43.9521H81.8589V0Z" fill="white"/></mask><g mask="url(#mask1_155_40)"><path d="M80.5796 43.8422C81.2772 43.8422 81.842 43.2979 81.842 42.6257L81.8289 1.78608C81.8289 1.08499 81.3932 0.455998 80.718 0.187458C80.0466 -0.0828834 79.2761 0.0649035 78.7618 0.562332L58.234 20.1765C57.7403 20.6487 57.7365 21.4201 58.2265 21.8959C58.7184 22.3735 59.517 22.3771 60.0126 21.9031L79.306 3.46941L79.3172 42.6257C79.3172 43.2997 79.8839 43.8422 80.5796 43.8422ZM80.5441 2.28531C80.5422 2.28711 80.5404 2.28891 80.5404 2.29072L80.5441 2.28531Z" fill="white"/></g><line x1="1.11898" y1="39.9426" x2="57.3027" y2="28.6856" stroke="white" stroke-width="0.90139"/><line y1="-0.450695" x2="64.7688" y2="-0.450695" transform="matrix(0.999524 0.0308377 -0.0235173 0.999723 60.0969 29.1982)" stroke="#E7B254" stroke-width="0.90139"/><line y1="-0.450695" x2="64.8174" y2="-0.450695" transform="matrix(0.996363 0.0852077 -0.0650668 0.997881 60.1753 29.2383)" stroke="#E7B254" stroke-width="0.90139"/><line y1="-0.450695" x2="64.9279" y2="-0.450695" transform="matrix(0.989165 0.146806 -0.112443 0.993658 60.0969 29.1982)" stroke="#E7B254" stroke-width="0.90139"/><path d="M1.97785 80.6716V64.507H9.25437C10.9799 64.507 12.3392 64.9791 13.3322 65.9232C14.3251 66.8511 14.8216 68.1127 14.8216 69.708C14.8216 71.3033 14.3251 72.573 13.3322 73.5172C12.3392 74.4451 10.9799 74.909 9.25437 74.909H3.80919V80.6716H1.97785ZM3.80919 73.1998H9.13228C10.402 73.1998 11.3624 72.8905 12.0136 72.2719C12.6647 71.6533 12.9903 70.7987 12.9903 69.708C12.9903 68.6336 12.6647 67.7871 12.0136 67.1686C11.3624 66.55 10.402 66.2407 9.13228 66.2407H3.80919V73.1998ZM24.6359 80.6716V64.507H32.3764C34.0368 64.507 35.3553 64.9628 36.3321 65.8744C37.325 66.786 37.8215 68.015 37.8215 69.5615C37.8215 70.6033 37.6181 71.4335 37.2111 72.0521C36.8204 72.6707 36.3239 73.1428 35.7216 73.4684C35.1193 73.7777 34.517 74.0056 33.9147 74.1521L38.1634 80.6716H35.9902L32.0833 74.4695H26.4672V80.6716H24.6359ZM26.4672 72.7358H32.0589C32.645 72.7358 33.2391 72.6463 33.8414 72.4672C34.4437 72.2882 34.9484 71.9707 35.3553 71.5149C35.7786 71.0429 35.9902 70.3917 35.9902 69.5615C35.9902 68.536 35.6402 67.7302 34.9402 67.1441C34.2403 66.5418 33.3124 66.2407 32.1566 66.2407H26.4672V72.7358ZM48.2955 80.6716V64.507H50.1268V80.6716H48.2955ZM67.2023 80.867C65.607 80.867 64.3129 80.6554 63.3199 80.2321C62.3269 79.7926 61.5781 79.1903 61.0735 78.4252C60.5851 77.6601 60.3002 76.7973 60.2188 75.8369H62.1234C62.1723 76.6183 62.4327 77.2531 62.9048 77.7415C63.3769 78.2136 63.9955 78.5636 64.7605 78.7915C65.5419 79.0194 66.3965 79.1333 67.3244 79.1333C68.6918 79.1333 69.7743 78.8973 70.572 78.4252C71.3696 77.9368 71.7685 77.2206 71.7685 76.2764C71.7685 75.7067 71.565 75.2509 71.158 74.909C70.7673 74.5509 70.2383 74.2579 69.5709 74.03C68.9197 73.8021 68.2035 73.5986 67.4221 73.4195C66.6407 73.2242 65.8512 73.0207 65.0536 72.8091C64.2722 72.5975 63.5478 72.3289 62.8804 72.0033C62.2292 71.6777 61.7002 71.2626 61.2932 70.758C60.9025 70.2371 60.7072 69.5778 60.7072 68.7801C60.7072 67.4616 61.2118 66.3872 62.2211 65.557C63.2466 64.7268 64.7687 64.3117 66.7872 64.3117C68.2197 64.3117 69.3999 64.5314 70.3278 64.9709C71.2557 65.3942 71.9475 65.9558 72.4033 66.6558C72.8754 67.3558 73.1359 68.1127 73.1847 68.9266H71.3045C71.2069 68.1127 70.7999 67.429 70.0836 66.8755C69.3674 66.3058 68.2686 66.0209 66.7872 66.0209C65.8756 66.0209 65.135 66.1104 64.5652 66.2895C63.9955 66.4686 63.5559 66.7046 63.2466 66.9976C62.9536 67.2744 62.7501 67.5674 62.6362 67.8767C62.5385 68.186 62.4897 68.479 62.4897 68.7557C62.4897 69.2929 62.685 69.7324 63.0757 70.0743C63.4827 70.3999 64.0117 70.6766 64.6629 70.9045C65.3303 71.1161 66.0628 71.3115 66.8605 71.4905C67.6581 71.6696 68.4476 71.8731 69.229 72.101C70.0267 72.3126 70.7511 72.5893 71.4022 72.9312C72.0696 73.2567 72.5987 73.68 72.9894 74.2009C73.3963 74.7218 73.5998 75.3892 73.5998 76.2032C73.5998 77.7008 73.0301 78.8566 71.8906 79.6705C70.7511 80.4681 69.1883 80.867 67.2023 80.867ZM83.7634 80.6716V64.507H85.8877L91.6747 72.1742L97.3641 64.507H99.4885V80.6716H97.6571V67.2906L91.6747 74.9823L85.5947 67.2906V80.6716H83.7634ZM108.857 80.6716L115.718 64.507H118.013L124.875 80.6716H122.848L120.87 75.9834H112.861L110.883 80.6716H108.857ZM113.569 74.2986H120.162L116.866 66.4116L113.569 74.2986Z" fill="#E7B254"/><path d="M2.25623 94.4392V87.9734H7.01283V88.6766H2.98876V90.8449H6.58307V91.5579H2.98876V93.736H7.01283V94.4392H2.25623ZM12.1667 94.5173C11.5221 94.5173 10.9654 94.3708 10.4966 94.0778C10.0277 93.7783 9.66636 93.3778 9.41241 92.8765C9.16498 92.3751 9.04126 91.8184 9.04126 91.2063C9.04126 90.5942 9.16498 90.0375 9.41241 89.5361C9.66636 89.0347 10.0277 88.6375 10.4966 88.3445C10.9654 88.045 11.5221 87.8952 12.1667 87.8952C12.6551 87.8952 13.0946 87.9831 13.4853 88.1589C13.876 88.3282 14.2081 88.5626 14.4816 88.8622C14.755 89.1617 14.9602 89.5101 15.0969 89.9073H14.3253C14.1625 89.5101 13.9053 89.1943 13.5537 88.9598C13.2021 88.7254 12.7593 88.6082 12.2254 88.6082C11.7044 88.6082 11.2584 88.7254 10.8873 88.9598C10.5226 89.1877 10.2459 89.497 10.057 89.8877C9.86821 90.2784 9.7738 90.7179 9.7738 91.2063C9.7738 91.6881 9.86821 92.1277 10.057 92.5248C10.2459 92.9155 10.5226 93.2281 10.8873 93.4625C11.2584 93.6904 11.7044 93.8043 12.2254 93.8043C12.7593 93.8043 13.2021 93.6871 13.5537 93.4527C13.9053 93.2183 14.1625 92.9025 14.3253 92.5053H15.0969C14.9602 92.896 14.755 93.2444 14.4816 93.5504C14.2081 93.8499 13.876 94.0876 13.4853 94.2634C13.0946 94.4327 12.6551 94.5173 12.1667 94.5173ZM20.2777 94.5173C19.633 94.5173 19.0763 94.3708 18.6075 94.0778C18.1387 93.7783 17.7773 93.3778 17.5233 92.8765C17.2759 92.3751 17.1522 91.8184 17.1522 91.2063C17.1522 90.5942 17.2759 90.0375 17.5233 89.5361C17.7773 89.0347 18.1387 88.6375 18.6075 88.3445C19.0763 88.045 19.633 87.8952 20.2777 87.8952C20.766 87.8952 21.2056 87.9831 21.5962 88.1589C21.9869 88.3282 22.319 88.5626 22.5925 88.8622C22.866 89.1617 23.0711 89.5101 23.2078 89.9073H22.4362C22.2734 89.5101 22.0162 89.1943 21.6646 88.9598C21.313 88.7254 20.8702 88.6082 20.3363 88.6082C19.8154 88.6082 19.3693 88.7254 18.9982 88.9598C18.6335 89.1877 18.3568 89.497 18.168 89.8877C17.9791 90.2784 17.8847 90.7179 17.8847 91.2063C17.8847 91.6881 17.9791 92.1277 18.168 92.5248C18.3568 92.9155 18.6335 93.2281 18.9982 93.4625C19.3693 93.6904 19.8154 93.8043 20.3363 93.8043C20.8702 93.8043 21.313 93.6871 21.6646 93.4527C22.0162 93.2183 22.2734 92.9025 22.4362 92.5053H23.2078C23.0711 92.896 22.866 93.2444 22.5925 93.5504C22.319 93.8499 21.9869 94.0876 21.5962 94.2634C21.2056 94.4327 20.766 94.5173 20.2777 94.5173ZM25.6733 94.4392V87.9734H30.4299V88.6766H26.4059V90.8449H30.0002V91.5579H26.4059V93.736H30.4299V94.4392H25.6733ZM32.983 94.4392V87.9734H33.7156V93.736H37.2415V94.4392H32.983ZM39.5583 94.4392V87.9734H40.2909V93.736H43.8168V94.4392H39.5583ZM46.1336 94.4392V87.9734H50.8902V88.6766H46.8661V90.8449H50.4604V91.5579H46.8661V93.736H50.8902V94.4392H46.1336ZM53.4433 94.4392V87.9734H54.293L58.2878 93.4137V87.9734H59.0203V94.4392H58.1706L54.1758 88.9794V94.4392H53.4433ZM61.466 94.4392V93.7457L65.6854 88.6571H61.5246V87.9734H66.584V88.6766L62.3646 93.7555H66.584V94.4392H61.466ZM68.2833 94.4392L71.0279 87.9734H71.946L74.6906 94.4392H73.8799L73.0888 92.5639H69.8851L69.094 94.4392H68.2833ZM70.1684 91.89H72.8055L71.487 88.7352L70.1684 91.89ZM82.182 94.4392L79.5644 87.9734H80.3653L82.602 93.609L84.8386 87.9734H85.6396L83.022 94.4392H82.182ZM87.8267 94.4392V87.9734H88.5592V94.4392H87.8267ZM93.8267 94.5173C93.1886 94.5173 92.6709 94.4327 92.2737 94.2634C91.8765 94.0876 91.577 93.8467 91.3751 93.5406C91.1798 93.2346 91.0659 92.8895 91.0333 92.5053H91.7951C91.8147 92.8179 91.9189 93.0718 92.1077 93.2672C92.2965 93.456 92.5439 93.596 92.85 93.6871C93.1625 93.7783 93.5044 93.8239 93.8755 93.8239C94.4225 93.8239 94.8555 93.7295 95.1746 93.5406C95.4936 93.3453 95.6532 93.0588 95.6532 92.6811C95.6532 92.4532 95.5718 92.2709 95.409 92.1342C95.2527 91.9909 95.0411 91.8737 94.7741 91.7825C94.5137 91.6914 94.2272 91.61 93.9146 91.5384C93.6021 91.4602 93.2863 91.3788 92.9672 91.2942C92.6546 91.2095 92.3649 91.1021 92.0979 90.9719C91.8375 90.8416 91.6258 90.6756 91.4631 90.4737C91.3068 90.2654 91.2286 90.0017 91.2286 89.6826C91.2286 89.1552 91.4305 88.7254 91.8342 88.3933C92.2444 88.0613 92.8532 87.8952 93.6607 87.8952C94.2337 87.8952 94.7057 87.9831 95.0769 88.1589C95.448 88.3282 95.7248 88.5529 95.9071 88.8329C96.0959 89.1129 96.2001 89.4156 96.2197 89.7412H95.4676C95.4285 89.4156 95.2657 89.1422 94.9792 88.9208C94.6927 88.6929 94.2532 88.5789 93.6607 88.5789C93.296 88.5789 92.9997 88.6147 92.7718 88.6864C92.5439 88.758 92.3681 88.8524 92.2444 88.9696C92.1272 89.0803 92.0458 89.1975 92.0002 89.3212C91.9612 89.4449 91.9416 89.5621 91.9416 89.6728C91.9416 89.8877 92.0198 90.0635 92.1761 90.2003C92.3388 90.3305 92.5505 90.4412 92.8109 90.5324C93.0779 90.617 93.3709 90.6951 93.69 90.7668C94.009 90.8384 94.3248 90.9198 94.6374 91.0109C94.9564 91.0956 95.2462 91.2063 95.5066 91.343C95.7736 91.4733 95.9852 91.6426 96.1415 91.8509C96.3043 92.0593 96.3857 92.3263 96.3857 92.6518C96.3857 93.2509 96.1578 93.7132 95.702 94.0388C95.2462 94.3578 94.6211 94.5173 93.8267 94.5173ZM98.8884 94.4392V87.9734H99.6209V94.4392H98.8884ZM102.574 94.4392V87.9734H105.474C105.982 87.9734 106.383 88.0613 106.676 88.2371C106.975 88.4129 107.19 88.6343 107.32 88.9012C107.451 89.1617 107.516 89.4222 107.516 89.6826C107.516 90.0993 107.428 90.4217 107.252 90.6496C107.076 90.8709 106.874 91.0337 106.646 91.1379C106.829 91.1965 107.011 91.2909 107.193 91.4212C107.382 91.5449 107.539 91.7142 107.662 91.9291C107.786 92.1439 107.848 92.4142 107.848 92.7397C107.848 93.2216 107.662 93.6253 107.291 93.9509C106.926 94.2764 106.376 94.4392 105.64 94.4392H102.574ZM103.306 90.8644H105.474C105.702 90.8644 105.914 90.8254 106.109 90.7472C106.311 90.6691 106.474 90.5486 106.598 90.3858C106.721 90.2165 106.783 90.0017 106.783 89.7412C106.783 89.5589 106.741 89.3863 106.656 89.2236C106.578 89.0608 106.448 88.9273 106.266 88.8231C106.09 88.7189 105.852 88.6668 105.553 88.6668H103.306V90.8644ZM103.306 93.7457H105.719C106.161 93.7457 106.503 93.6546 106.744 93.4723C106.992 93.2834 107.115 93.0197 107.115 92.6811C107.115 92.3751 106.998 92.1081 106.764 91.8802C106.529 91.6458 106.155 91.5286 105.64 91.5286H103.306V93.7457ZM110.408 94.4392V87.9734H111.14V94.4392H110.408ZM114.093 94.4392V87.9734H114.826V93.736H118.352V94.4392H114.093ZM120.668 94.4392V87.9734H125.425V88.6766H121.401V90.8449H124.995V91.5579H121.401V93.736H125.425V94.4392H120.668Z" fill="white"/></svg></div>
+
+<!-- ─── PROGRESS + NAV ─── -->
+<div class="progress-bar" id="progress"></div>
+<div class="nav-controls">
+  <button class="nav-btn" onclick="go(-1)">←</button>
+  <button class="nav-btn" onclick="go(1)">→</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const N = slides.length;
+let cur = 0;
+
+function show(i) {
+  slides[cur].classList.remove('active');
+  cur = Math.max(0, Math.min(N - 1, i));
+  slides[cur].classList.add('active');
+  document.getElementById('progress').style.width = ((cur + 1) / N * 100) + '%';
+}
+
+function go(d) { show(cur + d); }
+
+document.addEventListener('keydown', e => {
+  if (['ArrowRight', 'ArrowDown', ' '].includes(e.key)) { e.preventDefault(); go(1); }
+  else if (['ArrowLeft', 'ArrowUp'].includes(e.key)) { e.preventDefault(); go(-1); }
+});
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.nav-controls')) go(1);
+});
+
+show(0);
+</script>
+</body>
+</html>
