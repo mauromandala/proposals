@@ -169,13 +169,13 @@ body {
 }
 
 /* TIMELINE */
-.tl-wrap { position: relative; width: 100%; margin: 4vh 0 2vh; }
+.tl-wrap { position: relative; width: 100%; margin: 5vh 0 0; }
 .tl-axis {
   position: absolute;
-  top: 10px;
+  top: 0;
   left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(to right, rgba(231,178,84,0.5), rgba(255,255,255,0.08) 80%);
+  background: linear-gradient(to right, rgba(231,178,84,0.45), rgba(255,255,255,0.06) 85%);
   z-index: 0;
 }
 .tl-phases {
@@ -184,26 +184,31 @@ body {
   position: relative;
   z-index: 1;
   align-items: flex-start;
+  padding-top: 0;
 }
-.tl-phase { display: flex; flex-direction: column; padding-right: 2vw; min-width: 0; }
+.tl-phase {
+  display: flex;
+  flex-direction: column;
+  padding-right: 2.5vw;
+  min-width: 0;
+  padding-top: 0;
+}
 .tl-node {
-  width: 20px; height: 20px;
+  width: 9px; height: 9px;
   border-radius: 50%;
-  background: var(--navy);
-  border: 1.5px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.30);
   flex-shrink: 0;
-  margin-bottom: 2.2vh;
+  margin-bottom: 3.5vh;
+  margin-top: -4px;
 }
 .tl-phase.is-deploy .tl-node {
-  width: 20px; height: 20px;
   background: var(--gold);
-  border-color: var(--gold);
-  box-shadow: 0 0 24px rgba(231,178,84,0.6);
+  box-shadow: 0 0 16px rgba(231,178,84,0.7);
 }
-.tl-num  { display: block; font-size: clamp(10px, 1.00vw, 12px); color: var(--gold); text-transform: uppercase; letter-spacing: 0.20em; margin-bottom: 1.0vh; }
-.tl-name { display: block; font-size: clamp(17px, 1.90vw, 26px); line-height: 1.2; margin-bottom: 0.8vh; font-weight: 400; }
+.tl-num  { display: block; font-size: clamp(9px, 0.90vw, 11px); color: var(--gold); text-transform: uppercase; letter-spacing: 0.25em; margin-bottom: 1.2vh; }
+.tl-name { display: block; font-size: clamp(20px, 2.30vw, 32px); line-height: 1.15; margin-bottom: 1.0vh; }
 .tl-phase.is-deploy .tl-name { color: var(--gold); }
-.tl-dur  { display: block; font-size: clamp(12px, 1.20vw, 15px); color: rgba(255,255,255,0.32); letter-spacing: 0.05em; }
+.tl-dur  { display: block; font-size: clamp(11px, 1.05vw, 14px); color: rgba(255,255,255,0.28); letter-spacing: 0.06em; }
 .tl-desc { display: none; }
 
 /* ABC GRID */
@@ -536,7 +541,7 @@ body {
 <section class="slide" id="slide-07">
   <div class="label">Capitolo 3 — La Soluzione</div>
   <div class="gold-bar"></div>
-  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 2.5vh;">Soluzione 1. Prima di toccare il sito, capiamo esattamente cosa rotto e perché — e lo mettiamo per iscritto.</h2>
+  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 2.5vh;">Opzione A. Prima di toccare il sito, capiamo esattamente cosa è rotto e perché — e lo mettiamo per iscritto.</h2>
   <div class="two-col" style="gap: 4vw; align-items: start;">
     <div>
       <ul class="bullet-list" style="gap: 1vh;">
@@ -562,7 +567,7 @@ body {
 <section class="slide" id="slide-08">
   <div class="label">Capitolo 3 — La Soluzione</div>
   <div class="gold-bar"></div>
-  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 2.5vh;">Soluzione 2. Il checkout diventa un percorso guidato — gli errori diventano quasi impossibili.</h2>
+  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 2.5vh;">Opzione B. Il checkout diventa un percorso guidato — gli errori diventano quasi impossibili.</h2>
   <div class="two-col" style="gap: 4vw; align-items: start;">
     <div>
       <ul class="bullet-list" style="gap: 1vh;">
@@ -588,7 +593,7 @@ body {
 <section class="slide" id="slide-09">
   <div class="label">Capitolo 3 — La Soluzione</div>
   <div class="gold-bar"></div>
-  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 2.5vh;">Soluzione 3. Il sito diventa uno strumento di vendita e il backend diventa tuo.</h2>
+  <h2 class="headline" style="font-size: clamp(20px, 2.50vw, 33px); margin-bottom: 2.5vh;">Opzione C. Il sito diventa uno strumento di vendita e il backend diventa tuo.</h2>
   <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2vw; margin-bottom: 2vh;">
     <div style="background: var(--surface); padding: 1.6vh 1.4vw; border-top: 2px solid var(--gold);">
       <div style="font-size: clamp(12px, 1.32vw, 16px); color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5vh;">Homepage</div>
@@ -621,55 +626,49 @@ body {
 <section class="slide" id="slide-10">
   <div class="label">Capitolo 4 — L'Esecuzione</div>
   <div class="gold-bar"></div>
-  <h2 class="headline" style="font-size: clamp(26px, 3.20vw, 46px); margin-bottom: 0;">8 settimane.<span style="color: var(--muted); font-size: 0.55em; padding-left: 1.5vw;">Il sito attuale rimane online per tutta la durata.</span></h2>
+  <h2 class="headline" style="font-size: clamp(38px, 5.50vw, 76px); line-height: 1; margin-bottom: 0.4vh;">8 settimane.</h2>
+  <p style="font-size: clamp(13px, 1.30vw, 17px); color: rgba(255,255,255,0.32); letter-spacing: 0.06em; margin-bottom: 0;">Il sito attuale rimane online per tutta la durata del progetto.</p>
   <div class="tl-wrap">
     <div class="tl-axis"></div>
     <div class="tl-phases">
       <div class="tl-phase" style="flex:1">
         <div class="tl-node"></div>
-        <span class="tl-num">Fase 0 — Opzione A</span>
-        <span class="tl-name">Audit Strategico</span>
-        <span class="tl-dur">Settimana 1</span>
-        <span class="tl-desc">Goal Discovery, diagnosi funnel, Decision Document, call di restituzione.</span>
+        <span class="tl-num">Opzione A · Settimana 1</span>
+        <span class="tl-name">Audit<br>Strategico</span>
+        <span class="tl-dur">1 sett.</span>
       </div>
       <div class="tl-phase" style="flex:1">
         <div class="tl-node"></div>
-        <span class="tl-num">Fase 1</span>
-        <span class="tl-name">Strategia e UX</span>
-        <span class="tl-dur">Settimana 2</span>
-        <span class="tl-desc">Sitemap, wireframe checkout, architettura sezioni. Brief validato.</span>
+        <span class="tl-num">Settimana 2</span>
+        <span class="tl-name">Strategia<br>e UX</span>
+        <span class="tl-dur">1 sett.</span>
       </div>
       <div class="tl-phase" style="flex:2">
         <div class="tl-node"></div>
-        <span class="tl-num">Fase 2 — Opzione B</span>
-        <span class="tl-name">Checkout e Mobile</span>
-        <span class="tl-dur">Settimane 3 – 4</span>
-        <span class="tl-desc">Checkout guidato per CAP, ottimizzazione mobile, navigazione above the fold su staging.</span>
+        <span class="tl-num">Opzione B · Settimane 3–4</span>
+        <span class="tl-name">Checkout<br>e Mobile</span>
+        <span class="tl-dur">2 sett.</span>
       </div>
       <div class="tl-phase" style="flex:2">
         <div class="tl-node"></div>
-        <span class="tl-num">Fase 3 — Opzione C</span>
-        <span class="tl-name">Sito e Backend</span>
-        <span class="tl-dur">Settimane 5 – 6</span>
-        <span class="tl-desc">Homepage conversione, schede prodotto, SEO alimentare, analytics, formazione backend.</span>
+        <span class="tl-num">Opzione C · Settimane 5–6</span>
+        <span class="tl-name">Sito<br>e Backend</span>
+        <span class="tl-dur">2 sett.</span>
       </div>
       <div class="tl-phase" style="flex:1">
         <div class="tl-node"></div>
-        <span class="tl-num">Fase 4</span>
-        <span class="tl-name">Test e revisioni</span>
-        <span class="tl-dur">Settimana 7</span>
-        <span class="tl-desc">Test su dispositivi reali, flusso ordine end-to-end. Finestra correzioni.</span>
+        <span class="tl-num">Settimana 7</span>
+        <span class="tl-name">Test e<br>Revisioni</span>
+        <span class="tl-dur">1 sett.</span>
       </div>
       <div class="tl-phase is-deploy" style="flex:1">
         <div class="tl-node"></div>
-        <span class="tl-num">Fase 5 — Go-live</span>
-        <span class="tl-name">Deploy e formazione</span>
-        <span class="tl-dur">Settimana 8</span>
-        <span class="tl-desc">Messa in produzione. Documentazione operativa consegnata.</span>
+        <span class="tl-num">Settimana 8</span>
+        <span class="tl-name">Go-live</span>
+        <span class="tl-dur">Deploy</span>
       </div>
     </div>
   </div>
-  <p style="margin-top: 3vh; font-size: clamp(12px, 1.20vw, 15px); color: rgba(255,255,255,0.28); letter-spacing: 0.04em;">Go-live solo dopo validazione completa su staging — nessuna interruzione del servizio.</p>
   <div class="slide-footer"><div class="footer-num">10 / 12</div></div>
 </section>
 
