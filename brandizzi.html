@@ -221,6 +221,8 @@ body {
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 2vh 1.8vw;
+  display: flex;
+  flex-direction: column;
 }
 .abc-package.featured {
   background: var(--surface-gold);
@@ -231,20 +233,25 @@ body {
   letter-spacing: 0.2em;
   color: var(--muted);
   text-transform: uppercase;
-  margin-bottom: 0.3vh;
+  margin-bottom: 0.4vh;
 }
 .abc-package-name {
   font-size: clamp(19px, 2.18vw, 28px);
-  margin-bottom: 0.3vh;
+  margin-bottom: 2.5vh;
+  padding-bottom: 1.8vh;
+  border-bottom: 1px solid var(--border);
 }
 .abc-package.featured .abc-package-name { color: var(--gold); }
 .abc-package-price {
-  font-size: clamp(29px, 3.90vw, 53px);
+  font-size: clamp(25px, 3.40vw, 46px);
   color: var(--gold);
-  margin: 0.8vh 0 0.3vh;
+  margin-top: 2.5vh;
+  padding-top: 1.8vh;
+  border-top: 1px solid var(--border);
+  margin-bottom: 0.3vh;
 }
-.abc-package-price-note { font-size: clamp(12px, 1.32vw, 16px); color: var(--muted); margin-bottom: 1.2vh; }
-.abc-items { list-style: none; display: flex; flex-direction: column; gap: 0.6vh; }
+.abc-package-price-note { font-size: clamp(12px, 1.32vw, 16px); color: var(--muted); }
+.abc-items { list-style: none; display: flex; flex-direction: column; gap: 0.6vh; flex: 1; }
 .abc-items li {
   font-size: clamp(14px, 1.56vw, 19px);
   color: rgba(255,255,255,0.78);
@@ -663,49 +670,50 @@ body {
   <div class="abc-grid">
     <div class="abc-package">
       <div class="abc-package-label">Opzione A</div>
-      <div class="abc-package-name">Checkout e Mobile</div>
-      <div class="abc-package-price">—</div>
-      <div class="abc-package-price-note">Core: risolve il problema immediato</div>
+      <div class="abc-package-name">Audit Strategico</div>
       <ul class="abc-items">
+        <li>Goal Discovery Session (call strutturata 1–2h)</li>
+        <li>Diagnosi del funnel e-commerce (checkout, mobile, conversione)</li>
+        <li>Mappa delle priorità di intervento</li>
+        <li>Decision Document scritto</li>
+        <li>Call di restituzione e raccomandazioni operative</li>
+        <li class="out">Nessuna implementazione inclusa</li>
+        <li class="out">Nessuna modifica al sito</li>
+      </ul>
+      <div class="abc-package-price">€1.200 – €1.500</div>
+      <div class="abc-package-price-note">Diagnosi e piano d'azione</div>
+    </div>
+    <div class="abc-package">
+      <div class="abc-package-label">Opzione B</div>
+      <div class="abc-package-name">Audit + Checkout e Mobile</div>
+      <ul class="abc-items">
+        <li>Tutto di A — Audit Strategico completo</li>
         <li>Checkout guidato — punto di ritiro per CAP</li>
         <li>Ottimizzazione mobile dell'intero flusso</li>
         <li>Navigazione above the fold</li>
         <li>Deploy staging → produzione</li>
         <li>1 mese assistenza post-lancio</li>
         <li class="out">Ristrutturazione sezioni di marketing</li>
-        <li class="out">Analytics — continui a volare cieco</li>
-        <li class="out">Formazione e autonomia backend</li>
+        <li class="out">Analytics strutturate</li>
         <li class="out">SEO tecnica alimentare</li>
       </ul>
-    </div>
-    <div class="abc-package">
-      <div class="abc-package-label">Opzione B</div>
-      <div class="abc-package-name">Checkout + Sito che Converte</div>
-      <div class="abc-package-price">—</div>
-      <div class="abc-package-price-note">Core + struttura marketing</div>
-      <ul class="abc-items">
-        <li>Tutto di A</li>
-        <li>Homepage con sezioni orientate alla conversione (hero, value, come funziona, punti ritiro, fiducia)</li>
-        <li>Ottimizzazione categorie e schede prodotto</li>
-        <li>Analytics base (Umami — nessun cookie, nessun costo ricorrente)</li>
-        <li>Formazione backend + documentazione operativa</li>
-        <li class="out">SEO tecnica strutturata</li>
-        <li class="out">Analytics avanzate con eventi personalizzati</li>
-        <li class="out">2 mesi assistenza post-lancio</li>
-      </ul>
+      <div class="abc-package-price">€3.800 – €4.200</div>
+      <div class="abc-package-price-note">Audit + intervento tattico immediato</div>
     </div>
     <div class="abc-package featured">
       <div class="abc-package-label">Opzione C</div>
-      <div class="abc-package-name">Trasformazione Completa</div>
-      <div class="abc-package-price">—</div>
-      <div class="abc-package-price-note">Soluzione integrata</div>
+      <div class="abc-package-name">Audit + Trasformazione Completa</div>
       <ul class="abc-items">
-        <li>Tutto di B</li>
+        <li>Tutto di B — Audit + Checkout e Mobile</li>
+        <li>Homepage con sezioni orientate alla conversione (hero, value, come funziona, punti ritiro, fiducia)</li>
+        <li>Ottimizzazione categorie e schede prodotto</li>
         <li>SEO tecnica con Schema.org alimentare (prodotti, provenienza, recensioni strutturate)</li>
         <li>Analytics avanzate — eventi checkout, selezione ritiro, conversioni, abbandoni</li>
-        <li>Schede prodotto con struttura narrativa e CTA orientate alla conversione</li>
+        <li>Formazione backend + documentazione operativa</li>
         <li>2 mesi assistenza post-lancio inclusi — aggiornamenti software, backup 24h, sicurezza/malware</li>
       </ul>
+      <div class="abc-package-price">€7.200 – €8.400</div>
+      <div class="abc-package-price-note">Audit + soluzione integrata</div>
     </div>
   </div>
   <div class="slide-footer"><div class="footer-num">11 / 12</div></div>
