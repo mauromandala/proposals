@@ -466,6 +466,9 @@ body {
   /* Override padding inline su slide con stili hardcoded */
   .slide[style] { padding-top: max(150px, 12vh) !important; }
 
+  /* comp-v2-wrap: overflow:hidden blocca lo scroll touch su iOS — rimosso */
+  .comp-v2-wrap { overflow: visible; }
+
   /* Counter — fixed, centrato, subito sotto le frecce */
   .slide-footer {
     position: fixed !important;
