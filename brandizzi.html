@@ -463,12 +463,19 @@ body {
   .logo-fixed svg { width: 72px; }
   .logo-fixed { top: 2vh; left: 5vw; }
 
-  /* Counter — nascosto su mobile (la progress bar indica già la posizione) */
-  .slide-footer { display: none; }
+  /* Counter — fixed, centrato, subito sotto le frecce */
+  .slide-footer {
+    position: fixed !important;
+    bottom: 1.2vh;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .footer-num { font-size: clamp(11px, 3.2vw, 14px); color: rgba(255,255,255,0.35); }
 
   /* Nav — touch-friendly, centrate in basso */
   .nav-btn { width: 3.8em; height: 3.8em; font-size: 18px; }
-  .nav-controls { gap: 3vw; bottom: 2.5vh; right: 50%; transform: translateX(50%); }
+  .nav-controls { gap: 3vw; bottom: 5vh; right: 50%; transform: translateX(50%); }
 
   /* Progress bar */
   .progress-bar { height: 4px; }
