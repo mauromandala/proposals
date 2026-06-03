@@ -379,6 +379,104 @@ body {
 .comp-v2-price-label { font-size: clamp(9px, 0.85vw, 11px); text-transform: uppercase; letter-spacing: 0.20em; color: rgba(255,255,255,0.28); }
 .comp-v2-price-val { font-size: clamp(14px, 1.55vw, 20px); color: var(--gold); text-align: center; }
 .comp-v2-note { font-size: clamp(13px, 1.26vw, 17px); color: rgba(255,255,255,0.22); font-style: italic; margin-top: 1.3vh; text-align: center; }
+
+/* ─── MOBILE ≤ 650px ─── */
+@media (max-width: 650px) {
+
+  body { overflow: hidden; }
+
+  .slide {
+    padding: 10vh 6vw 16vh;
+    justify-content: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Tipografia generale */
+  .headline  { max-width: 100%; font-size: clamp(22px, 6.5vw, 34px) !important; }
+  .subheadline { max-width: 100%; }
+  .slide-body { max-width: 100% !important; font-size: clamp(14px, 4vw, 18px) !important; }
+  .body-text  { font-size: clamp(14px, 4vw, 18px) !important; }
+
+  /* Cover */
+  #slide-00 h1 { max-width: 100% !important; font-size: clamp(26px, 7.5vw, 40px) !important; }
+  #slide-00 p  { max-width: 100% !important; }
+
+  /* Lo Strategist — foto sopra, contenuto sotto */
+  .strategist-grid {
+    grid-template-columns: 1fr !important;
+    gap: 3vh !important;
+    align-items: start !important;
+  }
+  .strategist-photo { height: 42vw !important; min-height: 160px; }
+
+  /* I miei numeri — 2×2 */
+  .numbers-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 3vh 6vw !important;
+  }
+  #slide-02 p { max-width: 100% !important; }
+
+  /* Two-col / three-col */
+  .two-col, .three-col {
+    grid-template-columns: 1fr !important;
+    gap: 2.5vh !important;
+  }
+
+  /* Metodo Prisma — colonna singola */
+  .metodo-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2vh !important;
+  }
+  #slide-10 .slide-body { max-width: 100% !important; }
+
+  /* Gantt — scroll orizzontale */
+  .gantt { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .gantt-header, .gantt-row { flex-wrap: nowrap; min-width: 420px; }
+  .gantt-label-col { width: 22vw !important; min-width: 72px; }
+  .gantt-bar { font-size: clamp(9px, 2.4vw, 12px) !important; padding: 0 1.5vw !important; }
+  .gantt-week { font-size: clamp(9px, 2.5vw, 12px); }
+  .gantt-legend { flex-direction: column; gap: 1vh; }
+  .gantt-legend-item { font-size: clamp(11px, 3.2vw, 14px); }
+
+  /* Opzioni ABC — colonna singola */
+  .abc-grid { grid-template-columns: 1fr !important; gap: 2.5vh !important; }
+
+  /* Confronto — compatta le colonne dot */
+  .comp-v2-header,
+  .comp-v2-row {
+    grid-template-columns: 1fr 14% 14% 14% !important;
+    padding: 1.4vh 3vw !important;
+  }
+  .comp-v2-desc { display: none; }
+  .comp-v2-name { font-size: clamp(13px, 3.8vw, 17px) !important; }
+  .comp-v2-opt-label { font-size: clamp(14px, 4.2vw, 18px) !important; }
+
+  /* Slide finale — testo sopra, steps sotto */
+  .final-split {
+    grid-template-columns: 1fr !important;
+    gap: 4vh !important;
+    align-items: start !important;
+  }
+
+  /* Logo */
+  .logo-fixed svg { width: 72px; }
+  .logo-fixed { top: 2vh; left: 5vw; }
+
+  /* Nav — touch-friendly */
+  .nav-btn { width: 3.8em; height: 3.8em; font-size: 18px; }
+  .nav-controls { gap: 3vw; bottom: 2.5vh; right: 4vw; }
+
+  /* Progress bar */
+  .progress-bar { height: 4px; }
+
+  /* Quote block padding */
+  .quote-block { padding: 1.8vh 4vw; }
+  .verbatim { padding: 1.4vh 4vw; }
+
+  /* ABC package padding */
+  .abc-package { padding: 2vh 4vw; }
+}
 </style>
 </head>
 <body>
@@ -404,10 +502,10 @@ body {
 
 <!-- ─── 01 LO STRATEGIST — CHI SONO ─── -->
 <section class="slide" id="slide-01">
-  <div style="display: grid; grid-template-columns: 36% 1fr; gap: 6vw; align-items: center; width: 100%;">
+  <div class="strategist-grid" style="display: grid; grid-template-columns: 36% 1fr; gap: 6vw; align-items: center; width: 100%;">
 
     <!-- Foto con glow gold -->
-    <div style="position: relative; height: 58vh; border-radius: 14px; overflow: hidden;
+    <div class="strategist-photo" style="position: relative; height: 58vh; border-radius: 14px; overflow: hidden;
                 box-shadow: 0 0 0 2px rgba(231,178,84,0.55), 0 0 28px rgba(231,178,84,0.22), 0 0 60px rgba(231,178,84,0.08);">
       <img src="https://www.mauromandalari.it/wp-content/uploads/2026/01/mauro-lezione-05-compr-ridimens.jpeg"
            style="width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block;">
@@ -452,7 +550,7 @@ body {
   <div class="label">Capitolo 1 — I miei numeri</div>
   <div class="gold-bar"></div>
   <h2 class="headline" style="margin-bottom: 4vh;">Il track record che porta garanzie reali.</h2>
-  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5vw;">
+  <div class="numbers-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5vw;">
     <div>
       <div class="big-number">15+</div>
       <div class="big-number-label">anni di regia<br>digitale</div>
@@ -625,7 +723,7 @@ body {
   <div class="gold-bar"></div>
   <h2 class="headline" style="font-size: clamp(28px, 3.80vw, 52px); line-height: 1.15; margin-bottom: 1.2vh;">Entra complessità.<br><span style="color: var(--gold);">Esce chiarezza.</span></h2>
   <p class="slide-body" style="max-width: 72%; margin-bottom: 2.5vh;">Un metodo strutturato per trasformare un e-commerce in un asset di vendita misurabile. Non operatività generica — architettura strategica con un responsabile unico del risultato.</p>
-  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5vw;">
+  <div class="metodo-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5vw;">
     <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 2vh 2vw;">
       <div style="font-size: clamp(10px, 1.00vw, 13px); color: var(--gold); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 0.8vh; opacity: 0.80;">Diagnosi prima dell'intervento</div>
       <p style="font-size: clamp(13px, 1.40vw, 17px); color: rgba(255,255,255,0.68); line-height: 1.55;">Non si tocca nulla senza aver prima capito cosa c'è sotto. L'Audit mappa ogni criticità, la documenta e consegna un piano scritto — prima che parta qualsiasi sviluppo.</p>
@@ -843,7 +941,7 @@ body {
 
 <!-- ─── 13 IL PASSO SUCCESSIVO ─── -->
 <section class="slide" id="slide-14">
-  <div style="display: grid; grid-template-columns: 1fr 44%; gap: 7vw; align-items: center; width: 100%;">
+  <div class="final-split" style="display: grid; grid-template-columns: 1fr 44%; gap: 7vw; align-items: center; width: 100%;">
 
     <!-- Sinistra: statement -->
     <div>
