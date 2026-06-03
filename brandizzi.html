@@ -37,7 +37,7 @@ body {
   width: 100vw;
   height: 100vh;
   background: var(--navy);
-  padding: 10vh 8vw 8vh;
+  padding: max(200px, 16vh) 8vw 8vh;
   flex-direction: column;
   justify-content: center;
   position: relative;
@@ -280,7 +280,8 @@ body {
 .logo-fixed {
   position: fixed;
   top: 2.5vh;
-  left: 8vw;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 50;
   pointer-events: none;
 }
@@ -465,7 +466,6 @@ body {
 
   /* Logo */
   .logo-fixed svg { width: 72px; }
-  .logo-fixed { top: 2vh; left: 5vw; }
 
   /* Override padding inline su slide con stili hardcoded */
   .slide[style] { padding-top: max(150px, 12vh) !important; padding-bottom: max(120px, 16vh) !important; }
