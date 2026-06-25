@@ -394,7 +394,6 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
 <script>
 (function(){
     var PACCHETTI = {
@@ -431,52 +430,60 @@
         b.addEventListener('click', function(){ selectPkg(b.dataset.pick); });
     });
 
-    function buildSheet(key){
+    function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    function openApproval(key){
         var p = PACCHETTI[key];
         var d = new Date();
         var mesi = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
         var dataOggi = d.getDate() + ' ' + mesi[d.getMonth()] + ' ' + d.getFullYear();
-        var voci = p.voci.map(function(v){ return '<li style="margin-bottom:6px;">' + v + '</li>'; }).join('');
-        var ric = p.ricorrente ? '<div style="font-size:15px;color:#718096;margin-top:4px;">+ ' + p.ricorrente + ' &middot; gestione continuativa (disdicibile)</div>' : '';
-        var el = document.createElement('div');
-        el.style.cssText = 'position:fixed;left:-10000px;top:0;width:760px;background:#fff;';
-        el.innerHTML =
-            '<div style="font-family:Inter,Arial,sans-serif;color:#2d3748;padding:56px;">' +
-              '<div style="border-bottom:3px solid #c8a96e;padding-bottom:20px;margin-bottom:30px;">' +
-                '<div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#c8a96e;font-weight:700;">Modulo di Approvazione</div>' +
-                '<div style="font-size:26px;color:#1e3a5f;font-weight:700;margin-top:10px;">SEO e Reindirizzamenti — Marienklinik</div>' +
-                '<div style="font-size:14px;color:#718096;margin-top:4px;">Sito bilingue &middot; Italiano e Tedesco</div>' +
-              '</div>' +
-              '<div style="font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#718096;margin-bottom:6px;">Pacchetto selezionato</div>' +
-              '<div style="font-size:23px;font-weight:700;color:#1e3a5f;">Pacchetto ' + key + ' — ' + p.nome + '</div>' +
-              '<ul style="margin:16px 0 0 18px;font-size:15px;line-height:1.6;color:#2d3748;">' + voci + '</ul>' +
-              '<div style="margin-top:26px;padding:20px 24px;background:#f7f8fc;border-left:3px solid #c8a96e;border-radius:6px;">' +
-                '<div style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#718096;">Investimento</div>' +
-                '<div style="font-size:26px;font-weight:700;color:#1e3a5f;margin-top:4px;">' + p.prezzo + ' <span style="font-size:15px;font-weight:400;color:#718096;">' + p.note + '</span></div>' + ric +
-              '</div>' +
-              '<div style="margin-top:30px;font-size:14px;color:#4a5568;line-height:1.7;">Il presente modulo vale come accettazione del pacchetto sopra indicato e autorizza l\'avvio delle attività descritte nella proposta. Tutte le attività SEO e i reindirizzamenti sono eseguiti in entrambe le lingue del sito (italiano e tedesco). Offerta valida 30 giorni dalla data della proposta.</div>' +
-              '<div style="display:flex;gap:48px;margin-top:56px;">' +
-                '<div style="flex:1;border-top:1px solid #2d3748;padding-top:8px;font-size:13px;color:#718096;">Firma per accettazione</div>' +
-                '<div style="width:200px;border-top:1px solid #2d3748;padding-top:8px;font-size:13px;color:#718096;">Data &nbsp;&nbsp;(' + dataOggi + ')</div>' +
-              '</div>' +
-              '<div style="margin-top:44px;text-align:center;font-size:12px;color:#a0aec0;">Mauro Mandalari &middot; info@mauromandalari.it &middot; 392 850 5348</div>' +
-            '</div>';
-        return el;
+        var voci = p.voci.map(function(v){ return '<li>' + esc(v) + '</li>'; }).join('');
+        var ric = p.ricorrente ? '<div class="ric">+ ' + esc(p.ricorrente) + ' · gestione continuativa (disdicibile)</div>' : '';
+        var html =
+            '<!DOCTYPE html><html lang="it"><head><meta charset="utf-8">' +
+            '<title>Approvazione Marienklinik - Pacchetto ' + key + '</title>' +
+            '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">' +
+            '<style>' +
+            '@page{size:A4;margin:18mm;}' +
+            '*{box-sizing:border-box;margin:0;padding:0;}' +
+            'body{font-family:Inter,Arial,sans-serif;color:#2d3748;-webkit-print-color-adjust:exact;print-color-adjust:exact;}' +
+            '.hint{margin:0 0 20px;padding:11px 15px;background:#fff8e6;border:1px solid #e7c66e;border-radius:6px;font-size:12.5px;color:#7a5d00;}' +
+            '.head{border-bottom:3px solid #c8a96e;padding-bottom:16px;margin-bottom:26px;}' +
+            '.label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#c8a96e;font-weight:700;}' +
+            '.title{font-size:24px;color:#1e3a5f;font-weight:700;margin-top:8px;}' +
+            '.sub{font-size:13px;color:#718096;margin-top:4px;}' +
+            '.pl{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#718096;margin-bottom:5px;}' +
+            '.pn{font-size:21px;font-weight:700;color:#1e3a5f;}' +
+            'ul{margin:14px 0 0 18px;font-size:14px;line-height:1.7;}li{margin-bottom:5px;}' +
+            '.inv{margin-top:22px;padding:18px 22px;background:#f7f8fc;border-left:3px solid #c8a96e;border-radius:6px;}' +
+            '.invl{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#718096;}' +
+            '.invp{font-size:24px;font-weight:700;color:#1e3a5f;margin-top:3px;}.invp span{font-size:14px;font-weight:400;color:#718096;}' +
+            '.ric{font-size:13px;color:#718096;margin-top:4px;}' +
+            '.legal{margin-top:26px;font-size:13px;color:#4a5568;line-height:1.7;}' +
+            '.sign{display:flex;gap:48px;margin-top:54px;}.sign div{border-top:1px solid #2d3748;padding-top:8px;font-size:12px;color:#718096;}.s1{flex:1;}.s2{width:210px;}' +
+            '.foot{margin-top:40px;text-align:center;font-size:11px;color:#a0aec0;}' +
+            '@media print{.hint{display:none;}}' +
+            '</style></head><body>' +
+            '<div class="hint">Per salvare: nella finestra di stampa scegli <b>"Salva come PDF"</b> come destinazione. (La stampa parte da sola.)</div>' +
+            '<div class="head"><div class="label">Modulo di Approvazione</div><div class="title">SEO e Reindirizzamenti — Marienklinik</div><div class="sub">Sito bilingue · Italiano e Tedesco</div></div>' +
+            '<div class="pl">Pacchetto selezionato</div><div class="pn">Pacchetto ' + key + ' — ' + esc(p.nome) + '</div>' +
+            '<ul>' + voci + '</ul>' +
+            '<div class="inv"><div class="invl">Investimento</div><div class="invp">' + esc(p.prezzo) + ' <span>' + esc(p.note) + '</span></div>' + ric + '</div>' +
+            '<div class="legal">Il presente modulo vale come accettazione del pacchetto sopra indicato e autorizza l\'avvio delle attività descritte nella proposta. Tutte le attività SEO e i reindirizzamenti sono eseguiti in entrambe le lingue del sito (italiano e tedesco). Offerta valida 30 giorni dalla data della proposta.</div>' +
+            '<div class="sign"><div class="s1">Firma per accettazione</div><div class="s2">Data &nbsp;&nbsp;(' + dataOggi + ')</div></div>' +
+            '<div class="foot">Mauro Mandalari · info@mauromandalari.it · 392 850 5348</div>' +
+            '</body></html>';
+        var w = window.open('', '_blank');
+        if(!w){ alert('Per scaricare il PDF, consenti le finestre popup per questo sito e riprova.'); return; }
+        w.document.open(); w.document.write(html); w.document.close(); w.focus();
+        var go = function(){ try { w.print(); } catch(e){} };
+        if(w.document.readyState === 'complete'){ setTimeout(go, 600); }
+        else { w.onload = function(){ setTimeout(go, 500); }; }
     }
 
     downloadBtn.addEventListener('click', function(){
         if(!selected) return;
-        var el = buildSheet(selected);
-        document.body.appendChild(el);
-        var filename = 'Approvazione-Marienklinik-Pacchetto' + selected + '.pdf';
-        if(window.html2pdf){
-            html2pdf().set({ margin: 0, filename: filename, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, backgroundColor: '#ffffff' }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } })
-                .from(el).save().then(function(){ el.remove(); }).catch(function(){ el.remove(); });
-        } else {
-            var w = window.open('', '_blank');
-            if(w){ w.document.write('<html><head><meta charset="utf-8"><title>' + filename + '</title></head><body>' + el.innerHTML + '</body></html>'); w.document.close(); w.focus(); setTimeout(function(){ w.print(); }, 300); }
-            el.remove();
-        }
+        openApproval(selected);
     });
 })();
 </script>
