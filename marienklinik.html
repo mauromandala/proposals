@@ -33,12 +33,12 @@
         .hero-meta { display: flex; justify-content: center; gap: 40px; font-size: 16px; opacity: 0.5; }
 
         /* ── LAYOUT ── */
-        .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+        .container { max-width: 1024px; margin: 0 auto; padding: 0 40px; }
         .section { padding: 64px 0; }
         .section + .section { border-top: 1px solid var(--border); }
         .section-label { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
         .section-title { font-size: 31px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
-        .section-text { font-size: 19px; color: var(--text); line-height: 1.8; max-width: 700px; }
+        .section-text { font-size: 19px; color: var(--text); line-height: 1.8; }
         .section-text + .section-text { margin-top: 14px; }
         .highlight { background: var(--navy); color: white; border-radius: 12px; padding: 24px 32px; margin-top: 32px; font-size: 20px; font-weight: 400; line-height: 1.7; }
 
@@ -107,10 +107,10 @@
 
         /* ── APPROVAL ── */
         .approval-section { background: #0f1f38; color: #fff; padding: 64px 24px; }
-        .approval-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+        .approval-inner { max-width: 900px; margin: 0 auto; text-align: center; }
         .approval-inner .section-label { color: var(--gold); }
         .approval-title { font-size: 30px; font-weight: 700; margin: 8px 0 16px; }
-        .approval-text { font-size: 17px; color: rgba(255,255,255,0.72); line-height: 1.8; max-width: 600px; margin: 0 auto 28px; }
+        .approval-text { font-size: 17px; color: rgba(255,255,255,0.72); line-height: 1.8; max-width: 800px; margin: 0 auto 28px; }
         .approval-pills { display: flex; justify-content: center; gap: 10px; margin-bottom: 22px; flex-wrap: wrap; }
         .approval-pill { border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.05); color: #fff; border-radius: 30px; padding: 12px 22px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: inherit; transition: all .15s; }
         .approval-pill:hover { border-color: var(--gold); }
@@ -318,6 +318,10 @@
 
         <div class="pkg-scale-note">
             Puoi partire dal Pacchetto A e fare l'upgrade in un secondo momento: la quota già versata viene scalata integralmente dal pacchetto superiore.
+        </div>
+
+        <div class="pkg-scale-note" style="border-left-color: var(--navy); background: linear-gradient(135deg, #f0ebe0, #f7f3eb); margin-top: 12px;">
+            <strong style="color: var(--navy);">Offerta multi-touchpoint:</strong> se scegli il pacchetto completo (C) per più di un touchpoint digitale, lo sconto applicato su ciascun pacchetto aumenta di un ulteriore 10%.
         </div>
     </div>
 </div>
