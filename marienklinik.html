@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO e Reindirizzamenti — Mauro Mandalari</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy: #1e3a5f;
+            --gold: #c8a96e;
+            --text: #2d3748;
+            --text-light: #718096;
+            --bg: #f7f8fc;
+            --white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ── HERO ── */
+        .hero { background: var(--navy); color: white; padding: 80px 40px; text-align: center; }
+        .hero-label { font-size: 13px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+        .hero h1 { font-size: 46px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+        .hero-sub { font-size: 22px; font-weight: 300; opacity: 0.75; margin-bottom: 36px; }
+        .hero-meta { display: flex; justify-content: center; gap: 40px; font-size: 16px; opacity: 0.5; }
+
+        /* ── LAYOUT ── */
+        .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+        .section { padding: 64px 0; }
+        .section + .section { border-top: 1px solid var(--border); }
+        .section-label { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+        .section-title { font-size: 31px; font-weight: 700; color: var(--navy); margin-bottom: 20px; }
+        .section-text { font-size: 19px; color: var(--text); line-height: 1.8; max-width: 700px; }
+        .section-text + .section-text { margin-top: 14px; }
+        .highlight { background: var(--navy); color: white; border-radius: 12px; padding: 24px 32px; margin-top: 32px; font-size: 20px; font-weight: 400; line-height: 1.7; }
+
+        /* ── SERVICES ── */
+        .services-wrap { background: var(--bg); }
+        .services-grid { display: flex; flex-direction: column; gap: 16px; margin-top: 40px; }
+        .service-card { background: var(--white); border-radius: 12px; padding: 28px 32px; border: 1px solid var(--border); }
+        .service-card.featured { border-color: var(--gold); border-width: 2px; }
+        .service-number { font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+        .service-title { font-size: 20px; font-weight: 600; color: var(--navy); margin-bottom: 10px; }
+        .service-desc { font-size: 17px; color: var(--text-light); line-height: 1.7; }
+        .service-desc ul { margin: 8px 0 0 18px; }
+        .service-desc li { margin-bottom: 4px; }
+        .service-note { font-size: 16px; color: var(--text-light); font-style: italic; margin-top: 12px; }
+
+        /* ── PACKAGES (A/B/C) ── */
+        .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+        .pkg-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 28px 24px; display: flex; flex-direction: column; }
+        .pkg-card.featured { border-color: var(--gold); border-width: 2px; box-shadow: 0 8px 24px rgba(30,58,95,0.08); }
+        .pkg-badge { display: inline-block; align-self: flex-start; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--white); background: var(--gold); border-radius: 20px; padding: 4px 12px; margin-bottom: 14px; }
+        .pkg-letter { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+        .pkg-name { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+        .pkg-for { font-size: 15px; color: var(--text-light); line-height: 1.6; margin-bottom: 18px; min-height: 66px; }
+        .pkg-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
+        .pkg-list li { font-size: 15px; color: var(--text); line-height: 1.5; padding-left: 22px; position: relative; }
+        .pkg-list li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+        .pkg-list li.muted { color: var(--text-light); }
+        .pkg-list li.muted::before { content: '+'; }
+        .pkg-price-wrap { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--border); }
+        .pkg-price-old { font-size: 17px; color: var(--text-light); text-decoration: line-through; }
+        .pkg-price { font-size: 30px; font-weight: 700; color: var(--navy); }
+        .pkg-price-note { font-size: 14px; color: var(--text-light); margin-top: 2px; }
+        .pkg-scale-note { margin-top: 24px; padding: 18px 24px; background: var(--white); border-radius: 8px; border-left: 3px solid var(--gold); font-size: 17px; color: var(--text); line-height: 1.7; }
+
+        /* ── STEPS ── */
+        .steps-wrap { background: var(--white); }
+        .steps { display: flex; flex-direction: column; margin-top: 40px; }
+        .step { display: grid; grid-template-columns: 52px 1fr; gap: 20px; padding: 24px 0; }
+        .step + .step { border-top: 1px solid var(--border); }
+        .step-number { width: 40px; height: 40px; background: var(--navy); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+        .step-title { font-size: 19px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+        .step-desc { font-size: 17px; color: var(--text-light); line-height: 1.6; }
+
+        /* ── CONDITIONS ── */
+        .conditions-list { list-style: none; margin-top: 32px; display: flex; flex-direction: column; gap: 10px; }
+        .conditions-list li { font-size: 18px; color: var(--text); padding: 14px 20px; background: var(--white); border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; gap: 14px; }
+        .conditions-list li::before { content: ''; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+        /* ── CTA ── */
+        .cta-section { background: var(--navy); color: white; padding: 72px 40px; text-align: center; }
+        .cta-section h2 { font-size: 36px; font-weight: 700; margin-bottom: 16px; }
+        .cta-section p { font-size: 19px; opacity: 0.75; max-width: 560px; margin: 0 auto 36px; line-height: 1.8; }
+        .contact-block { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 28px 48px; }
+        .contact-name { font-size: 24px; font-weight: 700; }
+        .contact-detail { font-size: 17px; opacity: 0.6; }
+
+        /* ── FOOTER ── */
+        .footer { background: #0f1f38; color: rgba(255,255,255,0.3); text-align: center; padding: 24px; font-size: 14px; }
+
+        /* ── PACKAGE SELECTION ── */
+        .pkg-card { cursor: pointer; transition: box-shadow .15s, border-color .15s, transform .15s; }
+        .pkg-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+        .pkg-card.selected { border-color: var(--gold); border-width: 2px; box-shadow: 0 8px 28px rgba(200,169,110,0.30); }
+        .pkg-card.selected::after { content: '✓ Selezionato'; position: absolute; top: 12px; right: 12px; background: var(--gold); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: .5px; padding: 3px 10px; border-radius: 20px; }
+        .pkg-card { position: relative; }
+
+        /* ── APPROVAL ── */
+        .approval-section { background: #0f1f38; color: #fff; padding: 64px 24px; }
+        .approval-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+        .approval-inner .section-label { color: var(--gold); }
+        .approval-title { font-size: 30px; font-weight: 700; margin: 8px 0 16px; }
+        .approval-text { font-size: 17px; color: rgba(255,255,255,0.72); line-height: 1.8; max-width: 600px; margin: 0 auto 28px; }
+        .approval-pills { display: flex; justify-content: center; gap: 10px; margin-bottom: 22px; flex-wrap: wrap; }
+        .approval-pill { border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.05); color: #fff; border-radius: 30px; padding: 12px 22px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: inherit; transition: all .15s; }
+        .approval-pill:hover { border-color: var(--gold); }
+        .approval-pill.active { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 700; }
+        .approval-pick { font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+        .approval-pick-value { color: var(--gold); font-weight: 600; }
+        .approval-btn { background: var(--gold); color: var(--navy); border: none; border-radius: 8px; padding: 16px 36px; font-size: 17px; font-weight: 700; cursor: pointer; font-family: inherit; transition: opacity .15s, transform .15s; }
+        .approval-btn:hover:not(:disabled) { transform: translateY(-2px); }
+        .approval-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .approval-hint { font-size: 14px; color: rgba(255,255,255,0.45); margin-top: 14px; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 720px) {
+            .hero { padding: 52px 24px; }
+            .hero h1 { font-size: 28px; }
+            .hero-meta { flex-direction: column; gap: 6px; }
+            .pkg-grid { grid-template-columns: 1fr; }
+            .pkg-for { min-height: 0; }
+            .section { padding: 48px 0; }
+            .cta-section { padding: 52px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-label">Servizio SEO &amp; Migrazione</div>
+    <h1>SEO e Reindirizzamenti<br>per il tuo sito</h1>
+    <div style="font-size: 17px; color: rgba(255,255,255,0.65); margin-bottom: 28px; font-weight: 400;">Proteggi il posizionamento e non perdere traffico nel passaggio al nuovo sito — in italiano e tedesco</div>
+    <div class="hero-sub">Preparata per Marienklinik</div>
+    <div class="hero-meta">
+        <span>Mauro Mandalari</span>
+        <span>Giugno 2026</span>
+        <span>Validità 30 giorni</span>
+    </div>
+</div>
+
+<!-- CONTESTO -->
+<div class="container">
+    <div class="section">
+        <div class="section-label">Il Contesto</div>
+        <div class="section-title">Rifare un sito senza gestire i redirect significa buttare via la SEO accumulata.</div>
+        <p class="section-text">Ogni pagina del vecchio sito che Google ha indicizzato negli anni ha un valore: posizionamento, link in entrata, traffico. Quando il sito cambia struttura e gli indirizzi delle pagine si modificano, senza un piano di reindirizzamenti quei vecchi link portano a una pagina di errore — e quel valore si perde, spesso in modo permanente.</p>
+        <p class="section-text">Il mio lavoro è fare in modo che ogni vecchio indirizzo accompagni il visitatore (e Google) alla pagina giusta del nuovo sito, e che le fondamenta SEO siano impostate correttamente fin dal primo giorno. Niente traffico perso, niente errori 404, nessuna penalizzazione.</p>
+        <div class="highlight">
+            I reindirizzamenti sono l'assicurazione anti-perdita di traffico di ogni rifacimento. Si impostano una volta, ma proteggono anni di posizionamento.
+        </div>
+    </div>
+</div>
+
+<!-- SERVIZI -->
+<div class="services-wrap">
+<div class="container">
+    <div class="section">
+        <div class="section-label">Cosa Comprende</div>
+        <div class="section-title">Tutto quello che posso fare per la SEO del tuo sito.</div>
+        <p class="section-text">Cinque aree di intervento. Nei pacchetti qui sotto trovi come si combinano in base all'obiettivo e al budget.</p>
+        <div class="highlight">
+            Sito bilingue: tutte le attività SEO e i reindirizzamenti vengono eseguiti in entrambe le lingue del sito — italiano e tedesco — con gli hreflang corretti tra le due versioni.
+        </div>
+
+        <div class="services-grid">
+
+            <div class="service-card featured">
+                <div class="service-number">01 — Il cuore del servizio</div>
+                <div class="service-title">Migrazione e Reindirizzamenti 301</div>
+                <div class="service-desc">
+                    <ul>
+                        <li>Analisi della vecchia sitemap e mappatura completa dei vecchi indirizzi</li>
+                        <li>Reindirizzamenti 301 verso le pagine corrette del nuovo sito</li>
+                        <li>Reindirizzamento "logico": ogni link porta alla pagina più pertinente, non genericamente alla home</li>
+                        <li>Gestione delle pagine senza corrispondenza (redirect di sezione oppure "410 — pagina rimossa")</li>
+                        <li>Monitoraggio degli errori 404 e correzione continua dei link rotti</li>
+                        <li>Eliminazione delle catene di redirect che rallentano il sito</li>
+                        <li>Reindirizzamenti gestiti separatamente per la versione italiana e tedesca, con hreflang corretti</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-number">02</div>
+                <div class="service-title">Ottimizzazione SEO On-Page</div>
+                <div class="service-desc">
+                    <ul>
+                        <li>Titoli SEO e meta description di pagine, articoli e categorie</li>
+                        <li>Definizione delle parole chiave per ogni pagina</li>
+                        <li>Controllo di indicizzazione (cosa Google deve o non deve mostrare)</li>
+                        <li>Gestione degli URL canonici per evitare contenuti duplicati</li>
+                        <li>Ottimizzazione delle anteprime social (Facebook / X)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-number">03</div>
+                <div class="service-title">Dati Strutturati e Rich Snippet</div>
+                <div class="service-desc">
+                    <ul>
+                        <li>Implementazione dello Schema markup (FAQ, articoli, attività locale, prodotti…)</li>
+                        <li>Maggiore probabilità di comparire con risultati arricchiti su Google</li>
+                        <li>Configurazione di cornerstone / contenuti pilastro</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-number">04</div>
+                <div class="service-title">Fondamenta Tecniche SEO</div>
+                <div class="service-desc">
+                    <ul>
+                        <li>Generazione e ottimizzazione della sitemap XML</li>
+                        <li>Impostazione dei template globali di titoli e meta description</li>
+                        <li>Configurazione di robots e indicizzazione a livello di sito</li>
+                        <li>Notifica immediata a Google/Bing alla pubblicazione (indicizzazione rapida)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-number">05</div>
+                <div class="service-title">Monitoraggio e Miglioramento Continuo</div>
+                <div class="service-desc">
+                    <ul>
+                        <li>Collegamento con Google Search Console</li>
+                        <li>Analisi del punteggio SEO delle pagine e correzione dei punti deboli</li>
+                        <li>Report periodico sullo stato SEO e sulle azioni svolte</li>
+                        <li>Analisi dei link interni per rafforzare le pagine più importanti</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- PACCHETTI -->
+<div class="container">
+    <div class="section">
+        <div class="section-label">I Pacchetti</div>
+        <div class="section-title">Tre livelli. Scegli in base all'obiettivo.</div>
+        <p class="section-text">Ogni pacchetto è pensato per un momento diverso del sito. Si parte dall'essenziale e si sale verso la gestione continuativa.</p>
+
+        <div class="pkg-grid">
+
+            <!-- A -->
+            <div class="pkg-card">
+                <div class="pkg-letter">Pacchetto A</div>
+                <div class="pkg-name">SEO Essenziale<br>+ Redirect</div>
+                <div class="pkg-for">Per chi sta rifacendo il sito e deve proteggere il traffico esistente senza perdere posizionamento.</div>
+                <ul class="pkg-list">
+                    <li>Migrazione e redirect 301 completi (italiano e tedesco)</li>
+                    <li>Monitoraggio errori 404</li>
+                    <li>Sitemap XML, robots e indicizzazione</li>
+                    <li>SEO on-page sulle pagine principali</li>
+                </ul>
+                <div class="pkg-price-wrap">
+                    <div class="pkg-price-old">€1.000</div>
+                    <div class="pkg-price">€800</div>
+                    <div class="pkg-price-note">una tantum</div>
+                </div>
+            </div>
+
+            <!-- B -->
+            <div class="pkg-card featured">
+                <span class="pkg-badge">Il più scelto</span>
+                <div class="pkg-letter">Pacchetto B</div>
+                <div class="pkg-name">SEO Completo</div>
+                <div class="pkg-for">Per chi vuole una base SEO solida su tutto il sito, non solo sulle pagine principali.</div>
+                <ul class="pkg-list">
+                    <li class="muted">Tutto il Pacchetto A</li>
+                    <li>SEO on-page su tutte le pagine (italiano e tedesco)</li>
+                    <li>Dati strutturati / Schema markup</li>
+                    <li>Anteprime social ottimizzate</li>
+                    <li>Collegamento Google Search Console</li>
+                </ul>
+                <div class="pkg-price-wrap">
+                    <div class="pkg-price-old">€2.000</div>
+                    <div class="pkg-price">€1.600</div>
+                    <div class="pkg-price-note">una tantum</div>
+                </div>
+            </div>
+
+            <!-- C -->
+            <div class="pkg-card">
+                <div class="pkg-letter">Pacchetto C</div>
+                <div class="pkg-name">SEO Completo<br>+ Gestione Continua</div>
+                <div class="pkg-for">Per chi vuole crescere nel tempo e monitorare i risultati mese dopo mese.</div>
+                <ul class="pkg-list">
+                    <li class="muted">Tutto il Pacchetto B</li>
+                    <li>Monitoraggio mensile posizionamenti e 404</li>
+                    <li>Report periodico sui risultati</li>
+                    <li>Ottimizzazioni ricorrenti</li>
+                    <li>Analisi dei link interni</li>
+                </ul>
+                <div class="pkg-price-wrap">
+                    <div class="pkg-price-old">€2.000</div>
+                    <div class="pkg-price">€1.600</div>
+                    <div class="pkg-price-note">una tantum + €150 / mese</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="pkg-scale-note">
+            Puoi partire dal Pacchetto A e fare l'upgrade in un secondo momento: la quota già versata viene scalata integralmente dal pacchetto superiore.
+        </div>
+    </div>
+</div>
+
+<!-- PROCESSO -->
+<div class="steps-wrap">
+<div class="container">
+    <div class="section">
+        <div class="section-label">Il Processo</div>
+        <div class="section-title">Come lavoriamo.</div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>
+                    <div class="step-title">Analisi del vecchio sito</div>
+                    <div class="step-desc">All'analisi del sito precedente pensiamo noi: estraiamo la sitemap e tutti i vecchi indirizzi da reindirizzare, in entrambe le lingue (italiano e tedesco). A te non chiediamo nulla di tecnico.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>
+                    <div class="step-title">Mappatura di reindirizzamento</div>
+                    <div class="step-desc">Preparo la tabella "vecchio indirizzo → nuova pagina", divisa per lingua (IT / DE), e te la faccio rivedere prima di applicare qualsiasi cosa.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>
+                    <div class="step-title">Implementazione</div>
+                    <div class="step-desc">Applico i redirect 301 e imposto le fondamenta SEO (sitemap, schema, meta) secondo il pacchetto scelto.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div>
+                    <div class="step-title">Verifica e consegna</div>
+                    <div class="step-desc">Controllo che ogni redirect funzioni, che non ci siano 404 residui e che Google veda correttamente il nuovo sito.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- CONDIZIONI -->
+<div class="container">
+    <div class="section">
+        <div class="section-label">Condizioni</div>
+        <div class="section-title">Le basi del rapporto.</div>
+        <ul class="conditions-list">
+            <li>Il preventivo ha validità 30 giorni</li>
+            <li>I pacchetti una tantum si saldano con acconto all'avvio e saldo alla consegna</li>
+            <li>La gestione continuativa (Pacchetto C) è mensile e disdicibile in qualsiasi momento</li>
+            <li>L'accesso al sito e agli strumenti (hosting, Search Console) è a cura del cliente</li>
+        </ul>
+    </div>
+</div>
+
+<!-- APPROVAZIONE -->
+<div class="approval-section">
+    <div class="approval-inner">
+        <div class="section-label">Approvazione</div>
+        <h2 class="approval-title">Confermare il pacchetto è semplice.</h2>
+        <p class="approval-text">Per avviare il progetto, il pacchetto scelto va approvato con firma. Seleziona qui sotto il pacchetto e scarica il modulo PDF: contiene il dettaglio del pacchetto, l'investimento e lo spazio per la firma. Rinvialo firmato e i lavori partono.</p>
+        <div class="approval-pills">
+            <button type="button" class="approval-pill" data-pick="A">Pacchetto A</button>
+            <button type="button" class="approval-pill" data-pick="B">Pacchetto B</button>
+            <button type="button" class="approval-pill" data-pick="C">Pacchetto C</button>
+        </div>
+        <div class="approval-pick">Pacchetto selezionato: <span class="approval-pick-value" id="pickValue">nessuno</span></div>
+        <button type="button" class="approval-btn" id="downloadBtn" disabled>Scarica PDF per la firma</button>
+        <p class="approval-hint" id="approvalHint">Seleziona un pacchetto per abilitare il download.</p>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+<script>
+(function(){
+    var PACCHETTI = {
+        A: { nome: 'SEO Essenziale + Redirect', prezzo: '€800', ricorrente: '', note: 'una tantum',
+             voci: ['Migrazione e redirect 301 completi (italiano e tedesco)', 'Monitoraggio errori 404', 'Sitemap XML, robots e indicizzazione', 'SEO on-page sulle pagine principali'] },
+        B: { nome: 'SEO Completo', prezzo: '€1.600', ricorrente: '', note: 'una tantum',
+             voci: ['Tutto il Pacchetto A', 'SEO on-page su tutte le pagine (italiano e tedesco)', 'Dati strutturati / Schema markup', 'Anteprime social ottimizzate', 'Collegamento Google Search Console'] },
+        C: { nome: 'SEO Completo + Gestione Continua', prezzo: '€1.600', ricorrente: '€150 / mese', note: 'una tantum',
+             voci: ['Tutto il Pacchetto B', 'Monitoraggio mensile posizionamenti e 404', 'Report periodico sui risultati', 'Ottimizzazioni ricorrenti', 'Analisi dei link interni'] }
+    };
+    var selected = null;
+    var pickValue = document.getElementById('pickValue');
+    var downloadBtn = document.getElementById('downloadBtn');
+    var hint = document.getElementById('approvalHint');
+
+    function selectPkg(key){
+        if(!PACCHETTI[key]) return;
+        selected = key;
+        var p = PACCHETTI[key];
+        document.querySelectorAll('.pkg-card').forEach(function(c){ c.classList.toggle('selected', c.dataset.pkg === key); });
+        document.querySelectorAll('.approval-pill').forEach(function(b){ b.classList.toggle('active', b.dataset.pick === key); });
+        pickValue.textContent = 'Pacchetto ' + key + ' — ' + p.nome + ' (' + p.prezzo + (p.ricorrente ? ' + ' + p.ricorrente : '') + ')';
+        downloadBtn.disabled = false;
+        hint.textContent = 'Pronto: clicca per scaricare il modulo di approvazione.';
+    }
+
+    document.querySelectorAll('.pkg-card').forEach(function(card){
+        var lt = card.querySelector('.pkg-letter');
+        var key = lt ? lt.textContent.replace(/Pacchetto/i, '').trim() : '';
+        card.dataset.pkg = key;
+        card.addEventListener('click', function(){ selectPkg(key); });
+    });
+    document.querySelectorAll('.approval-pill').forEach(function(b){
+        b.addEventListener('click', function(){ selectPkg(b.dataset.pick); });
+    });
+
+    function buildSheet(key){
+        var p = PACCHETTI[key];
+        var d = new Date();
+        var mesi = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+        var dataOggi = d.getDate() + ' ' + mesi[d.getMonth()] + ' ' + d.getFullYear();
+        var voci = p.voci.map(function(v){ return '<li style="margin-bottom:6px;">' + v + '</li>'; }).join('');
+        var ric = p.ricorrente ? '<div style="font-size:15px;color:#718096;margin-top:4px;">+ ' + p.ricorrente + ' &middot; gestione continuativa (disdicibile)</div>' : '';
+        var el = document.createElement('div');
+        el.style.cssText = 'position:fixed;left:-10000px;top:0;width:760px;background:#fff;';
+        el.innerHTML =
+            '<div style="font-family:Inter,Arial,sans-serif;color:#2d3748;padding:56px;">' +
+              '<div style="border-bottom:3px solid #c8a96e;padding-bottom:20px;margin-bottom:30px;">' +
+                '<div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#c8a96e;font-weight:700;">Modulo di Approvazione</div>' +
+                '<div style="font-size:26px;color:#1e3a5f;font-weight:700;margin-top:10px;">SEO e Reindirizzamenti — Marienklinik</div>' +
+                '<div style="font-size:14px;color:#718096;margin-top:4px;">Sito bilingue &middot; Italiano e Tedesco</div>' +
+              '</div>' +
+              '<div style="font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#718096;margin-bottom:6px;">Pacchetto selezionato</div>' +
+              '<div style="font-size:23px;font-weight:700;color:#1e3a5f;">Pacchetto ' + key + ' — ' + p.nome + '</div>' +
+              '<ul style="margin:16px 0 0 18px;font-size:15px;line-height:1.6;color:#2d3748;">' + voci + '</ul>' +
+              '<div style="margin-top:26px;padding:20px 24px;background:#f7f8fc;border-left:3px solid #c8a96e;border-radius:6px;">' +
+                '<div style="font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#718096;">Investimento</div>' +
+                '<div style="font-size:26px;font-weight:700;color:#1e3a5f;margin-top:4px;">' + p.prezzo + ' <span style="font-size:15px;font-weight:400;color:#718096;">' + p.note + '</span></div>' + ric +
+              '</div>' +
+              '<div style="margin-top:30px;font-size:14px;color:#4a5568;line-height:1.7;">Il presente modulo vale come accettazione del pacchetto sopra indicato e autorizza l\'avvio delle attività descritte nella proposta. Tutte le attività SEO e i reindirizzamenti sono eseguiti in entrambe le lingue del sito (italiano e tedesco). Offerta valida 30 giorni dalla data della proposta.</div>' +
+              '<div style="display:flex;gap:48px;margin-top:56px;">' +
+                '<div style="flex:1;border-top:1px solid #2d3748;padding-top:8px;font-size:13px;color:#718096;">Firma per accettazione</div>' +
+                '<div style="width:200px;border-top:1px solid #2d3748;padding-top:8px;font-size:13px;color:#718096;">Data &nbsp;&nbsp;(' + dataOggi + ')</div>' +
+              '</div>' +
+              '<div style="margin-top:44px;text-align:center;font-size:12px;color:#a0aec0;">Mauro Mandalari &middot; info@mauromandalari.it &middot; 392 850 5348</div>' +
+            '</div>';
+        return el;
+    }
+
+    downloadBtn.addEventListener('click', function(){
+        if(!selected) return;
+        var el = buildSheet(selected);
+        document.body.appendChild(el);
+        var filename = 'Approvazione-Marienklinik-Pacchetto' + selected + '.pdf';
+        if(window.html2pdf){
+            html2pdf().set({ margin: 0, filename: filename, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, backgroundColor: '#ffffff' }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } })
+                .from(el).save().then(function(){ el.remove(); }).catch(function(){ el.remove(); });
+        } else {
+            var w = window.open('', '_blank');
+            if(w){ w.document.write('<html><head><meta charset="utf-8"><title>' + filename + '</title></head><body>' + el.innerHTML + '</body></html>'); w.document.close(); w.focus(); setTimeout(function(){ w.print(); }, 300); }
+            el.remove();
+        }
+    });
+})();
+</script>
+
+</body>
+</html>
