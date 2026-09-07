@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposta — Collegamenti interni tra reparti affini</title>
+<style>
+  :root {
+    --bg: #091529;
+    --surface: #0d1e35;
+    --surface-2: #112544;
+    --ink: #ffffff;
+    --ink-soft: #c8d4e8;
+    --ink-faint: #8a9ab8;
+    --gold: #e6b253;
+    --gold-ink: #091529;
+    --rule: rgba(200,212,232,0.14);
+    --ok: #7fc99b;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink-soft);
+    font-family: "Inter", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.65;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 72px 32px 110px;
+  }
+
+  h1, h2, h3 { color: var(--ink); font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    padding-bottom: 32px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .wordmark { font-weight: 800; letter-spacing: 0.08em; font-size: 19px; color: var(--ink); text-transform: uppercase; }
+  .wordmark .dot { color: var(--gold); margin: 0 8px; }
+  .wordmark .sub { color: var(--ink-faint); font-weight: 400; letter-spacing: 0.04em; text-transform: none; }
+  .meta-date { color: var(--ink-faint); font-size: 16px; letter-spacing: 0.02em; }
+
+  .kicker {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--gold); font-size: 15px; font-weight: 700;
+    letter-spacing: 0.13em; text-transform: uppercase; margin-bottom: 16px;
+  }
+  .kicker::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+
+  h1.title { font-size: 40px; margin-bottom: 14px; }
+  .intro { font-size: 21px; color: var(--ink-soft); font-weight: 300; margin-bottom: 32px; }
+
+  .scope-note {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--ok);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin-bottom: 56px;
+    font-size: 17px;
+  }
+  .scope-note strong { color: var(--ink); }
+
+  section.block { margin-bottom: 56px; }
+  .block-lede { font-size: 17.5px; color: var(--ink-soft); margin-bottom: 22px; }
+
+  h2.section-title { font-size: 24px; margin-bottom: 8px; }
+  .section-sub { font-size: 15.5px; color: var(--ink-faint); margin-bottom: 22px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 0; font-size: 15.5px; }
+  th { text-align: left; color: var(--ink-faint); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; font-size: 12.5px; padding: 10px 14px; border-bottom: 1px solid var(--rule); }
+  td { padding: 12px 14px; border-bottom: 1px solid var(--rule); color: var(--ink-soft); }
+  tr:last-child td { border-bottom: none; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); margin-bottom: 12px; }
+  .table-wrap table { margin: 0; }
+  td.why { color: var(--ink-faint); font-size: 14.5px; }
+  td strong { color: var(--ink); font-weight: 600; }
+
+  .callout {
+    background: var(--surface-2);
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin-top: 8px;
+    font-size: 16px;
+  }
+  .callout strong { color: var(--ink); }
+  .callout ul { margin: 10px 0 0; padding-left: 20px; }
+  .callout li { margin-bottom: 6px; }
+
+  .closing { margin-top: 60px; padding-top: 36px; border-top: 1px solid var(--rule); }
+  .closing p { font-size: 18px; margin-bottom: 14px; }
+
+  .approve-box {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+  .approve-pill {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 220px;
+    background: var(--surface);
+  }
+  .approve-pill .label { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); margin-bottom: 6px; }
+  .approve-pill .val { font-size: 16px; color: var(--ink); font-weight: 600; }
+
+  .sign { margin-top: 48px; font-size: 17px; color: var(--ink-faint); }
+  .sign .name { color: var(--ink); font-weight: 600; }
+
+  @media (max-width: 640px) {
+    h1.title { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wordmark">Mauro Mandalari<span class="dot">·</span><span class="sub">Marienklinik SEO</span></div>
+  <div class="meta-date">Proposta — settembre 2026</div>
+</div>
+
+<div class="kicker">Attività strategica — linking interno</div>
+<h1 class="title">Collegamenti tra reparti affini</h1>
+<p class="intro">Completare la rete di collegamenti interni tra i reparti clinicamente correlati del sito, per rafforzare l'autorità tematica di ogni pagina e guidare meglio chi cerca un percorso di cura completo.</p>
+
+<div class="scope-note">
+  <strong>Attività già inclusa nel servizio in corso.</strong> L'analisi e l'implementazione dei collegamenti interni fanno parte delle attività ricorrenti del canone mensile — non comporta alcun costo aggiuntivo. Sottopongo la mappatura per approvazione prima di intervenire sulle pagine reparto, trattandosi di una modifica che tocca la struttura dei contenuti pubblicati.
+</div>
+
+<section class="block">
+  <h2 class="section-title">Perché conta</h2>
+  <p class="block-lede">Un sito con reparti clinicamente correlati ma non collegati tra loro perde due cose: segnale di autorità tematica per Google (i motori di ricerca leggono i link interni come indicazione di quali pagine sono correlate) e un percorso naturale per chi arriva su una pagina reparto ma in realtà ha bisogno di quella affine — es. chi cerca "ortopedia" e ha bisogno anche di "fisioterapia" per la riabilitazione. Ad oggi nessuno dei 27 reparti del sito rimanda ai reparti affini.</p>
+</section>
+
+<section class="block">
+  <h2 class="section-title">Collegamenti proposti tra reparti clinici</h2>
+  <p class="section-sub">18 coppie, applicate in entrambe le lingue (IT/DE) e in entrambe le direzioni.</p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Reparto</th><th>Collegato a</th><th>Perché</th></tr>
+      <tr><td><strong>Ortopedia e Traumatologia</strong></td><td>Fisioterapia</td><td class="why">riabilitazione post-trauma/intervento</td></tr>
+      <tr><td><strong>Ortopedia e Traumatologia</strong></td><td>Chirurgia della mano</td><td class="why">sottospecialità ortopedica</td></tr>
+      <tr><td><strong>Ortopedia e Traumatologia</strong></td><td>Medicina rigenerativa</td><td class="why">infiltrazioni e terapie rigenerative articolari</td></tr>
+      <tr><td><strong>Cardiologia</strong></td><td>Medicina interna</td><td class="why">percorso diagnostico condiviso</td></tr>
+      <tr><td><strong>Cardiologia</strong></td><td>Chirurgia vascolare</td><td class="why">continuità cardio-vascolare</td></tr>
+      <tr><td><strong>Neurologia</strong></td><td>Neurochirurgia</td><td class="why">percorso medico → chirurgico</td></tr>
+      <tr><td><strong>Neurologia</strong></td><td>Fisioterapia</td><td class="why">riabilitazione neurologica</td></tr>
+      <tr><td><strong>Gastroenterologia</strong></td><td>Dieta e nutrizione</td><td class="why">patologie digestive e alimentazione</td></tr>
+      <tr><td><strong>Gastroenterologia</strong></td><td>Proctologia</td><td class="why">continuità del tratto digestivo</td></tr>
+      <tr><td><strong>Gastroenterologia</strong></td><td>Chirurgia Generale</td><td class="why">percorso medico → chirurgico</td></tr>
+      <tr><td><strong>Endocrinologia</strong></td><td>Dieta e nutrizione</td><td class="why">diabete, obesità, metabolismo</td></tr>
+      <tr><td><strong>Endocrinologia</strong></td><td>Medicina interna</td><td class="why">comorbidità frequenti</td></tr>
+      <tr><td><strong>Otorinolaringoiatria</strong></td><td>Pneumologia</td><td class="why">via respiratoria condivisa</td></tr>
+      <tr><td><strong>Pneumologia pediatrica</strong></td><td>Pediatria</td><td class="why">stessa fascia d'età</td></tr>
+      <tr><td><strong>Urologia</strong></td><td>Chirurgia Generale</td><td class="why">percorso medico → chirurgico</td></tr>
+      <tr><td><strong>Chirurgia vascolare</strong></td><td>Chirurgia Generale</td><td class="why">area chirurgica affine</td></tr>
+      <tr><td><strong>Medicina complementare</strong></td><td>Medicina rigenerativa</td><td class="why">approcci terapeutici integrativi</td></tr>
+      <tr><td><strong>Terapia occupazionale</strong></td><td>Fisioterapia</td><td class="why">riabilitazione funzionale congiunta</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="block">
+  <h2 class="section-title">Servizi trasversali</h2>
+  <p class="block-lede">Radiologia, Punto di prelievo (laboratorio) e Anestesia e terapia del dolore sono servizi di supporto usati da più reparti, non reparti "affini" tra loro in senso clinico. La proposta è collegarli <em>dai</em> reparti clinici che li utilizzano più spesso, invece di collegarli reciprocamente:</p>
+  <div class="callout">
+    <strong>Da collegare verso Radiologia e Laboratorio:</strong>
+    <ul>
+      <li>Ortopedia e Traumatologia, Cardiologia, Gastroenterologia, Medicina interna</li>
+    </ul>
+    <strong style="display:block; margin-top:14px;">Da collegare verso Anestesia e terapia del dolore:</strong>
+    <ul>
+      <li>Chirurgia Generale, Ortopedia e Traumatologia, Chirurgia vascolare, Chirurgia della mano</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <h2 class="section-title">Reparti senza collegamento affine</h2>
+  <p class="block-lede"><strong style="color: var(--ink)">Odontoiatria</strong> e <strong style="color: var(--ink)">Ginecologia</strong> non hanno sovrapposizioni cliniche forti con altri reparti del sito: restano senza collegamento "reparto affine" dedicato, salvo eventuale rimando ai servizi trasversali (radiologia/laboratorio) dove pertinente.</p>
+</section>
+
+<div class="closing">
+  <p>Con l'approvazione, il collegamento viene implementato su tutte le pagine reparto coinvolte, in italiano e tedesco, completando così anche l'ultimo tassello del punto 01 già avviato (collegamento specialista ↔ reparto, attivo da agosto).</p>
+</div>
+
+<div class="approve-box">
+  <div class="approve-pill">
+    <div class="label">Costo</div>
+    <div class="val">Incluso nel canone mensile</div>
+  </div>
+  <div class="approve-pill">
+    <div class="label">Tempo di implementazione</div>
+    <div class="val">Entro la prossima attività ricorrente</div>
+  </div>
+  <div class="approve-pill">
+    <div class="label">Cosa serve dal cliente</div>
+    <div class="val">Un sì su questa mappatura</div>
+  </div>
+</div>
+
+<div class="sign">
+  <div class="name">Mauro Mandalari</div>
+  <div>Consulenza SEO — Marienklinik Bozen</div>
+</div>
+
+</body>
+</html>
