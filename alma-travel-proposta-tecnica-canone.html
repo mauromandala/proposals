@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta tecnica a canone mensile — Alma Travel</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --navy:#1e3a5f; --gold:#c8a96e; --text:#2d3748; --text-light:#718096; --bg:#f7f8fc; --white:#ffffff; --border:#e2e8f0; }
+body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+.hero { background:var(--navy); color:#fff; padding:80px 40px; text-align:center; }
+.hero-label { font-size:13px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+.hero h1 { font-size:46px; font-weight:700; line-height:1.2; margin-bottom:12px; }
+.hero-sub { font-size:22px; font-weight:300; opacity:.75; margin-bottom:36px; }
+.hero-meta { display:flex; justify-content:center; gap:40px; font-size:16px; opacity:.5; }
+.container { max-width:1024px; margin:0 auto; padding:0 40px; }
+.section { padding:64px 0; }
+.section + .section { border-top:1px solid var(--border); }
+.section-label { font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.section-title { font-size:31px; font-weight:700; color:var(--navy); margin-bottom:20px; }
+.section-text { font-size:19px; line-height:1.8; }
+.section-text + .section-text { margin-top:14px; }
+.sub-title { font-size:20px; font-weight:600; color:var(--navy); margin:32px 0 10px; }
+.highlight { background:var(--navy); color:#fff; border-radius:12px; padding:24px 32px; margin-top:32px; font-size:20px; line-height:1.7; }
+.alt { background:var(--white); }
+.divider { border-top:1px solid var(--border); }
+.table-wrap { margin-top:28px; overflow-x:auto; background:var(--white); border:1px solid var(--border); border-radius:12px; }
+table { width:100%; min-width:640px; border-collapse:collapse; font-size:16px; }
+th { text-align:left; padding:14px 20px; font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); border-bottom:1px solid var(--border); }
+td { padding:14px 20px; vertical-align:top; color:var(--text-light); border-bottom:1px solid var(--border); line-height:1.6; }
+tr:last-child td { border-bottom:none; }
+td.key { color:var(--navy); font-weight:600; min-width:190px; }
+.num { text-align:right; white-space:nowrap; }
+td.num { color:var(--navy); font-weight:600; }
+tr.opt td { background:var(--bg); }
+tr.total td { background:var(--navy); color:#fff; font-weight:700; border-bottom:none; }
+.note { margin-top:24px; padding:18px 24px; background:var(--white); border-radius:8px; border-left:3px solid var(--gold); font-size:17px; line-height:1.7; }
+.alt .note { background:var(--bg); }
+.phase-meta { font-size:17px; color:var(--text-light); margin:-6px 0 4px; }
+.phase-meta b { color:var(--navy); }
+.conditions-list { list-style:none; margin-top:20px; display:flex; flex-direction:column; gap:10px; }
+.conditions-list li { font-size:17px; padding:14px 20px; background:var(--white); border-radius:8px; border:1px solid var(--border); display:flex; align-items:flex-start; gap:14px; line-height:1.6; }
+.alt .conditions-list li { background:var(--bg); }
+.conditions-list li::before { content:''; width:6px; height:6px; background:var(--gold); border-radius:50%; flex-shrink:0; margin-top:11px; }
+.cta-section { background:var(--navy); color:#fff; padding:72px 40px; text-align:center; }
+.cta-section h2 { font-size:36px; font-weight:700; margin-bottom:16px; }
+.cta-section p { font-size:19px; opacity:.75; max-width:600px; margin:0 auto 36px; line-height:1.8; }
+.contact-block { display:inline-flex; flex-direction:column; align-items:center; gap:6px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:12px; padding:28px 48px; }
+.contact-name { font-size:24px; font-weight:700; }
+.contact-detail { font-size:17px; opacity:.6; }
+.footer { background:#0f1f38; color:rgba(255,255,255,.3); text-align:center; padding:24px; font-size:14px; }
+@media (max-width:620px) {
+ .hero { padding:52px 24px; } .hero h1 { font-size:28px; } .hero-meta { flex-direction:column; gap:6px; }
+ .container { padding:0 20px; } .section { padding:48px 0; } .section-title { font-size:25px; } .section-text { font-size:17px; }
+ .cta-section { padding:52px 24px; } .contact-block { padding:24px; }
+}
+
+.price-box { margin-top:32px; background:var(--white); border:2px solid var(--gold); border-radius:12px; padding:36px 32px; text-align:center; box-shadow:0 8px 24px rgba(30,58,95,.08); }
+.price-box .pb-label { font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.price-box .pb-value { font-size:56px; font-weight:700; color:var(--navy); line-height:1.1; }
+.price-box .pb-value span { font-size:22px; font-weight:500; color:var(--text-light); }
+.price-box .pb-sub { margin-top:10px; font-size:17px; color:var(--text-light); }
+.calc td.key { min-width:0; }
+@media (max-width:620px) { .price-box .pb-value { font-size:42px; } .price-box { padding:28px 20px; } }
+</style>
+</head>
+<body>
+
+<div class="hero">
+ <div class="hero-label">Proposta tecnica a canone mensile</div>
+ <h1>Alma Travel<br>CRM, nuovo sito ed e-commerce</h1>
+ <div class="hero-sub">Preparata per VVL Marketing</div>
+ <div class="hero-meta"><span>Mauro Mandalari</span><span>Ottobre 2026</span></div>
+</div>
+
+<div class="container"><div class="section">
+ <div class="section-label">Il Modello</div>
+ <div class="section-title">Una cifra fissa al mese, per dodici mesi.</div>
+ <p class="section-text">Stessa proposta tecnica, un diverso modo di pagarla. Invece di tre fasi con un importo ciascuna, il cliente paga un canone fisso al mese per dodici mesi. Il canone comprende lo sviluppo di tutte e tre le fasi e la manutenzione e l'assistenza dalla messa online del sito.</p>
+ <div class="price-box"><div class="pb-label">Canone mensile</div><div class="pb-value">€ 990 <span>al mese, netti</span></div><div class="pb-sub">12 mesi · totale € 11.880 · sviluppo e assistenza inclusi</div></div>
+</div></div>
+
+<div class="alt"><div class="container"><div class="section"><div class="section-label">Come si arriva alla cifra</div><div class="section-title">Nessun sovrapprezzo per la rateizzazione.</div><p class="section-text">Il canone è il totale della proposta a fasi, con la manutenzione contata dal momento in cui il sito è online, diviso in dodici rate e arrotondato.</p><div class="table-wrap"><table class="calc"><thead><tr><th>Voce</th><th class="num">Importo</th></tr></thead><tbody><tr><td class="key">Fasi 1-3: analisi, CRM e canali, nuovo sito con e-commerce</td><td class="num">€ 10.570</td></tr><tr><td class="key">Manutenzione e assistenza dalla messa online, circa 9 mesi su 12 a € 144</td><td class="num">€ 1.296</td></tr><tr class="total"><td><b>Totale su 12 mesi</b></td><td class="num"><b>€ 11.866</b></td></tr></tbody></table></div><div class="note">€ 11.866 diviso 12 fa € 988,83, arrotondato a € 990. Rispetto alla proposta a fasi la differenza sui dodici mesi è di € 14: il cliente non paga interessi per dilazionare.</div></div></div></div>
+
+<div class=""><div class="container"><div class="section"><div class="section-label">Calendario</div><div class="section-title">Sviluppo nei primi tre mesi, poi assistenza.</div><div class="table-wrap"><table><thead><tr><th>Periodo</th><th>Cosa succede</th></tr></thead><tbody><tr><td class="key">Mesi 1-3</td><td>Sviluppo: analisi (circa 2 settimane), CRM e canali (4-5 settimane, in parallelo al sito), nuovo sito con e-commerce (8-10 settimane) e messa online</td></tr><tr><td class="key">Mesi 4-12</td><td>Manutenzione e assistenza tecnica di sito e integrazioni, con aggiornamenti, backup e monitoraggio</td></tr><tr><td class="key">Dal mese 13</td><td>Finito il canone di sviluppo resta l'assistenza a € 144 al mese</td></tr></tbody></table></div></div></div></div>
+
+<div class="alt"><div class="container"><div class="section"><div class="section-label">Cosa comprende · Fase 1 · Analisi</div><div class="section-title">Chiudere le scelte tecniche prima di investire.</div><p class="phase-meta"><b>Circa 2 settimane.</b> Consegna: un documento funzionale che VVL usa per la specifica delle automazioni e per l'approvazione del cliente.</p><div class="table-wrap"><table><thead><tr><th>Modulo</th><th>Cosa comprende</th></tr></thead><tbody><tr><td class="key">Mappa dei canali e dei processi</td><td>Da dove arrivano le richieste, chi le gestisce, quali passaggi servono al CRM</td></tr><tr><td class="key">Architettura informativa e modello dati</td><td>Come convivono business travel e leisure nel sito; struttura delle schede viaggio con partenze e disponibilità</td></tr><tr><td class="key">Verifica tecnica e modello dati del CRM</td><td>Audit completo del sito, di WooCommerce con prenotazioni e del sistema «Prenota online»; modello dati del CRM su misura, verifica del collegamento con WhatsApp e delle notifiche allo staff</td></tr></tbody></table></div></div></div></div>
+
+<div class=""><div class="container"><div class="section"><div class="section-label">Cosa comprende · Fase 2 · CRM e canali</div><div class="section-title">Un CRM su misura dentro WordPress.</div><p class="phase-meta"><b>Circa 4-5 settimane, in parallelo all'avvio della Fase 3.</b> Il plugin «Alma CRM» viene installato nella nuova installazione WordPress, già sull'hosting definitivo e raggiungibile dallo staff a un indirizzo provvisorio. Il sito attuale non viene modificato.</p><div class="table-wrap"><table><thead><tr><th>Modulo</th><th>Cosa comprende</th></tr></thead><tbody><tr><td class="key">Plugin «Alma CRM»</td><td>Sviluppo su misura nel pannello: richieste, contatti, pipeline business travel e leisure, assegnazione agli operatori, registrazione dei contatti con il cliente, promemoria sulle richieste ferme, notifiche nel pannello e via email, secondo la specifica di VVL</td></tr><tr><td class="key">WhatsApp aziendale nel CRM</td><td>Numero unico condiviso dallo staff, collegato tramite la piattaforma WhatsApp Business: ogni nuova conversazione diventa una richiesta sul contatto. Si risponde dall'app WhatsApp e si registra il contatto nella scheda. Costi di Meta e dell'eventuale fornitore a carico del cliente</td></tr><tr><td class="key">Email dedicate nel CRM</td><td>Caselle per le richieste commerciali lette dal CRM: ogni nuova email diventa una richiesta sul contatto. Si risponde dal programma di posta abituale</td></tr><tr><td class="key">Importazione e pulizia dei contatti</td><td>Utenti registrati sul sito e anagrafiche esistenti, deduplicati e divisi fra aziende e privati</td></tr><tr><td class="key">Report</td><td>Pagina «Panoramica» nel pannello: richieste per canale d'ingresso, stati, tasso di conversione, tempi di primo contatto, motivi di mancata vendita</td></tr><tr><td class="key">Formazione tecnica</td><td>Uso quotidiano di pannello, notifiche e report</td></tr></tbody></table></div><div class="note">Il report legge i dati del CRM: mostra da quale canale arriva una richiesta, ma non da quale campagna. L'attribuzione alle campagne dipende dal tracciamento, escluso da questa proposta.</div><div class="note">Il plugin «Alma CRM» è progettato per essere riutilizzato con altri tour operator seguiti da VVL: le impostazioni specifiche di Alma restano separate dal nucleo comune.</div></div></div></div>
+
+<div class="alt"><div class="container"><div class="section"><div class="section-label">Cosa comprende · Fase 3 · Nuovo sito</div><div class="section-title">Un sito nuovo, pubblicato al posto dell'attuale.</div><p class="phase-meta"><b>Circa 8-10 settimane.</b> Un sito nuovo, costruito in un ambiente separato e pubblicato al posto dell'attuale. Prodotti, ordini, clienti e pagamenti esistenti vengono mantenuti.</p><div class="table-wrap"><table><thead><tr><th>Modulo</th><th>Cosa comprende</th></tr></thead><tbody><tr><td class="key">UX</td><td>Wireframe desktop e mobile di tutti i template, con percorsi separati per aziende (business travel) e viaggiatori (leisure)</td></tr><tr><td class="key">UI</td><td>Impostazione grafica, componenti e stili applicati a tutte le pagine</td></tr><tr><td class="key">Tema su misura</td><td>Sviluppo nativo senza page builder, orientato a velocità e conversione</td></tr><tr><td class="key">Schede viaggio strutturate</td><td>Campi guidati per itinerario, quote, servizi inclusi, partenze con disponibilità e sold-out in un clic</td></tr><tr><td class="key">E-commerce</td><td>Template WooCommerce, compatibilità con prenotazioni, Nexi e Scalapay già attivi; ordini e prenotazioni registrati come vendite sul contatto nel CRM</td></tr><tr><td class="key">Moduli collegati al CRM</td><td>Moduli del nuovo sito, distinti per aziende e viaggiatori</td></tr><tr><td class="key">Chat del sito nel CRM</td><td>Chat in tempo reale gestita da più operatori, conversazioni salvate sul contatto</td></tr><tr><td class="key">Ambiente e hosting</td><td>Ambiente di sviluppo separato, hosting di produzione adeguato con cache, predisposto all'inizio per ospitare il CRM, coordinato con il fornitore del bando</td></tr><tr><td class="key">Migrazione dei contenuti</td><td>Ricostruzione di 31 schede e 38 pagine da Divi, trasferimento degli 88 articoli</td></tr><tr><td class="key">Messa online</td><td>SEO tecnica, reindirizzamento dei vecchi indirizzi, collaudo, pubblicazione</td></tr><tr><td class="key">Formazione sui contenuti</td><td>Pubblicazione dei programmi e gestione delle partenze</td></tr></tbody></table></div></div></div></div>
+
+<div class=""><div class="container"><div class="section"><div class="section-label">Fuori dal canone</div><div class="section-title">Opzionale ed evolutive.</div><ul class="conditions-list"><li>Guide «consigli»: ricostruzione delle 42 guide su villaggi e destinazioni, € 480 una tantum oppure € 40 al mese aggiunti al canone per dodici mesi.</li><li>Evolutive su richiesta di VVL (recensioni post-viaggio, newsletter, risposte WhatsApp ed email dal CRM, preventivo PDF dalla scheda viaggio, report per destinazione, pipeline con trascinamento): si quotano sulla specifica, a progetto o a € 50 l'ora.</li><li>Licenze a carico del cliente: conversazioni WhatsApp Business, hosting, plugin a pagamento. Il CRM su misura non ha costi di licenza e la licenza Zoho non serve più.</li></ul></div></div></div>
+
+<div class="alt"><div class="container"><div class="section"><div class="section-label">Perimetro</div><div class="section-title">Esclusioni, dipendenze e punti da chiarire.</div><div class="sub-title" style="margin-top:0">Escluso</div><ul class="conditions-list"><li>Tracciamento: tag manager, analytics, conversioni, attribuzione delle campagne. Da definire fra VVL e Mauro.</li><li>Progettazione di pipeline e automazioni, strategia, campagne, social: VVL.</li><li>Testi, foto, traduzioni.</li><li>Server, VPN e sicurezza di rete in sede: fornitore del bando MIMIT.</li><li>Licenze e costi di terze parti.</li></ul><div class="sub-title">Dipendenze</div><ul class="conditions-list"><li>La configurazione del CRM parte dalla specifica di pipeline e automazioni che VVL consegna a fine Fase 1.</li><li>Il CRM su misura va confermato con il cliente a fine Fase 1, insieme alla specifica di VVL.</li><li>Per l'audit completo serve un accesso amministratore al sito, anche temporaneo: quello attuale è Editore.</li><li>La migrazione dell'hosting va coordinata con il fornitore del bando MIMIT.</li></ul><div class="sub-title">Da chiarire</div><ul class="conditions-list"><li>Il bando MIMIT può coprire una parte di sito o CRM, e con quale fornitore?</li><li>Cos'è il sistema «Prenota online» e se va integrato o sostituito.</li><li>Il sito multilingua con Linguise resta? Se sì, va verificata la compatibilità con il nuovo tema.</li><li>Notifiche sul telefono: un CRM dentro WordPress non ha un'app nativa. Le notifiche arrivano nel pannello, via email o via WhatsApp: da validare con lo staff in Fase 1.</li><li>Se il rapporto si interrompe prima dei dodici mesi: cosa resta consegnato e come si regolano le rate residue. Da definire fra VVL e Mauro prima di proporlo al cliente.</li></ul></div></div></div>
+
+<div class="cta-section">
+ <h2>Prossimo passo</h2>
+ <p>Ne parliamo insieme: scegliamo se portare al cliente la proposta a fasi o quella a canone, poi chiudiamo la specifica delle automazioni e il perimetro.</p>
+ <div class="contact-block"><span class="contact-name">Mauro Mandalari</span><span class="contact-detail">info@mauromandalari.it</span><span class="contact-detail">392 850 5348</span></div>
+</div>
+
+<div class="footer">Proposta riservata — preparata per VVL Marketing &nbsp;·&nbsp; Ottobre 2026</div>
+
+</body>
+</html>
