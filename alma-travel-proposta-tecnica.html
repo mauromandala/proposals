@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta tecnica di sviluppo — Alma Travel</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --navy:#1e3a5f; --gold:#c8a96e; --text:#2d3748; --text-light:#718096; --bg:#f7f8fc; --white:#ffffff; --border:#e2e8f0; }
+body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+.hero { background:var(--navy); color:#fff; padding:80px 40px; text-align:center; }
+.hero-label { font-size:13px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+.hero h1 { font-size:46px; font-weight:700; line-height:1.2; margin-bottom:12px; }
+.hero-sub { font-size:22px; font-weight:300; opacity:.75; margin-bottom:36px; }
+.hero-meta { display:flex; justify-content:center; gap:40px; font-size:16px; opacity:.5; }
+.container { max-width:1024px; margin:0 auto; padding:0 40px; }
+.section { padding:64px 0; }
+.section + .section { border-top:1px solid var(--border); }
+.section-label { font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.section-title { font-size:31px; font-weight:700; color:var(--navy); margin-bottom:20px; }
+.section-text { font-size:19px; line-height:1.8; }
+.section-text + .section-text { margin-top:14px; }
+.sub-title { font-size:20px; font-weight:600; color:var(--navy); margin:32px 0 10px; }
+.highlight { background:var(--navy); color:#fff; border-radius:12px; padding:24px 32px; margin-top:32px; font-size:20px; line-height:1.7; }
+.alt { background:var(--white); }
+.divider { border-top:1px solid var(--border); }
+.table-wrap { margin-top:28px; overflow-x:auto; background:var(--white); border:1px solid var(--border); border-radius:12px; }
+table { width:100%; min-width:640px; border-collapse:collapse; font-size:16px; }
+th { text-align:left; padding:14px 20px; font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); border-bottom:1px solid var(--border); }
+td { padding:14px 20px; vertical-align:top; color:var(--text-light); border-bottom:1px solid var(--border); line-height:1.6; }
+tr:last-child td { border-bottom:none; }
+td.key { color:var(--navy); font-weight:600; min-width:190px; }
+.num { text-align:right; white-space:nowrap; }
+td.num { color:var(--navy); font-weight:600; }
+tr.opt td { background:var(--bg); }
+tr.total td { background:var(--navy); color:#fff; font-weight:700; border-bottom:none; }
+.note { margin-top:24px; padding:18px 24px; background:var(--white); border-radius:8px; border-left:3px solid var(--gold); font-size:17px; line-height:1.7; }
+.alt .note { background:var(--bg); }
+.phase-meta { font-size:17px; color:var(--text-light); margin:-6px 0 4px; }
+.phase-meta b { color:var(--navy); }
+.conditions-list { list-style:none; margin-top:20px; display:flex; flex-direction:column; gap:10px; }
+.conditions-list li { font-size:17px; padding:14px 20px; background:var(--white); border-radius:8px; border:1px solid var(--border); display:flex; align-items:flex-start; gap:14px; line-height:1.6; }
+.alt .conditions-list li { background:var(--bg); }
+.conditions-list li::before { content:''; width:6px; height:6px; background:var(--gold); border-radius:50%; flex-shrink:0; margin-top:11px; }
+.cta-section { background:var(--navy); color:#fff; padding:72px 40px; text-align:center; }
+.cta-section h2 { font-size:36px; font-weight:700; margin-bottom:16px; }
+.cta-section p { font-size:19px; opacity:.75; max-width:600px; margin:0 auto 36px; line-height:1.8; }
+.contact-block { display:inline-flex; flex-direction:column; align-items:center; gap:6px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:12px; padding:28px 48px; }
+.contact-name { font-size:24px; font-weight:700; }
+.contact-detail { font-size:17px; opacity:.6; }
+.footer { background:#0f1f38; color:rgba(255,255,255,.3); text-align:center; padding:24px; font-size:14px; }
+@media (max-width:620px) {
+ .hero { padding:52px 24px; } .hero h1 { font-size:28px; } .hero-meta { flex-direction:column; gap:6px; }
+ .container { padding:0 20px; } .section { padding:48px 0; } .section-title { font-size:25px; } .section-text { font-size:17px; }
+ .cta-section { padding:52px 24px; } .contact-block { padding:24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+ <div class="hero-label">Proposta tecnica di sviluppo</div>
+ <h1>Alma Travel<br>CRM, nuovo sito ed e-commerce</h1>
+ <div class="hero-sub">Preparata per VVL Marketing</div>
+ <div class="hero-meta"><span>Mauro Mandalari</span><span>Ottobre 2026</span></div>
+</div>
+
+<div class="container"><div class="section">
+ <div class="section-label">Il Contesto</div>
+ <div class="section-title">La parte di sviluppo web del progetto Alma Travel.</div>
+ <p class="section-text">Proposta riservata a VVL Marketing per la parte di sviluppo web del progetto Alma Travel. Copre il CRM integrato nel pannello di WordPress, le integrazioni con i canali, i report, il nuovo sito con l'e-commerce. Strategia, marketing, generazione dei lead e progettazione delle automazioni restano a VVL.</p>
+ <div class="highlight">Gli importi sono netti: il prezzo al cliente lo stabilisce VVL.</div>
+</div></div>
+
+<div class="alt"><div class="container"><div class="section"><div class="section-label">Ruoli</div><div class="section-title">Ripartizione dei ruoli</div><div class="table-wrap"><table><thead><tr><th>Area</th><th>Chi</th><th>Note</th></tr></thead><tbody><tr><td class="key">Strategia, posizionamento, marketing, campagne, generazione dei lead</td><td>VVL</td><td></td></tr><tr><td class="key">Conferma del CRM</td><td>VVL con il cliente</td><td>Proposta: CRM su misura dentro WordPress (plugin «Alma CRM»), da confermare a fine Fase 1</td></tr><tr><td class="key">Progettazione di pipeline e automazioni</td><td>VVL</td><td>Consegnata come specifica prima della Fase 2</td></tr><tr><td class="key">Configurazione tecnica del CRM e integrazioni con sito, chat, WhatsApp, email</td><td>Mauro</td><td>Sulla base della specifica di VVL</td></tr><tr><td class="key">Report</td><td>Mauro</td><td></td></tr><tr><td class="key">Tracciamento: tag manager, analytics, conversioni, attribuzione delle campagne</td><td>Da definire</td><td>Non quotato in questa proposta</td></tr><tr><td class="key">UX, UI e sviluppo del sito, e-commerce</td><td>Mauro</td><td></td></tr><tr><td class="key">Testi, foto, traduzioni</td><td>Cliente o VVL</td><td>Mauro esegue la migrazione tecnica dei contenuti esistenti</td></tr><tr><td class="key">Server in sede, VPN, sicurezza di rete</td><td>Fornitore del bando MIMIT</td><td>Coordinamento sull'hosting del sito</td></tr></tbody></table></div></div></div></div>
+
+<div class=""><div class="container"><div class="section"><div class="section-label">Punto di partenza</div><div class="section-title">Contesto tecnico</div><p class="section-text">Rilevato dall'esterno e confermato nella call del 20 ottobre.</p><div class="table-wrap"><table><tbody><tr><td class="key">Piattaforma</td><td>WordPress 6.6, tema Divi con due pacchetti di moduli aggiuntivi</td></tr><tr><td class="key">E-commerce</td><td>WooCommerce con prenotazioni, pagamenti Nexi e Scalapay, 31 prodotti, 383 utenti registrati</td></tr><tr><td class="key">Contenuti</td><td>31 schede, 38 pagine, 42 guide e 88 articoli; schede e guide costruite interamente in Divi</td></tr><tr><td class="key">Prestazioni</td><td>Home da 8,8 MB, caricamento completo in 9,7 secondi, cache dell'hosting disattivata</td></tr><tr><td class="key">Hosting</td><td>Aruba condiviso</td></tr><tr><td class="key">CRM e canali</td><td>Zoho CRM in licenza e non usato; chat Zoho che arriva per email; WhatsApp con poche licenze; nessun modulo di richiesta preventivo collegato a un CRM</td></tr><tr><td class="key">Prenotazione esterna</td><td>La voce «Prenota online» porta a un sito di terzo livello da identificare</td></tr></tbody></table></div><div class="note">Il punto più pesante per lo sviluppo: i contenuti in Divi non si convertono, quindi passando a un tema su misura vanno ricostruiti.</div></div></div></div>
+
+<div class="alt"><div class="container"><div class="section"><div class="section-label">Fase 1 · Analisi</div><div class="section-title">Chiudere le scelte tecniche prima di investire.</div><p class="phase-meta"><b>Priorità alta · circa 2 settimane.</b> Chiude le scelte tecniche aperte prima di investire nello sviluppo.</p><div class="table-wrap"><table><thead><tr><th>Modulo</th><th>Cosa comprende</th><th class="num">Netto</th></tr></thead><tbody><tr><td class="key">Mappa dei canali e dei processi</td><td>Da dove arrivano le richieste, chi le gestisce, quali passaggi servono al CRM</td><td class="num">€ 240</td></tr><tr><td class="key">Architettura informativa e modello dati</td><td>Come convivono business travel e leisure nel sito; struttura delle schede viaggio con partenze e disponibilità</td><td class="num">€ 360</td></tr><tr><td class="key">Verifica tecnica e modello dati del CRM</td><td>Audit completo del sito, di WooCommerce con prenotazioni e del sistema «Prenota online»; modello dati del CRM su misura, verifica del collegamento con WhatsApp e delle notifiche allo staff</td><td class="num">€ 240</td></tr><tr class="total"><td><b>Totale Fase 1</b></td><td></td><td class="num"><b>€ 840</b></td></tr></tbody></table></div><div class="note"><b>Consegna:</b> un documento funzionale che VVL usa per la specifica delle automazioni e per l'approvazione del cliente.</div></div></div></div>
+
+<div class=""><div class="container"><div class="section"><div class="section-label">Fase 2 · CRM e canali</div><div class="section-title">Un CRM su misura dentro WordPress.</div><p class="phase-meta"><b>Priorità alta · circa 4-5 settimane, in parallelo all'avvio della Fase 3.</b> Sviluppa un CRM su misura dentro il pannello di WordPress, il plugin «Alma CRM», e porta WhatsApp e le email commerciali in un unico punto, senza attendere il nuovo sito. Le schermate di esempio mostrano come apparirà. Il CRM viene installato nella nuova installazione WordPress, già sull'hosting definitivo e raggiungibile dallo staff a un indirizzo provvisorio: WhatsApp ed email entrano subito, i moduli e la chat del sito si aggiungono con la messa online. Il sito attuale non viene modificato.</p><div class="table-wrap"><table><thead><tr><th>Modulo</th><th>Cosa comprende</th><th class="num">Netto</th></tr></thead><tbody><tr><td class="key">Plugin «Alma CRM»</td><td>Sviluppo su misura nel pannello: richieste, contatti, pipeline business travel e leisure, assegnazione agli operatori, registrazione dei contatti con il cliente, promemoria sulle richieste ferme, notifiche nel pannello e via email, secondo la specifica di VVL</td><td class="num">€ 2.100</td></tr><tr><td class="key">WhatsApp aziendale nel CRM</td><td>Numero unico condiviso dallo staff, collegato tramite la piattaforma WhatsApp Business: ogni nuova conversazione diventa una richiesta sul contatto. Si risponde dall'app WhatsApp e si registra il contatto nella scheda. Costi di Meta e dell'eventuale fornitore a carico del cliente</td><td class="num">€ 450</td></tr><tr><td class="key">Email dedicate nel CRM</td><td>Caselle per le richieste commerciali lette dal CRM: ogni nuova email diventa una richiesta sul contatto. Si risponde dal programma di posta abituale</td><td class="num">€ 300</td></tr><tr><td class="key">Importazione e pulizia dei contatti</td><td>Utenti registrati sul sito e anagrafiche esistenti, deduplicati e divisi fra aziende e privati</td><td class="num">€ 240</td></tr><tr><td class="key">Report</td><td>Pagina «Panoramica» nel pannello: richieste per canale d'ingresso, stati, tasso di conversione, tempi di primo contatto, motivi di mancata vendita</td><td class="num">€ 600</td></tr><tr><td class="key">Formazione tecnica</td><td>Uso quotidiano di pannello, notifiche e report</td><td class="num">€ 120</td></tr><tr class="total"><td><b>Totale Fase 2</b></td><td></td><td class="num"><b>€ 3.810</b></td></tr></tbody></table></div><div class="note">Il report legge i dati del CRM: mostra da quale canale arriva una richiesta — modulo, chat, WhatsApp, email — ma non da quale campagna. L'attribuzione alle campagne dipende dal tracciamento, escluso da questa proposta.</div><div class="note">Il plugin «Alma CRM» è progettato per essere riutilizzato con altri tour operator seguiti da VVL: le impostazioni specifiche di Alma restano separate dal nucleo comune.</div></div></div></div>
+
+<div class="alt"><div class="container"><div class="section"><div class="section-label">Fase 3 · Nuovo sito</div><div class="section-title">Un sito nuovo, pubblicato al posto dell'attuale.</div><p class="phase-meta"><b>Priorità alta, a seguire · circa 8-10 settimane.</b> Un sito nuovo, costruito in un ambiente separato e pubblicato al posto dell'attuale. Prodotti, ordini, clienti e pagamenti esistenti vengono mantenuti.</p><div class="table-wrap"><table><thead><tr><th>Modulo</th><th>Cosa comprende</th><th class="num">Netto</th></tr></thead><tbody><tr><td class="key">UX</td><td>Wireframe desktop e mobile di tutti i template, con percorsi separati per aziende (business travel) e viaggiatori (leisure)</td><td class="num">€ 840</td></tr><tr><td class="key">UI</td><td>Impostazione grafica, componenti e stili applicati a tutte le pagine</td><td class="num">€ 360</td></tr><tr><td class="key">Tema su misura</td><td>Sviluppo nativo senza page builder, orientato a velocità e conversione</td><td class="num">€ 1.440</td></tr><tr><td class="key">Schede viaggio strutturate</td><td>Campi guidati per itinerario, quote, servizi inclusi, partenze con disponibilità e sold-out in un clic</td><td class="num">€ 480</td></tr><tr><td class="key">E-commerce</td><td>Template WooCommerce, compatibilità con prenotazioni, Nexi e Scalapay già attivi; ordini e prenotazioni registrati come vendite sul contatto nel CRM</td><td class="num">€ 640</td></tr><tr><td class="key">Moduli collegati al CRM</td><td>Moduli del nuovo sito, distinti per aziende e viaggiatori</td><td class="num">€ 200</td></tr><tr><td class="key">Chat del sito nel CRM</td><td>Chat in tempo reale gestita da più operatori, conversazioni salvate sul contatto</td><td class="num">€ 200</td></tr><tr><td class="key">Ambiente e hosting</td><td>Ambiente di sviluppo separato, hosting di produzione adeguato con cache, predisposto all'inizio per ospitare il CRM, coordinato con il fornitore del bando</td><td class="num">€ 240</td></tr><tr><td class="key">Migrazione dei contenuti</td><td>Ricostruzione di 31 schede e 38 pagine da Divi, trasferimento degli 88 articoli</td><td class="num">€ 960</td></tr><tr><td class="key">Messa online</td><td>SEO tecnica, reindirizzamento dei vecchi indirizzi, collaudo, pubblicazione</td><td class="num">€ 440</td></tr><tr><td class="key">Formazione sui contenuti</td><td>Pubblicazione dei programmi e gestione delle partenze</td><td class="num">€ 120</td></tr><tr class="opt"><td class="key"><i>Opzionale</i> — Guide «consigli»</td><td>Ricostruzione delle 42 guide su villaggi e destinazioni</td><td class="num">€ 480</td></tr><tr class="total"><td><b>Totale Fase 3</b></td><td></td><td class="num"><b>€ 5.920</b></td></tr></tbody></table></div></div></div></div>
+
+<div class=""><div class="container"><div class="section"><div class="section-label">Fase 4 · Evolutive</div><div class="section-title">Su richiesta di VVL.</div><p class="phase-meta"><b>Priorità media, dopo il nuovo sito.</b> Lo sviluppo tecnico al servizio delle attività di relazione con i clienti che VVL progetta. Si quota sulla specifica, a progetto o a € 50 l'ora.</p><ul class="conditions-list"><li>Avvisi nel CRM per le recensioni post-viaggio.</li><li>Sincronizzazione dei segmenti del CRM con lo strumento di newsletter.</li><li>Percorso tecnico dal welfare aziendale alle proposte leisure.</li><li>Assistente che smista le email in arrivo e segnala le richieste prioritarie.</li><li>Risposte WhatsApp ed email direttamente dalla scheda della richiesta, con lo storico della conversazione.</li><li>Preventivo PDF generato dalla scheda viaggio.</li><li>Report per destinazione e servizio.</li><li>Pipeline con trascinamento delle richieste fra le fasi.</li></ul></div></div></div>
+
+<div class="alt"><div class="container"><div class="section"><div class="section-label">Riepilogo economico</div><div class="section-title">Fasi, tempi e importi.</div><div class="table-wrap"><table><thead><tr><th>Fase</th><th>Durata indicativa</th><th class="num">Netto</th></tr></thead><tbody><tr><td class="key">1 — Analisi</td><td>2 settimane</td><td class="num">€ 840</td></tr><tr><td class="key">2 — CRM e canali</td><td>4-5 settimane, in parallelo alla Fase 3</td><td class="num">€ 3.810</td></tr><tr><td class="key">3 — Nuovo sito</td><td>8-10 settimane</td><td class="num">€ 5.920</td></tr><tr class="opt"><td class="key"><i>Opzionale</i> — Guide «consigli»</td><td></td><td class="num">€ 480</td></tr><tr class="total"><td><b>Totale fasi 1-3</b></td><td><b>10-12 settimane</b></td><td class="num"><b>€ 10.570</b></td></tr></tbody></table></div><p class="section-text" style="margin-top:24px">Le fasi 1 e 2 insieme valgono € 4.650 e mettono in funzione il CRM in WordPress con WhatsApp ed email prima del nuovo sito: sono il punto d'ingresso naturale se il cliente vuole procedere per gradi.</p><div class="sub-title">Servizi ricorrenti</div><div class="table-wrap"><table><tbody><tr><td class="key">Manutenzione e assistenza tecnica di sito e integrazioni, con aggiornamenti, backup e monitoraggio</td><td class="num">€ 144 / mese</td></tr></tbody></table></div><div class="note">Licenze a carico del cliente: conversazioni WhatsApp Business, hosting, plugin a pagamento. Il CRM su misura non ha costi di licenza e la licenza Zoho non serve più.</div></div></div></div>
+
+<div class=""><div class="container"><div class="section"><div class="section-label">Perimetro</div><div class="section-title">Esclusioni, dipendenze e punti da chiarire.</div><div class="sub-title" style="margin-top:0">Escluso</div><ul class="conditions-list"><li>Tracciamento: tag manager, analytics, conversioni, attribuzione delle campagne. Da definire fra VVL e Mauro.</li><li>Progettazione di pipeline e automazioni, strategia, campagne, social: VVL.</li><li>Testi, foto, traduzioni.</li><li>Server, VPN e sicurezza di rete in sede: fornitore del bando MIMIT.</li><li>Licenze e costi di terze parti.</li></ul><div class="sub-title">Dipendenze</div><ul class="conditions-list"><li>La configurazione del CRM parte dalla specifica di pipeline e automazioni che VVL consegna a fine Fase 1.</li><li>Il CRM su misura va confermato con il cliente a fine Fase 1, insieme alla specifica di VVL.</li><li>Per l'audit completo serve un accesso amministratore al sito, anche temporaneo: quello attuale è Editore.</li><li>La migrazione dell'hosting va coordinata con il fornitore del bando MIMIT.</li></ul><div class="sub-title">Da chiarire</div><ul class="conditions-list"><li>Il bando MIMIT può coprire una parte di sito o CRM, e con quale fornitore?</li><li>Cos'è il sistema «Prenota online» e se va integrato o sostituito.</li><li>Il sito multilingua con Linguise resta? Se sì, va verificata la compatibilità con il nuovo tema.</li><li>Notifiche sul telefono: un CRM dentro WordPress non ha un'app nativa. Le notifiche arrivano nel pannello, via email o via WhatsApp: da validare con lo staff in Fase 1.</li></ul></div></div></div>
+
+<div class="cta-section">
+ <h2>Prossimo passo</h2>
+ <p>Ne parliamo insieme: commentiamo importi e tempi, poi chiudiamo la specifica delle automazioni e il perimetro prima di portare la proposta al cliente.</p>
+ <div class="contact-block"><span class="contact-name">Mauro Mandalari</span><span class="contact-detail">info@mauromandalari.it</span><span class="contact-detail">392 850 5348</span></div>
+</div>
+
+<div class="footer">Proposta riservata — preparata per VVL Marketing &nbsp;·&nbsp; Ottobre 2026</div>
+
+</body>
+</html>
