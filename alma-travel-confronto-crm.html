@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confronto CRM — Alma Travel</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --navy:#1e3a5f; --gold:#c8a96e; --text:#2d3748; --text-light:#718096; --bg:#f7f8fc; --white:#ffffff; --border:#e2e8f0; }
+body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+.hero { background:var(--navy); color:#fff; padding:80px 40px; text-align:center; }
+.hero-label { font-size:13px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+.hero h1 { font-size:46px; font-weight:700; line-height:1.2; margin-bottom:12px; }
+.hero-sub { font-size:22px; font-weight:300; opacity:.75; margin-bottom:36px; }
+.hero-meta { display:flex; justify-content:center; gap:40px; font-size:16px; opacity:.5; }
+.container { max-width:1024px; margin:0 auto; padding:0 40px; }
+.section { padding:64px 0; }
+.section + .section { border-top:1px solid var(--border); }
+.section-label { font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.section-title { font-size:31px; font-weight:700; color:var(--navy); margin-bottom:20px; }
+.section-text { font-size:19px; line-height:1.8; }
+.section-text + .section-text { margin-top:14px; }
+.sub-title { font-size:20px; font-weight:600; color:var(--navy); margin:32px 0 10px; }
+.highlight { background:var(--navy); color:#fff; border-radius:12px; padding:24px 32px; margin-top:32px; font-size:20px; line-height:1.7; }
+.alt { background:var(--white); }
+.divider { border-top:1px solid var(--border); }
+.table-wrap { margin-top:28px; overflow-x:auto; background:var(--white); border:1px solid var(--border); border-radius:12px; }
+table { width:100%; min-width:640px; border-collapse:collapse; font-size:16px; }
+th { text-align:left; padding:14px 20px; font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); border-bottom:1px solid var(--border); }
+td { padding:14px 20px; vertical-align:top; color:var(--text-light); border-bottom:1px solid var(--border); line-height:1.6; }
+tr:last-child td { border-bottom:none; }
+td.key { color:var(--navy); font-weight:600; min-width:190px; }
+.num { text-align:right; white-space:nowrap; }
+td.num { color:var(--navy); font-weight:600; }
+tr.opt td { background:var(--bg); }
+tr.total td { background:var(--navy); color:#fff; font-weight:700; border-bottom:none; }
+.note { margin-top:24px; padding:18px 24px; background:var(--white); border-radius:8px; border-left:3px solid var(--gold); font-size:17px; line-height:1.7; }
+.alt .note { background:var(--bg); }
+.phase-meta { font-size:17px; color:var(--text-light); margin:-6px 0 4px; }
+.phase-meta b { color:var(--navy); }
+.conditions-list { list-style:none; margin-top:20px; display:flex; flex-direction:column; gap:10px; }
+.conditions-list li { font-size:17px; padding:14px 20px; background:var(--white); border-radius:8px; border:1px solid var(--border); display:flex; align-items:flex-start; gap:14px; line-height:1.6; }
+.alt .conditions-list li { background:var(--bg); }
+.conditions-list li::before { content:''; width:6px; height:6px; background:var(--gold); border-radius:50%; flex-shrink:0; margin-top:11px; }
+.cta-section { background:var(--navy); color:#fff; padding:72px 40px; text-align:center; }
+.cta-section h2 { font-size:36px; font-weight:700; margin-bottom:16px; }
+.cta-section p { font-size:19px; opacity:.75; max-width:600px; margin:0 auto 36px; line-height:1.8; }
+.contact-block { display:inline-flex; flex-direction:column; align-items:center; gap:6px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:12px; padding:28px 48px; }
+.contact-name { font-size:24px; font-weight:700; }
+.contact-detail { font-size:17px; opacity:.6; }
+.footer { background:#0f1f38; color:rgba(255,255,255,.3); text-align:center; padding:24px; font-size:14px; }
+@media (max-width:620px) {
+ .hero { padding:52px 24px; } .hero h1 { font-size:28px; } .hero-meta { flex-direction:column; gap:6px; }
+ .container { padding:0 20px; } .section { padding:48px 0; } .section-title { font-size:25px; } .section-text { font-size:17px; }
+ .cta-section { padding:52px 24px; } .contact-block { padding:24px; }
+}
+
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-top:28px; }
+.card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:24px; }
+.alt .card { background:var(--bg); }
+.card.featured { border:2px solid var(--gold); }
+.card .k { font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+.card .t { font-size:21px; font-weight:700; color:var(--navy); margin-bottom:10px; }
+.card .h { font-size:14px; font-weight:600; color:var(--navy); margin:12px 0 4px; }
+.card ul { margin-left:18px; font-size:15px; color:var(--text-light); line-height:1.6; }
+.card p { font-size:15px; color:var(--text-light); line-height:1.6; }
+.sources { margin-top:20px; font-size:15px; line-height:1.9; }
+.sources a { color:var(--navy); }
+.ok { color:#1a7f37; font-weight:600; } .mid { color:#9a6700; font-weight:600; } .no { color:#b42318; font-weight:600; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+ <div class="hero-label">Confronto CRM</div>
+ <h1>Alma Travel<br>Quale CRM e perché</h1>
+ <div class="hero-sub">Preparato per VVL Marketing</div>
+ <div class="hero-meta"><span>Mauro Mandalari</span><span>Ottobre 2026</span></div>
+</div>
+
+<div class="container"><div class="section">
+ <div class="section-label">Obiettivo</div>
+ <div class="section-title">Scegliere un CRM che lo staff usi davvero e che parli con il sito.</div>
+ <p class="section-text">Il nuovo sito invierà al CRM, via API, ogni richiesta con i campi concordati e il preventivo PDF. Il CRM deve quindi integrarsi bene con il sito e, allo stesso tempo, risolvere i problemi che Giuseppe ha descritto nella call del 20 ottobre: richieste sparse fra email, WhatsApp e chat, nessuna presa in carico condivisa, un CRM già pagato ma inutilizzato.</p>
+ <p class="section-text">Ho confrontato cinque CRM: Brevo, Pipedrive, HubSpot (usato in passato da Alma), Zoho CRM (in licenza oggi) e Bigin (la versione semplificata di Zoho).</p>
+ <div class="highlight">In sintesi: Brevo è la prima scelta, Pipedrive l'alternativa. La decisione finale dipende da due verifiche, il costo reale di WhatsApp su Brevo e la prova dello staff.</div>
+</div></div>
+
+<div class="alt"><div class="container"><div class="section"><div class="section-label">Criteri</div><div class="section-title">Cosa conta per Alma, e perché.</div><div class="table-wrap"><table><thead><tr><th>Criterio</th><th>Perché conta</th><th>Peso</th></tr></thead><tbody><tr><td class="key">Integrazione via API</td><td>Il sito deve inviare richieste, campi e PDF al CRM e ricevere gli aggiornamenti: è il cuore del progetto e del connettore riutilizzabile</td><td>Alta</td></tr><tr><td class="key">WhatsApp e chat in un'unica casella</td><td>Alma «lavora molto su WhatsApp» e la chat del sito oggi arriva per email</td><td>Alta</td></tr><tr><td class="key">Semplicità e adozione</td><td>Zoho è stato lasciato inutilizzato perché lo staff non lo capiva: il nuovo CRM va usato davvero</td><td>Alta</td></tr><tr><td class="key">App e notifiche</td><td>Avviso immediato su una richiesta importante, lavoro anche da remoto</td><td>Alta</td></tr><tr><td class="key">Costo mensile</td><td>HubSpot è stato lasciato per i costi; 120-130 € al mese per WhatsApp sono ritenuti eccessivi</td><td>Alta</td></tr><tr><td class="key">Newsletter e automazioni</td><td>Riattivare un database clienti in buona parte dormiente</td><td>Media</td></tr><tr><td class="key">Dati in UE e GDPR</td><td>Obiezione di VVL sulla responsabilità del trattamento</td><td>Media</td></tr></tbody></table></div></div></div></div>
+
+<div class=""><div class="container"><div class="section"><div class="section-label">Confronto</div><div class="section-title">I cinque CRM a confronto.</div><p class="section-text"><span class="ok">●</span> adatto &nbsp; <span class="mid">●</span> con limiti o da verificare &nbsp; <span class="no">●</span> punto debole</p><div class="table-wrap"><table><thead><tr><th>Criterio</th><th>Brevo</th><th>Pipedrive</th><th>HubSpot</th><th>Zoho CRM</th><th>Bigin</th></tr></thead><tbody><tr><td class="key">Integrazione via API</td><td><span class="ok">●</span> Trattative, contatti, aziende; PDF allegabile alla trattativa; webhook su creazione e cambio di fase</td><td><span class="ok">●</span> API matura su trattative, persone, aziende; webhook</td><td><span class="ok">●</span> API molto completa</td><td><span class="ok">●</span> API completa</td><td><span class="no">●</span> Più limitata, webhook non documentati</td></tr><tr><td class="key">WhatsApp e chat</td><td><span class="mid">●</span> Casella unica con chat, WhatsApp, social ed email; costo del canale WhatsApp da verificare</td><td><span class="no">●</span> Solo con app di terzi a pagamento</td><td><span class="mid">●</span> WhatsApp nativo solo nei piani Service Hub Professional e superiori</td><td><span class="mid">●</span> Da verificare</td><td><span class="mid">●</span> Integrazione WhatsApp Business</td></tr><tr><td class="key">Semplicità</td><td><span class="ok">●</span> Essenziale</td><td><span class="ok">●</span> Molto semplice, centrato sulla pipeline</td><td><span class="ok">●</span> Semplice, già conosciuto dallo staff</td><td><span class="no">●</span> Complesso: è il motivo per cui non è usato</td><td><span class="ok">●</span> Pensato per piccole aziende</td></tr><tr><td class="key">App e notifiche</td><td><span class="ok">●</span> Sì</td><td><span class="ok">●</span> Sì</td><td><span class="ok">●</span> Sì</td><td><span class="ok">●</span> Sì</td><td><span class="ok">●</span> Sì</td></tr><tr><td class="key">Newsletter e automazioni</td><td><span class="ok">●</span> Nello stesso strumento</td><td><span class="no">●</span> Serve un secondo strumento</td><td><span class="mid">●</span> Automazioni solo dal piano Professional</td><td><span class="mid">●</span> Con Zoho Campaigns, già installato e mai usato</td><td><span class="mid">●</span> Con strumenti Zoho aggiuntivi</td></tr><tr><td class="key">Dati in UE</td><td><span class="ok">●</span> Server in UE (Francia, Germania, Belgio)</td><td><span class="mid">●</span> Contratto UE e accordo sui dati; sede dei dati da verificare</td><td><span class="mid">●</span> Data center UE disponibile, da confermare in fase di attivazione</td><td><span class="mid">●</span> Da verificare</td><td><span class="mid">●</span> Da verificare</td></tr><tr><td class="key">Costo</td><td><span class="ok">●</span> Basso</td><td><span class="mid">●</span> Medio</td><td><span class="no">●</span> Basso solo nel piano Starter; alto con automazioni e WhatsApp</td><td><span class="ok">●</span> Basso, e già in licenza</td><td><span class="ok">●</span> Molto basso</td></tr></tbody></table></div></div></div></div>
+
+<div class="alt"><div class="container"><div class="section"><div class="section-label">Costi</div><div class="section-title">Quanto costano, in modo indicativo.</div><p class="section-text">Prezzi dichiarati dai fornitori o riportati da fonti recenti, nella valuta della fonte. L'esempio con 4 utenti serve solo a confrontare: il numero reale di utenti va chiesto ad Alma. Esclusi i costi a consumo di WhatsApp verso Meta.</p><div class="table-wrap"><table><thead><tr><th>CRM</th><th>Prezzo dichiarato</th><th>Esempio per 4 utenti</th><th>Note</th></tr></thead><tbody><tr><td class="key">Brevo</td><td>CRM di vendita circa $12 per utente; Conversations (chat) circa $15 per utente; marketing da € 7 al mese</td><td>circa $110 al mese più il piano marketing</td><td>WhatsApp: secondo una fonte richiede il piano Professional (€ 499 al mese) per le campagne; per la sola casella di conversazione va verificato</td></tr><tr><td class="key">Pipedrive</td><td>Piani da circa € 14, 39 o 59 per utente, fatturazione annuale; automazioni e sincronizzazione email dal piano da € 39</td><td>circa € 156 al mese</td><td>Più l'app per WhatsApp e uno strumento per le newsletter</td></tr><tr><td class="key">HubSpot</td><td>Starter $20 per utente; Sales e Service Professional $90-100 per utente</td><td>$80 al mese (Starter) oppure $360-400 al mese (Professional)</td><td>Le automazioni sono solo nel Professional; WhatsApp nativo solo nel Service Hub Professional</td></tr><tr><td class="key">Zoho CRM</td><td>Standard $14, Professional $23 per utente, fatturazione annuale</td><td>$56-92 al mese</td><td>Alma lo paga già: edizione e scadenza da verificare</td></tr><tr><td class="key">Bigin</td><td>Prezzi bassi, cifre da verificare sul sito Zoho</td><td>—</td><td>La fonte consultata non è affidabile sui prezzi</td></tr></tbody></table></div></div></div></div>
+
+<div class=""><div class="container"><div class="section"><div class="section-label">Valutazione</div><div class="section-title">Motivi della scelta, CRM per CRM.</div><div class="cards">
+<div class="card featured"><div class="k">Prima scelta da verificare</div><div class="t">Brevo</div>
+<div class="h">Perché</div><ul><li>Un solo strumento per CRM, chat, WhatsApp e newsletter: copre quasi tutto quello che Giuseppe ha chiesto.</li><li>API adatta al connettore: trattative, PDF allegato, webhook.</li><li>Dati in UE, costi bassi.</li></ul>
+<div class="h">Limiti</div><ul><li>CRM di vendita più semplice di Pipedrive.</li><li>Il costo reale di WhatsApp va chiarito prima di decidere.</li></ul></div>
+<div class="card"><div class="k">Alternativa forte</div><div class="t">Pipedrive</div>
+<div class="h">Perché</div><ul><li>Il miglior CRM di vendita del gruppo, molto semplice per lo staff.</li><li>API matura, ideale per il connettore.</li></ul>
+<div class="h">Limiti</div><ul><li>WhatsApp solo con app di terzi a pagamento.</li><li>Newsletter con un secondo strumento: più costi e più strumenti da gestire.</li></ul></div>
+<div class="card"><div class="k">Da considerare</div><div class="t">Zoho CRM</div>
+<div class="h">Perché</div><ul><li>Alma lo paga già: nessun nuovo costo di licenza.</li><li>API completa.</li></ul>
+<div class="h">Limiti</div><ul><li>Lo staff lo ha già rifiutato perché complesso. Si può semplificare la configurazione, ma il rischio di non adozione resta.</li></ul></div>
+<div class="card"><div class="k">Sconsigliato</div><div class="t">HubSpot</div>
+<div class="h">Perché no</div><ul><li>Lo staff lo conosce, ma è stato lasciato per i costi.</li><li>Automazioni e WhatsApp nativo richiedono i piani Professional, i più cari.</li></ul></div>
+<div class="card"><div class="k">Escluso</div><div class="t">Bigin</div>
+<div class="h">Perché no</div><ul><li>Economico e semplice, ma l'API è troppo limitata per un'integrazione completa con il sito.</li></ul></div>
+</div></div></div></div>
+
+<div class="alt"><div class="container"><div class="section"><div class="section-label">Raccomandazione</div><div class="section-title">Due candidati, una prova con lo staff.</div><p class="section-text">Propongo di portare in prova due CRM, Brevo e Pipedrive. Zoho resta un'opzione solo se Alma vuole evitare nuovi costi di licenza, accettando il rischio che lo staff continui a non usarlo.</p><ul class="conditions-list"><li><b>Prima della prova:</b> chiedere a Brevo quanto costa il canale WhatsApp nella casella Conversations, e a Pipedrive dove sono conservati i dati dei clienti europei.</li><li><b>Prova di due settimane</b> con lo staff di Alma, sugli stessi casi reali: richiesta dal sito, messaggio WhatsApp, presa in carico, passaggio a un collega assente, chiusura con motivo della mancata vendita, invio di una newsletter.</li><li><b>Decisione</b> su tre domande: lo staff lo usa senza aiuto? Il costo mensile totale è accettabile per Giuseppe? Il connettore funziona con la sua API nei casi provati?</li></ul></div></div></div>
+
+<div class=""><div class="container"><div class="section"><div class="section-label">Da verificare</div><div class="section-title">Punti aperti prima di decidere.</div><ul class="conditions-list"><li>Quante persone useranno il CRM e qual è il tetto di spesa mensile.</li><li>Costo del canale WhatsApp su Brevo: piano necessario e costo per conversazione.</li><li>Edizione e scadenza della licenza Zoho di Alma.</li><li>Sede dei dati di Pipedrive e Zoho per i clienti europei.</li><li>Interfaccia in italiano per lo staff, per ciascun CRM.</li><li>Limiti di chiamate API del piano scelto, rispetto al volume di richieste di Alma.</li></ul></div></div></div>
+
+<div class="alt"><div class="container"><div class="section"><div class="section-label">Fonti</div><div class="section-title">Documentazione consultata.</div><div class="sources">
+<a href="https://developers.brevo.com/reference/create-a-deal.md">Brevo — API: creare una trattativa</a><br>
+<a href="https://developers.brevo.com/reference/upload-a-file.md">Brevo — API: caricare un file e collegarlo a una trattativa</a><br>
+<a href="https://developers.brevo.com/docs/sales-crm-webhooks.md">Brevo — Webhook del CRM di vendita</a><br>
+<a href="https://apps.apple.com/app/id1605601366">Brevo — App Conversations</a><br>
+<a href="https://help.brevo.com/hc/en-us/articles/360001005510-Data-storage-location">Brevo — Dove sono conservati i dati</a><br>
+<a href="https://chatarmin.com/en/blog/brevo-pricing">Chatarmin — Prezzi di Brevo (settembre 2026)</a><br>
+<a href="https://pipedrive.readme.io/docs/pipedrive-api-v2">Pipedrive — API v2</a><br>
+<a href="https://support.pipedrive.com/en/article/pipedrive-and-gdpr">Pipedrive — GDPR</a><br>
+<a href="https://automationatlas.io/answers/pipedrive-pricing-explained-2026/">Automation Atlas — Prezzi di Pipedrive (luglio 2026)</a><br>
+<a href="https://www.folk.app/articles/pipedrive-vs-hubspot-whatsapp">folk — WhatsApp in Pipedrive e HubSpot</a><br>
+<a href="https://automationatlas.io/answers/hubspot-pricing-explained-2026/">Automation Atlas — Prezzi di HubSpot (luglio 2026)</a><br>
+<a href="https://automationatlas.io/answers/zoho-crm-pricing-explained-2026/">Automation Atlas — Prezzi di Zoho CRM (giugno 2026)</a><br>
+<a href="https://www.bigin.com/developer/docs/apis/v2/whats-new.html">Bigin — API v2</a>
+</div></div></div></div>
+
+<div class="cta-section">
+ <h2>Prossimo passo</h2>
+ <p>Ne parliamo in call: confermiamo i due candidati, chiariamo con Alma utenti e budget mensile e organizziamo la prova con lo staff.</p>
+ <div class="contact-block"><span class="contact-name">Mauro Mandalari</span><span class="contact-detail">info@mauromandalari.it</span><span class="contact-detail">392 850 5348</span></div>
+</div>
+
+<div class="footer">Documento riservato — preparato per VVL Marketing &nbsp;·&nbsp; Ottobre 2026</div>
+
+</body>
+</html>
