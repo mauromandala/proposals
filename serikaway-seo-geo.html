@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta SEO e GEO — Serikaway</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --navy:#1e3a5f; --gold:#c8a96e; --text:#2d3748; --text-light:#718096; --bg:#f7f8fc; --white:#ffffff; --border:#e2e8f0; }
+body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+.hero { background:var(--navy); color:#fff; padding:80px 40px; text-align:center; }
+.hero-label { font-size:13px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+.hero h1 { font-size:46px; font-weight:700; line-height:1.2; margin-bottom:12px; }
+.hero-sub { font-size:22px; font-weight:300; opacity:.75; margin-bottom:36px; }
+.hero-meta { display:flex; justify-content:center; gap:40px; font-size:16px; opacity:.5; }
+.container { max-width:1024px; margin:0 auto; padding:0 40px; }
+.section { padding:64px 0; }
+.section + .section { border-top:1px solid var(--border); }
+.section-label { font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.section-title { font-size:31px; font-weight:700; color:var(--navy); margin-bottom:20px; }
+.section-text { font-size:19px; line-height:1.8; }
+.section-text + .section-text { margin-top:14px; }
+.sub-title { font-size:20px; font-weight:600; color:var(--navy); margin:32px 0 10px; }
+.highlight { background:var(--navy); color:#fff; border-radius:12px; padding:24px 32px; margin-top:32px; font-size:20px; line-height:1.7; }
+.alt { background:var(--white); }
+.table-wrap { margin-top:28px; overflow-x:auto; background:var(--white); border:1px solid var(--border); border-radius:12px; }
+table { width:100%; min-width:640px; border-collapse:collapse; font-size:16px; }
+th { text-align:left; padding:14px 20px; font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); border-bottom:1px solid var(--border); }
+td { padding:14px 20px; vertical-align:top; color:var(--text-light); border-bottom:1px solid var(--border); line-height:1.6; }
+tr:last-child td { border-bottom:none; }
+td.key { color:var(--navy); font-weight:600; min-width:190px; }
+.num { text-align:right; white-space:nowrap; }
+td.num { color:var(--navy); font-weight:600; }
+tr.total td { background:var(--navy); color:#fff; font-weight:700; border-bottom:none; }
+.note { margin-top:24px; padding:18px 24px; background:var(--white); border-radius:8px; border-left:3px solid var(--gold); font-size:17px; line-height:1.7; }
+.alt .note { background:var(--bg); }
+.phase-meta { font-size:17px; color:var(--text-light); margin:-6px 0 4px; }
+.phase-meta b { color:var(--navy); }
+.conditions-list { list-style:none; margin-top:20px; display:flex; flex-direction:column; gap:10px; }
+.conditions-list li { font-size:17px; padding:14px 20px; background:var(--white); border-radius:8px; border:1px solid var(--border); display:flex; align-items:flex-start; gap:14px; line-height:1.6; }
+.alt .conditions-list li { background:var(--bg); }
+.conditions-list li::before { content:''; width:6px; height:6px; background:var(--gold); border-radius:50%; flex-shrink:0; margin-top:11px; }
+.cta-section { background:var(--navy); color:#fff; padding:72px 40px; text-align:center; }
+.cta-section h2 { font-size:36px; font-weight:700; margin-bottom:16px; }
+.cta-section p { font-size:19px; opacity:.75; max-width:600px; margin:0 auto 36px; line-height:1.8; }
+.contact-block { display:inline-flex; flex-direction:column; align-items:center; gap:6px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:12px; padding:28px 48px; }
+.contact-name { font-size:24px; font-weight:700; }
+.contact-detail { font-size:17px; opacity:.6; }
+.footer { background:#0f1f38; color:rgba(255,255,255,.3); text-align:center; padding:24px; font-size:14px; }
+.price-grid { margin-top:32px; display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.price-box { background:var(--white); border:2px solid var(--gold); border-radius:12px; padding:36px 28px; text-align:center; box-shadow:0 8px 24px rgba(30,58,95,.08); }
+.price-box.soft { border:1px solid var(--border); box-shadow:none; }
+.price-box .pb-label { font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.price-box .pb-value { font-size:52px; font-weight:700; color:var(--navy); line-height:1.1; }
+.price-box .pb-value span { font-size:20px; font-weight:500; color:var(--text-light); }
+.price-box .pb-sub { margin-top:10px; font-size:17px; color:var(--text-light); }
+@media (max-width:620px) {
+ .hero { padding:52px 24px; } .hero h1 { font-size:28px; } .hero-meta { flex-direction:column; gap:6px; }
+ .container { padding:0 20px; } .section { padding:48px 0; } .section-title { font-size:25px; } .section-text { font-size:17px; }
+ .cta-section { padding:52px 24px; } .contact-block { padding:24px; }
+ .price-grid { grid-template-columns:1fr; } .price-box .pb-value { font-size:42px; } .price-box { padding:28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+ <div class="hero-label">Proposta SEO e GEO · 6 mesi</div>
+ <h1>Serikaway<br>Visibilità su Google e negli assistenti AI</h1>
+ <div class="hero-sub">Preparata per VVL Marketing</div>
+ <div class="hero-meta"><span>Mauro Mandalari</span><span>Novembre 2026</span></div>
+</div>
+
+<div class="container"><div class="section">
+ <div class="section-label">L'obiettivo</div>
+ <div class="section-title">Farsi trovare da chi cerca un viaggio in Cina, e farsi consigliare dagli assistenti AI.</div>
+ <p class="section-text">Serikaway parte con un dominio nuovo, un primo itinerario e un vantaggio che i concorrenti non hanno: uno dei soci vive in Cina da cinque anni e il gruppo entra in luoghi chiusi al turismo organizzato. È l'esperienza diretta che Google premia nei risultati e che gli assistenti AI cercano quando devono indicare a chi affidarsi.</p>
+ <p class="section-text">Il lavoro di questi sei mesi trasforma quel vantaggio in contenuti, segnali tecnici e citazioni esterne: prima sulla Cina, poi con le basi già pronte per le destinazioni successive.</p>
+ <div class="price-grid">
+  <div class="price-box soft"><div class="pb-label">Setup iniziale</div><div class="pb-value">€ 1.500 <span>una tantum</span></div><div class="pb-sub">Audit, parole chiave, piano editoriale, baseline AI</div></div>
+  <div class="price-box"><div class="pb-label">Fee mensile</div><div class="pb-value">€ 1.350 <span>al mese</span></div><div class="pb-sub">6 mesi · 4 contenuti al mese inclusi</div></div>
+ </div>
+ <div class="note">Totale sui sei mesi: € 9.600, importi netti. Strumenti professionali di analisi e monitoraggio inclusi nella fee.</div>
+</div></div>
+
+<div class="alt"><div class="container"><div class="section">
+ <div class="section-label">Aspettative</div>
+ <div class="section-title">Cosa è realistico in sei mesi.</div>
+ <p class="section-text">Su ricerche generiche come «viaggi in Asia» o «viaggi in Cina» la prima pagina è occupata da tour operator con anni di storia e migliaia di link. Un dominio appena nato non li supera in sei mesi, e conviene dirlo al cliente fin da subito: è un obiettivo di medio periodo, che questo lavoro prepara.</p>
+ <div class="table-wrap"><table><thead><tr><th>Orizzonte</th><th>Risultato atteso</th></tr></thead><tbody>
+  <tr><td class="key">Mesi 1-2</td><td>Sito indicizzato correttamente, nessun errore tecnico, ricerche sul brand presidiate, prime posizioni sulle ricerche più specifiche</td></tr>
+  <tr><td class="key">Mesi 3-4</td><td>Prima pagina sulle ricerche di nicchia dove Serikaway è quasi senza concorrenti: Sichuan, Yibin, Zhangjiajie, viaggi di gruppo in Cina da Milano, itinerari di due settimane, ingresso senza visto</td></tr>
+  <tr><td class="key">Mesi 5-6</td><td>Traffico organico in crescita costante, Serikaway citata dagli assistenti AI sulle domande specifiche (piccolo gruppo, accompagnatore italiano, Cina autentica), contenuti pronti per la seconda destinazione</td></tr>
+ </tbody></table></div>
+ <div class="note">L'apertura dei posti del 15 novembre si regge su lista d'attesa e campagne: la SEO lavora sulle vendite dei mesi successivi e sulle prossime partenze.</div>
+</div></div></div>
+
+<div class="container"><div class="section">
+ <div class="section-label">Setup iniziale · € 1.500</div>
+ <div class="section-title">Le fondamenta, al lancio del sito.</div>
+ <p class="phase-meta"><b>Circa 2 settimane dalla messa online del sito ufficiale.</b> Consegna: audit con lista di interventi per lo sviluppatore, mappa delle parole chiave e piano editoriale dei sei mesi.</p>
+ <div class="table-wrap"><table><thead><tr><th>Attività</th><th>Cosa comprende</th></tr></thead><tbody>
+  <tr><td class="key">Audit tecnico</td><td>Indicizzazione e rendering delle pagine, gestione delle lingue (hreflang e canonical), sitemap, velocità e Core Web Vitals, dati strutturati, regole per i crawler degli assistenti AI. Ogni problema con priorità e indicazione pratica per lo sviluppatore</td></tr>
+  <tr><td class="key">Ricerca delle parole chiave</td><td>Ricerche su Cina e Asia raggruppate per intenzione (ispirazione, itinerario, informazioni pratiche, prenotazione), con volumi, difficoltà e analisi dei concorrenti che oggi occupano la prima pagina</td></tr>
+  <tr><td class="key">On-page delle pagine principali</td><td>Home, chi siamo, pagina dell'itinerario «Cina Autentica» e pagine di servizio: titoli, descrizioni, struttura dei titoli interni, testi, link interni</td></tr>
+  <tr><td class="key">Piano editoriale</td><td>Calendario dei contenuti per i sei mesi, collegato alle parole chiave e alle partenze</td></tr>
+  <tr><td class="key">Baseline negli assistenti AI</td><td>Un set di 30-50 domande che un viaggiatore farebbe, testate su ChatGPT, Gemini, Perplexity e AI Overviews di Google: chi viene citato oggi e con quali fonti. È il punto di partenza per misurare i progressi</td></tr>
+  <tr><td class="key">Misurazione</td><td>Verifica di Search Console e Analytics, impostazione del monitoraggio delle posizioni</td></tr>
+ </tbody></table></div>
+</div></div>
+
+<div class="alt"><div class="container"><div class="section">
+ <div class="section-label">Fee mensile · € 1.350</div>
+ <div class="section-title">Cosa comprende ogni mese.</div>
+ <div class="table-wrap"><table><thead><tr><th>Attività</th><th>Cosa comprende</th></tr></thead><tbody>
+  <tr><td class="key">4 contenuti</td><td>Articoli o pagine da 1.500-2.000 parole, uno a settimana, pensati per posizionarsi: guide alle destinazioni dell'itinerario, informazioni pratiche (visto, periodo migliore, cosa mettere in valigia), approfondimenti sull'esperienza che solo Serikaway può raccontare. Ogni contenuto ha FAQ, dati strutturati e link interni verso l'itinerario</td></tr>
+  <tr><td class="key">Ottimizzazione on-page</td><td>Nuovi itinerari e pagine pubblicati nel mese, aggiornamento delle pagine che crescono più lentamente</td></tr>
+  <tr><td class="key">GEO e AEO</td><td>Dati strutturati per organizzazione, viaggi e FAQ; presenza del brand nelle fonti che gli assistenti AI citano: portali e guide di viaggio, testate di settore, directory, Google Business Profile, piattaforme di recensioni</td></tr>
+  <tr><td class="key">Monitoraggio delle risposte AI</td><td>Ripetizione mensile del set di domande: quando Serikaway compare, come viene descritta, quali fonti vengono citate</td></tr>
+  <tr><td class="key">Coordinamento con lo sviluppatore</td><td>Interventi tecnici richiesti in forma scritta e verificati dopo la pubblicazione</td></tr>
+  <tr><td class="key">Report mensile</td><td>Due pagine da girare al cliente: posizioni sulle parole chiave, traffico organico, visibilità nelle risposte AI, lavoro svolto e priorità del mese successivo</td></tr>
+ </tbody></table></div>
+ <div class="note">Perché quattro contenuti al mese: uno a settimana è un ritmo che Google premia per costanza ed è sostenibile anche per la revisione da parte del cliente. Ogni contenuto va letto da chi vive in Cina prima della pubblicazione: è quella voce che lo distingue dai concorrenti, e gli assistenti AI la riconoscono.</div>
+ <div class="sub-title">Opzione con 6 contenuti al mese</div>
+ <p class="section-text">Se il cliente vuole accelerare, la stessa fee con 6 contenuti al mese costa <b>€ 1.650 al mese</b> (totale sui sei mesi € 11.400 con il setup). Ha senso soprattutto se si vuole preparare già nei sei mesi la seconda destinazione.</p>
+</div></div></div>
+
+<div class="container"><div class="section">
+ <div class="section-label">Lavorare con il loro sviluppatore</div>
+ <div class="section-title">Il sito è tecnicamente una buona base.</div>
+ <p class="section-text">La landing attuale arriva già completa ai motori di ricerca: le pagine sono generate lato server, con titoli, descrizioni e indirizzi separati per lingua. È il dubbio principale quando si lavora su un framework come quello scelto da Serikaway, e qui sembra risolto. Da verificare all'audit sul sito ufficiale.</p>
+ <p class="section-text">Senza accesso diretto al codice, ogni intervento tecnico passa dallo sviluppatore. Funziona bene a tre condizioni.</p>
+ <ul class="conditions-list">
+  <li><b>Pubblicazione dei contenuti in autonomia.</b> È il punto decisivo: se il sito ha un pannello per pubblicare articoli e pagine, i contenuti escono senza dipendere da nessuno. Se ogni articolo va inserito nel codice, servono un formato concordato e un tempo di pubblicazione garantito, altrimenti il ritmo settimanale salta.</li>
+  <li><b>Un canale e tempi concordati.</b> Richieste scritte in una board condivisa, con priorità, e una presa in carico entro 5 giorni lavorativi. I risultati dipendono da quanto viene implementato.</li>
+  <li><b>Accessi in lettura</b> a Search Console e Analytics dal primo giorno: senza non si misura e non si fa il report.</li>
+ </ul>
+ <div class="note">L'area riservata ad agenzie e partner va esclusa dall'indicizzazione. L'assistente AI interno al sito non incide sulla SEO e resta fuori da questo lavoro.</div>
+</div></div>
+
+<div class="alt"><div class="container"><div class="section">
+ <div class="section-label">Perimetro</div>
+ <div class="section-title">Ambito, esclusioni e punti da chiarire.</div>
+ <div class="sub-title" style="margin-top:0">Ambito</div>
+ <ul class="conditions-list">
+  <li>Solo la versione italiana del sito e le ricerche in italiano: parole chiave, contenuti, on-page, monitoraggio AI e report.</li>
+  <li>Unica eccezione tecnica: all'audit si verifica che le versioni in inglese, cinese e polacco siano collegate correttamente a quella italiana. Un errore lì fa comparire la pagina sbagliata a chi cerca in italiano.</li>
+ </ul>
+ <div class="sub-title">Escluso</div>
+ <ul class="conditions-list">
+  <li>Ottimizzazione e contenuti per le altre lingue e per motori diversi da Google (per esempio Baidu): si quotano a parte su richiesta.</li>
+  <li>Sviluppo e implementazione tecnica sul sito: a cura dello sviluppatore del cliente.</li>
+  <li>Foto e video, campagne a pagamento, social, newsletter, digital PR a pagamento e articoli sponsorizzati.</li>
+  <li>Traduzioni dei contenuti nelle altre lingue.</li>
+ </ul>
+ <div class="sub-title">Dipendenze</div>
+ <ul class="conditions-list">
+  <li>Il setup parte con il sito ufficiale online; prima si possono anticipare ricerca delle parole chiave e baseline AI.</li>
+  <li>Revisione dei contenuti da parte del cliente entro 5 giorni lavorativi dalla consegna.</li>
+  <li>Materiale dal cliente: foto, dettagli degli itinerari, date e prezzi delle partenze.</li>
+ </ul>
+ <div class="sub-title">Da chiarire</div>
+ <ul class="conditions-list">
+  <li>Come si pubblicano articoli e pagine sul sito ufficiale: pannello di gestione o intervento dello sviluppatore.</li>
+  <li>Esiste già un profilo Google Business per la sede di Torino?</li>
+  <li>Se il cliente vuole aprire la seconda destinazione nei sei mesi, con quale priorità.</li>
+ </ul>
+</div></div></div>
+
+<div class="container"><div class="section">
+ <div class="section-label">Condizioni</div>
+ <div class="section-title">Durata e pagamenti.</div>
+ <ul class="conditions-list">
+  <li>Durata 6 mesi, con partenza indicativa nella seconda metà di novembre 2026.</li>
+  <li>Setup: 50% all'avvio, 50% alla consegna dell'audit e del piano editoriale.</li>
+  <li>Fee mensile fatturata a inizio mese.</li>
+  <li>Alla scadenza il lavoro può proseguire alle stesse condizioni, oppure si ridefinisce in base ai risultati.</li>
+  <li>Validità della proposta: 30 giorni.</li>
+ </ul>
+</div></div>
+
+<div class="cta-section">
+ <h2>Prossimo passo</h2>
+ <p>Una breve call con il cliente e il suo sviluppatore per chiarire come si pubblicano i contenuti e concordare il canale per gli interventi tecnici. Poi si parte con parole chiave e baseline AI, in attesa del sito online.</p>
+ <div class="contact-block"><span class="contact-name">Mauro Mandalari</span><span class="contact-detail">info@mauromandalari.it</span><span class="contact-detail">392 850 5348</span></div>
+</div>
+
+<div class="footer">Proposta riservata — preparata per VVL Marketing &nbsp;·&nbsp; Novembre 2026</div>
+
+</body>
+</html>
