@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Proposta — Modello sito viaggi replicabile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+:root {
+ --navy:#0E2A4D; --navy-900:#081A33; --gold:#E8A23C; --gold-warm:#F0B945; --gold-deep:#D08E2C;
+ --paper:#F7F3EC; --white:#FFFFFF; --ink:#0E2A4D; --ink-2:#5A6478; --hairline:#E5DFD3;
+ --shadow:0 12px 40px -16px rgba(14,42,77,.18); --ease:cubic-bezier(.2,.7,.2,1);
+}
+html { scroll-behavior:smooth; }
+body { font-family:'Manrope',sans-serif; background:var(--white); color:var(--ink); line-height:1.65; font-weight:400; }
+a { color:var(--navy); text-decoration-color:var(--gold); text-underline-offset:3px; }
+
+.hero { background:radial-gradient(ellipse at 50% 0%, var(--navy) 0%, var(--navy-900) 100%); color:var(--white); padding:96px 40px 88px; text-align:center; }
+.eyebrow { font-size:13px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+.hero h1 { font-size:48px; font-weight:800; line-height:1.1; letter-spacing:-.01em; margin-bottom:16px; }
+.hero-sub { font-size:21px; font-weight:400; opacity:.78; max-width:720px; margin:0 auto 36px; }
+.hero-meta { display:flex; justify-content:center; gap:40px; font-size:15px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; opacity:.55; }
+
+.toc { position:sticky; top:0; z-index:10; background:rgba(255,255,255,.88); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--hairline); }
+.toc ul { list-style:none; max-width:1024px; margin:0 auto; padding:14px 40px; display:flex; gap:24px; overflow-x:auto; white-space:nowrap; }
+.toc a { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2); text-decoration:none; transition:color .3s var(--ease); }
+.toc a:hover { color:var(--navy); }
+
+.band { background:var(--white); }
+.band.paper { background:var(--paper); }
+.container { max-width:1024px; margin:0 auto; padding:0 40px; }
+.section { padding:88px 0; }
+.section-title { font-size:32px; font-weight:800; line-height:1.15; color:var(--navy); margin-bottom:22px; padding-left:18px; border-left:3px solid var(--gold); }
+.section-text { font-size:18px; line-height:1.75; color:var(--ink); }
+.section-text + .section-text { margin-top:14px; }
+.section-text strong { font-weight:700; }
+.sub-title { font-size:19px; font-weight:700; color:var(--navy); margin:0 0 12px; }
+
+.price-grid { margin-top:40px; display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.price-box { background:var(--white); border:1px solid var(--hairline); border-radius:16px; padding:28px 22px; box-shadow:var(--shadow); }
+.price-box.main { border:2px solid var(--gold); }
+.pb-label { font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-deep); margin-bottom:10px; }
+.pb-value { font-size:34px; font-weight:800; color:var(--navy); line-height:1.1; }
+.pb-value span { font-size:16px; font-weight:500; color:var(--ink-2); }
+.pb-sub { margin-top:8px; font-size:15px; color:var(--ink-2); line-height:1.5; }
+
+.cards { margin-top:32px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.card { background:var(--white); border:1px solid var(--hairline); border-radius:16px; padding:26px 28px; transition:transform .3s var(--ease), box-shadow .3s var(--ease); }
+.card:hover { transform:translateY(-2px); box-shadow:var(--shadow); }
+.paper .card { background:var(--white); }
+.card ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.card li { font-size:16px; line-height:1.6; padding-left:18px; position:relative; color:var(--ink); }
+.card li::before { content:''; position:absolute; left:0; top:10px; width:6px; height:6px; border-radius:50%; background:var(--gold); }
+
+.list { list-style:none; margin-top:24px; display:flex; flex-direction:column; gap:10px; }
+.list li { font-size:17px; padding:14px 20px; background:var(--white); border-radius:8px; border:1px solid var(--hairline); display:flex; gap:14px; line-height:1.6; }
+.list li::before { content:''; width:6px; height:6px; background:var(--gold); border-radius:50%; flex-shrink:0; margin-top:11px; }
+.list li strong { font-weight:700; color:var(--navy); }
+
+.steps { list-style:none; counter-reset:s; display:flex; flex-direction:column; gap:10px; }
+.steps li { counter-increment:s; position:relative; padding:4px 0 4px 46px; font-size:16px; line-height:1.6; min-height:32px; }
+.steps li::before { content:counter(s); position:absolute; left:0; top:2px; width:30px; height:30px; border-radius:50%; background:var(--navy); color:var(--gold); font-size:14px; font-weight:800; display:grid; place-items:center; }
+.steps li b { font-weight:700; color:var(--navy); }
+
+.table-wrap { margin-top:32px; overflow-x:auto; background:var(--white); border:1px solid var(--hairline); border-radius:16px; }
+table { width:100%; min-width:640px; border-collapse:collapse; font-size:16px; }
+th { text-align:left; padding:16px 20px; font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-deep); border-bottom:1px solid var(--hairline); }
+td { padding:16px 20px; vertical-align:top; color:var(--ink-2); border-bottom:1px solid var(--hairline); line-height:1.6; }
+tr:last-child td { border-bottom:none; }
+td.key { color:var(--navy); font-weight:700; min-width:200px; }
+td.num { color:var(--navy); font-weight:700; white-space:nowrap; }
+
+.note { margin-top:24px; padding:20px 24px; background:var(--paper); border-radius:8px; border-left:3px solid var(--gold); font-size:16px; line-height:1.7; }
+.paper .note { background:var(--white); }
+.note ul { list-style:none; margin-top:10px; display:flex; flex-direction:column; gap:8px; }
+.note li { padding-left:18px; position:relative; }
+.note li::before { content:''; position:absolute; left:0; top:11px; width:6px; height:6px; border-radius:50%; background:var(--gold); }
+
+.questions { list-style:none; counter-reset:q; margin-top:24px; display:flex; flex-direction:column; gap:10px; }
+.questions li { counter-increment:q; font-size:17px; padding:16px 20px 16px 64px; background:var(--white); border:1px solid var(--hairline); border-radius:8px; position:relative; line-height:1.6; }
+.questions li::before { content:counter(q); position:absolute; left:20px; top:15px; width:28px; height:28px; border-radius:50%; border:2px solid var(--gold); color:var(--navy); font-weight:800; font-size:14px; display:grid; place-items:center; }
+.questions li strong { font-weight:700; color:var(--navy); }
+
+.cta-section { background:radial-gradient(ellipse at 50% 100%, var(--navy) 0%, var(--navy-900) 100%); color:var(--white); padding:88px 40px; text-align:center; }
+.cta-section h2 { font-size:34px; font-weight:800; line-height:1.15; margin-bottom:16px; }
+.cta-section p { font-size:18px; opacity:.78; max-width:620px; margin:0 auto 32px; line-height:1.75; }
+.contact-block { display:inline-flex; flex-direction:column; align-items:center; gap:6px; }
+.contact-name { font-size:22px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+.contact-role { font-size:13px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); }
+.contact-detail a { color:var(--white); opacity:.7; font-size:16px; }
+.footer { background:var(--navy-900); color:rgba(255,255,255,.4); text-align:center; padding:24px; font-size:14px; }
+
+@media (max-width:860px) { .price-grid { grid-template-columns:1fr 1fr; } }
+@media (max-width:620px) {
+ .hero { padding:60px 24px; } .hero h1 { font-size:30px; } .hero-sub { font-size:18px; } .hero-meta { flex-direction:column; gap:6px; }
+ .toc ul { padding:12px 20px; } .container { padding:0 20px; } .section { padding:56px 0; } .section-title { font-size:25px; } .section-text { font-size:17px; }
+ .price-grid, .cards { grid-template-columns:1fr; } .cta-section { padding:60px 24px; } .cta-section h2 { font-size:26px; }
+}
+@media print { .toc { display:none; } .card:hover { transform:none; box-shadow:none; } .section { padding:40px 0; break-inside:avoid; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+ <div class="eyebrow">Proposta · Modello replicabile</div>
+ <h1>Modello sito viaggi<br>per agenzie</h1>
+ <p class="hero-sub">Ispirato alle leve di conversione di WeRoad. Si lancia sul primo cliente e si replica sui successivi in 1–2 settimane.</p>
+ <div class="hero-meta"><span>Mauro Mandalari</span><span>Novembre 2026</span></div>
+</header>
+
+<nav class="toc"><ul>
+ <li><a href="#premessa">Premessa</a></li>
+ <li><a href="#perimetro">Cosa comprende</a></li>
+ <li><a href="#fuori">Cosa resta fuori</a></li>
+ <li><a href="#tecnologia">Tecnologia</a></li>
+ <li><a href="#tempi">Tempi</a></li>
+ <li><a href="#investimento">Investimento</a></li>
+ <li><a href="#condizioni">Condizioni</a></li>
+ <li><a href="#domande">Punti da confermare</a></li>
+</ul></nav>
+
+<section class="band" id="premessa"><div class="container"><div class="section">
+ <div class="eyebrow">Premessa</div>
+ <h2 class="section-title">Un prodotto, non un sito singolo.</h2>
+ <p class="section-text">Propongo di costruire un modello di sito per agenzie viaggi ispirato a WeRoad: si lancia sul primo cliente a 2.500 € e si replica sui clienti successivi in 1–2 settimane.</p>
+ <p class="section-text">Struttura, CMS, form e tracciamento restano uguali per tutti; per ogni cliente cambiano <strong>branding e contenuti</strong>. L'agenzia aggiorna da sola le schede viaggio da un pannello guidato.</p>
+ <p class="section-text">Non c'è e-commerce: ogni scheda porta a una <strong>richiesta di preventivo</strong>, con invio automatico della brochure del viaggio e lead tracciato per le vostre campagne.</p>
+ <div class="price-grid">
+  <div class="price-box main"><div class="pb-label">Cliente di lancio</div><div class="pb-value">2.500 €</div><div class="pb-sub">Modello incluso</div></div>
+  <div class="price-box"><div class="pb-label">Replica</div><div class="pb-value">2.200 €</div><div class="pb-sub">Per ogni nuovo cliente</div></div>
+  <div class="price-box"><div class="pb-label">Manutenzione</div><div class="pb-value">70 € <span>/mese</span></div><div class="pb-sub">Per sito, licenze escluse</div></div>
+  <div class="price-box"><div class="pb-label">Tempi</div><div class="pb-value">4 <span>settimane</span></div><div class="pb-sub">Lancio · replica 1–2</div></div>
+ </div>
+</div></div></section>
+
+<section class="band paper" id="perimetro"><div class="container"><div class="section">
+ <div class="eyebrow">Perimetro</div>
+ <h2 class="section-title">Cosa comprende il modello.</h2>
+ <p class="section-text">Il modello copre tutti i punti della vostra richiesta. Quello che resta fuori è elencato nella sezione successiva.</p>
+ <div class="cards">
+  <div class="card"><div class="sub-title">Homepage</div><ul>
+   <li>Hero con ricerca rapida per destinazione e mese di partenza</li>
+   <li>Viaggi in evidenza e categorie: Viaggi di gruppo, Natale e Capodanno, Viaggi di nozze, Regala un viaggio, Welfare aziendale e altre a scelta dell'agenzia</li>
+   <li>Sezioni "perché noi", recensioni Google, FAQ, CTA finale e iscrizione newsletter</li>
+   <li>Sezioni componibili: l'agenzia le attiva, le riordina e ne modifica i contenuti senza toccare la grafica</li>
+  </ul></div>
+  <div class="card"><div class="sub-title">Catalogo viaggi</div><ul>
+   <li>Card con foto, destinazione, durata, prossime partenze e prezzo "a partire da"</li>
+   <li>Caricamento continuo (infinite scroll)</li>
+   <li>Filtri per destinazione, mese di partenza, categoria e durata</li>
+   <li>Pagine dedicate per categoria e destinazione, indicizzabili</li>
+  </ul></div>
+  <div class="card"><div class="sub-title">Scheda viaggio</div><ul>
+   <li>Galleria foto, durata, prezzo "a partire da" e menu ad ancore tra le sezioni</li>
+   <li>Panoramica del viaggio</li>
+   <li>Itinerario giorno per giorno a schede apribili: titolo, foto, attività, incluso e non incluso del giorno</li>
+   <li>Cosa è incluso e non incluso, cose da sapere</li>
+   <li>Partenze con date e prezzi</li>
+   <li>FAQ del viaggio</li>
+   <li>Recensioni da Google Business Profile</li>
+   <li>Pulsante "Richiedi preventivo" ripetuto nella pagina e fisso su mobile</li>
+   <li>Form di preventivo con invio automatico della brochure PDF del viaggio</li>
+   <li>Viaggi correlati</li>
+  </ul></div>
+  <div class="card"><div class="sub-title">CMS</div><ul>
+   <li>Scheda viaggio compilata da un modulo guidato a sezioni, con campi obbligatori e istruzioni</li>
+   <li>Creazione, modifica, duplicazione e archiviazione delle schede</li>
+   <li>Gestione di categorie, destinazioni, filtri e blog</li>
+   <li>Pagina "impostazioni brand" per logo, colori e contatti</li>
+   <li>Archivio delle richieste di preventivo ricevute, oltre all'email</li>
+   <li>Formazione finale: una sessione online di 90 minuti e una guida d'uso</li>
+  </ul></div>
+  <div class="card"><div class="sub-title">Altre pagine e migrazione</div><ul>
+   <li>Chi siamo, contatti, blog e pagine legali</li>
+   <li>Migrazione dei contenuti attuali nei limiti indicati nelle condizioni</li>
+  </ul></div>
+  <div class="card"><div class="sub-title">Requisiti tecnici</div><ul>
+   <li>Responsive e progettato prima per mobile, con obiettivo Core Web Vitals "buoni" su mobile</li>
+   <li>SEO di base: meta, URL, sitemap, dati strutturati, redirect 301 dalle pagine attuali</li>
+   <li>Cookie banner a norma GDPR con Consent Mode v2 (i testi privacy li redige il cliente)</li>
+   <li>GA4, Google Tag Manager, Meta Pixel e Conversions API</li>
+   <li>Form con tracciamento UTM ed eventi lead collegabili alle campagne, con invio via email e webhook</li>
+  </ul></div>
+ </div>
+</div></div></section>
+
+<section class="band" id="fuori"><div class="container"><div class="section">
+ <div class="eyebrow">Esclusioni</div>
+ <h2 class="section-title">Cosa resta fuori.</h2>
+ <p class="section-text">Questi elementi non sono inclusi. Su richiesta si quotano a parte.</p>
+ <ul class="list">
+  <li>E-commerce, pagamenti online e prenotazione diretta</li>
+  <li>Area riservata e login utenti</li>
+  <li>Recensioni per singolo viaggio</li>
+  <li>Chat AI, calendario partenze interattivo e mappe interattive per tappa</li>
+  <li>Versioni in più lingue</li>
+  <li>Redazione di testi, servizi fotografici e video</li>
+  <li>Testi di privacy e cookie policy</li>
+  <li>Dominio e caselle email; hosting, se resta intestato al cliente</li>
+  <li>Integrazioni con CRM specifici oltre all'invio via webhook</li>
+ </ul>
+</div></div></section>
+
+<section class="band paper" id="tecnologia"><div class="container"><div class="section">
+ <div class="eyebrow">Tecnologia</div>
+ <h2 class="section-title">Piattaforma leggera e proprietaria.</h2>
+ <p class="section-text">Propongo WordPress con un tema proprietario sviluppato su misura, senza page builder, e contenuti gestiti con campi strutturati.</p>
+ <ul class="list">
+  <li><span><strong>Velocità.</strong> Codice leggero e su misura: niente builder che appesantiscono le pagine. Conta per la SEO e per il costo dei lead da campagne.</span></li>
+  <li><span><strong>CMS a prova di errore.</strong> L'agenzia compila campi guidati e non può rompere la grafica: ogni scheda esce coerente con il brand.</span></li>
+  <li><span><strong>Replicabilità.</strong> Lo stesso codice, versionato, va su ogni cliente. Il rebranding passa dalle impostazioni, non da una riprogettazione.</span></li>
+  <li><span><strong>Costi ricorrenti bassi.</strong> Poche licenze, nessun abbonamento a piattaforme SaaS per sito.</span></li>
+  <li><span><strong>Autonomia e continuità.</strong> Il CMS più diffuso al mondo, noto a molte agenzie, con hosting facile da trovare e nessun vincolo verso fornitori chiusi.</span></li>
+ </ul>
+ <div class="note">Ho scartato due alternative. Un sito fatto con page builder si costruisce prima, ma è più lento e lascia all'agenzia troppa libertà sulla grafica. Un'architettura headless è ottima ma costa molto di più da costruire e mantenere: non sta nel budget.</div>
+</div></div></section>
+
+<section class="band" id="tempi"><div class="container"><div class="section">
+ <div class="eyebrow">Tempi</div>
+ <h2 class="section-title">4 settimane per il lancio, 1–2 per ogni replica.</h2>
+ <p class="section-text">Il modello con il cliente di lancio va online in 4 settimane dal kickoff e dalla ricezione dei materiali. Ogni replica successiva richiede 1–2 settimane.</p>
+ <div class="cards">
+  <div class="card"><div class="sub-title">Cliente di lancio</div><ol class="steps">
+   <li><b>Settimana 1.</b> Analisi, modello dati della scheda viaggio, mappatura del sito attuale e dei redirect, avvio del design</li>
+   <li><b>Settimana 2.</b> Design di homepage, catalogo, scheda viaggio e pagine di servizio, con un giro di revisione; avvio dello sviluppo</li>
+   <li><b>Settimana 3.</b> Sviluppo di tema, CMS, filtri, form preventivo e tracciamento; migrazione dei contenuti</li>
+   <li><b>Settimana 4.</b> Test su dispositivi, ottimizzazione, formazione e messa online</li>
+  </ol></div>
+  <div class="card"><div class="sub-title">Replica su un nuovo cliente</div><ol class="steps">
+   <li><b>Settimana 1.</b> Clonazione del modello, branding, configurazione di dominio e tracciamento, avvio della migrazione</li>
+   <li><b>Settimana 2.</b> Completamento della migrazione, test, formazione e messa online. Con pochi contenuti si chiude già nella prima settimana</li>
+  </ol></div>
+ </div>
+ <div class="note">I tempi dipendono dalla rapidità dei feedback e dalla consegna dei materiali da parte del cliente.</div>
+</div></div></section>
+
+<section class="band paper" id="investimento"><div class="container"><div class="section">
+ <div class="eyebrow">Investimento</div>
+ <h2 class="section-title">Il lancio rientra nei 2.500 € richiesti.</h2>
+ <p class="section-text">Il cliente di lancio rientra nei 2.500 € richiesti. Le repliche successive costano 2.200 € ciascuna.</p>
+ <div class="table-wrap"><table>
+  <thead><tr><th>Voce</th><th>Importo</th><th>Cosa comprende</th></tr></thead>
+  <tbody>
+   <tr><td class="key">Cliente di lancio, modello incluso</td><td class="num">2.500 €</td><td>Tutto il perimetro descritto, alle condizioni sotto</td></tr>
+   <tr><td class="key">Replica su nuovo cliente</td><td class="num">2.200 €</td><td>Branding, configurazione, migrazione fino a 20 viaggi e 10 pagine, formazione</td></tr>
+   <tr><td class="key">Viaggio o pagina extra da migrare</td><td class="num">30 € l'uno</td><td>Oltre le soglie incluse</td></tr>
+   <tr><td class="key">Manutenzione</td><td class="num">70 € al mese per sito<br>(840 € l'anno)</td><td>Aggiornamenti, backup, monitoraggio sicurezza e uptime, fino a 3 ore di piccoli interventi. Licenze escluse</td></tr>
+   <tr><td class="key">Opzione: brochure PDF generata in automatico dai dati del viaggio</td><td class="num">400 € una tantum</td><td>Si sviluppa una volta sul modello e vale per tutti i clienti</td></tr>
+  </tbody>
+ </table></div>
+ <div class="note"><strong>Licenze software</strong>: a parte, annuali e per singolo sito, fatturate al costo di listino.
+  <ul>
+   <li><strong>ACF PRO</strong> (circa 49 $/anno): il plugin che crea i tipi di contenuto personalizzati e i loro campi, cioè schede viaggio, partenze con date e prezzi, itinerari giorno per giorno, blocchi della homepage e impostazioni brand. È la base del pannello guidato con cui l'agenzia aggiorna il sito da sola.</li>
+   <li><strong>Gestione del consenso cookie</strong> (circa 59 €/anno).</li>
+   <li>Solo se servono: plugin di traduzione per i siti multilingua (circa 99 €/anno) e cache premium se l'hosting non ne offre una (circa 59 $/anno).</li>
+  </ul>
+ </div>
+ <ul class="list">
+  <li>Pagamento: 50% all'avvio, 50% alla messa online. La manutenzione parte dalla messa online e si fattura mese per mese.</li>
+  <li>Il dominio è a carico del cliente finale. L'hosting dipende dall'opzione scelta (vedi punti da confermare).</li>
+ </ul>
+</div></div></section>
+
+<section class="band" id="condizioni"><div class="container"><div class="section">
+ <div class="eyebrow">Condizioni</div>
+ <h2 class="section-title">Le condizioni del modello.</h2>
+ <p class="section-text">Il prezzo di lancio è sostenibile solo perché il modello si riusa: per questo le condizioni sotto ne fanno parte.</p>
+ <ul class="list">
+  <li><span><strong>Proprietà.</strong> Il modello (codice, struttura, componenti) resta di mia proprietà. Ogni cliente riceve una licenza d'uso perpetua per il proprio sito; testi, foto e dati restano del cliente.</span></li>
+  <li><span><strong>Rapporto con voi.</strong> Non propongo il modello direttamente ai vostri clienti.</span></li>
+  <li><span><strong>Perimetro del lancio.</strong> Il design parte dal modello con il branding del cliente, non da una grafica da zero. Sono previsti due giri di revisione e la migrazione di fino a 20 viaggi e 10 pagine.</span></li>
+  <li><span><strong>Materiali.</strong> Testi, foto, brochure e loghi li fornisce il cliente in formato digitale.</span></li>
+  <li><span><strong>Validità.</strong> Il prezzo delle repliche vale per tutti i progetti avviati entro il 31 dicembre 2027.</span></li>
+ </ul>
+</div></div></section>
+
+<section class="band paper" id="domande"><div class="container"><div class="section">
+ <div class="eyebrow">Prossimi passi</div>
+ <h2 class="section-title">Punti da confermare.</h2>
+ <p class="section-text">Per chiudere l'offerta mi servono alcune conferme. Le vediamo in una call breve prima di martedì.</p>
+ <ol class="questions">
+  <li><strong>Brochure:</strong> PDF caricato dall'agenzia o generato in automatico (opzione a 400 €)?</li>
+  <li><strong>Partenze:</strong> ogni viaggio ha più date con prezzi diversi?</li>
+  <li><strong>Cliente di lancio:</strong> quanti viaggi e pagine ha oggi, e su che piattaforma?</li>
+  <li><strong>Lingue:</strong> il sito è solo in italiano?</li>
+  <li><strong>Lead:</strong> oltre all'email, dove devono arrivare (CRM, foglio, altro)?</li>
+  <li><strong>Hosting:</strong> preferite che lo gestisca io, su un'infrastruttura ottimizzata per il modello con canone mensile per sito, oppure resta intestato al cliente? Nel secondo caso indichiamo noi cosa acquistare: cache lato server, accesso SSH e strumenti da riga di comando, ambiente di staging, backup giornalieri, data center in UE.</li>
+  <li><strong>Volumi:</strong> quanti clienti prevedete di proporre nel 2027?</li>
+ </ol>
+ <p class="section-text" style="margin-top:20px">Con queste risposte confermo l'offerta definitiva. Dopo la conferma fissiamo il kickoff con il cliente di lancio.</p>
+</div></div></section>
+
+<section class="cta-section">
+ <h2>Parliamone in una call di 15 minuti.</h2>
+ <p>Chiudiamo i punti aperti e martedì potete formalizzare l'offerta.</p>
+ <div class="contact-block">
+  <div class="contact-name">Mauro Mandalari</div>
+  <div class="contact-role">UX · UI · CRO · AI</div>
+  <div class="contact-detail"><a href="https://www.mauromandalari.it/">mauromandalari.it</a></div>
+ </div>
+</section>
+
+<footer class="footer">Proposta riservata &nbsp;·&nbsp; Novembre 2026 &nbsp;·&nbsp; Importi netti</footer>
+
+</body>
+</html>
