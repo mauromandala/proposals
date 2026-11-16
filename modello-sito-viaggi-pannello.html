@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Pannello agenzia viaggi – anteprima</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Pannello WordPress + ACF PRO con il brand dell'agenzia: sidebar ridotta, contenuto a schede, colonna di pubblicazione a destra. Tema chiaro unico, come il pannello reale. */
+:root{
+  --brand:#14403D;        /* colore primario dell'agenzia (da brand.json) */
+  --brand-ink:#0C2B29;
+  --accent:#E07A3F;       /* accento dell'agenzia */
+  --ground:#F4F5F2;
+  --surface:#FFFFFF;
+  --line:#DDE2DC;
+  --text:#1D2422;
+  --muted:#5C6763;
+  --ok:#2F7D4F; --ok-bg:#E3F2E8;
+  --warn:#8A5A00; --warn-bg:#FBEFD5;
+  --info:#24548C; --info-bg:#E2ECF8;
+  --off:#5C6763; --off-bg:#ECEEEB;
+  --display:'Bricolage Grotesque', 'Figtree', system-ui, sans-serif;
+  --body:'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --r:10px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--ground);color:var(--text);font:15px/1.5 var(--body)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.2}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+
+/* Barra della demo */
+.demobar{background:var(--text);color:#fff;font-size:13px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:8px 16px}
+.demobar strong{font-weight:600}
+.demobar nav{display:flex;flex-wrap:wrap;gap:4px;margin-left:auto}
+.demobar a{color:#fff;text-decoration:none;padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.3)}
+.demobar a[aria-current="page"]{background:#fff;color:var(--text)}
+
+/* Struttura del pannello */
+.app{display:grid;grid-template-columns:232px 1fr;min-height:calc(100% - 40px)}
+.side{background:var(--brand);color:#fff;display:flex;flex-direction:column;padding:18px 12px;gap:4px}
+.logo{display:flex;align-items:center;gap:10px;padding:4px 10px 18px;font-family:var(--display);font-size:20px;font-weight:700;letter-spacing:-.01em}
+.logo svg{flex:none}
+.side a{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;padding:10px 12px;border-radius:8px;opacity:.86}
+.side a:hover{background:rgba(255,255,255,.1);opacity:1}
+.side a[aria-current="page"]{background:#fff;color:var(--brand);opacity:1;font-weight:600}
+.side .count{margin-left:auto;background:var(--accent);color:#fff;font-size:12px;font-weight:700;border-radius:999px;padding:0 8px}
+.side .foot{margin-top:auto;font-size:12px;opacity:.7;padding:12px 10px 0;border-top:1px solid rgba(255,255,255,.15)}
+.main{min-width:0;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:12px;background:var(--surface);border-bottom:1px solid var(--line);padding:10px 24px;min-height:56px}
+.top .crumbs{color:var(--muted);font-size:14px}
+.top .user{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:14px}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px}
+.content{padding:28px 24px 48px;max-width:1240px;width:100%}
+.head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:20px}
+.head h1{font-size:28px}
+.head .actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:9px 14px;font-weight:600;cursor:pointer;text-decoration:none;color:var(--text);min-height:40px}
+.btn:hover{border-color:var(--brand)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.primary:hover{background:var(--brand-ink)}
+.btn.accent{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.small{padding:5px 10px;min-height:32px;font-size:13px}
+.btn.ghost{border-color:transparent;background:transparent}
+.btn.ghost:hover{background:var(--ground)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.card > h2{font-size:17px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.card .body{padding:16px 18px}
+
+.pill{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:2px 10px;white-space:nowrap}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}
+.pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill.info{background:var(--info-bg);color:var(--info)}
+.pill.off{background:var(--off-bg);color:var(--off)}
+
+.screen{display:none}
+.screen.on{display:block}
+
+/* Login */
+.login{min-height:calc(100vh - 40px);display:grid;place-items:center;background:linear-gradient(160deg,var(--brand) 0 45%,var(--ground) 45%);padding:24px 16px}
+.login form{width:min(400px,100%);background:var(--surface);border-radius:14px;padding:32px;box-shadow:0 20px 50px rgba(12,43,41,.18);display:flex;flex-direction:column;gap:14px}
+.login .logo{color:var(--brand);padding:0 0 8px;justify-content:center;font-size:24px}
+.login p.note{font-size:13px;color:var(--muted);margin:0;text-align:center}
+
+/* Campi */
+label.f{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
+label.f small{font-weight:400;color:var(--muted)}
+.req{color:var(--accent)}
+input[type=text],input[type=email],input[type=password],input[type=number],input[type=date],input[type=datetime-local],input[type=search],select,textarea{border:1px solid var(--line);border-radius:8px;padding:9px 11px;background:var(--surface);min-height:40px;width:100%}
+textarea{min-height:96px;resize:vertical}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+
+/* Dashboard */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:20px}
+.tile{padding:16px 18px}
+.tile .k{color:var(--muted);font-size:13px}
+.tile .v{font-family:var(--display);font-size:30px;font-weight:700}
+.tile .d{font-size:13px;color:var(--muted)}
+.dash{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.quick a{display:flex;flex-direction:column;gap:4px;padding:14px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--text)}
+.quick a:hover{border-color:var(--brand)}
+.quick a b{font-size:15px}
+.quick a span{font-size:13px;color:var(--muted)}
+.list{list-style:none;margin:0;padding:0}
+.list li{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.list li:last-child{border-bottom:0}
+.list .meta{color:var(--muted);font-size:13px}
+
+/* Tabelle */
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+.thumb{width:56px;height:40px;border-radius:6px;flex:none}
+.tname{display:flex;align-items:center;gap:12px}
+.tname b{display:block}
+.wpacts{font-size:13px;color:var(--muted);margin-top:2px}
+.wpacts a,.wpacts button{color:var(--brand);background:none;border:0;padding:0;font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;padding:14px 18px;border-bottom:1px solid var(--line)}
+.filters label.f{font-size:12px;min-width:150px;flex:1}
+.tabsline{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
+.tabsline button{border:0;background:transparent;padding:6px 12px;border-radius:999px;cursor:pointer;font-weight:600;color:var(--muted);min-height:36px}
+.tabsline button[aria-pressed="true"]{background:var(--surface);color:var(--text);box-shadow:inset 0 0 0 1px var(--line)}
+
+/* Foto segnaposto (nel pannello reale: le foto caricate dall'agenzia) */
+.ph1{background:linear-gradient(170deg,#1f3a5a,#4f7aa0 55%,#cfd9e0)}
+.ph2{background:linear-gradient(170deg,#7a3b2a,#c97a4a 60%,#f0d2a8)}
+.ph3{background:linear-gradient(170deg,#1d4d3a,#5f9a6a 60%,#d9e6c8)}
+.ph4{background:linear-gradient(170deg,#3a2f58,#8a6fb0 60%,#ead9f0)}
+.ph5{background:linear-gradient(170deg,#0f4b5c,#3fa0b0 60%,#d6f0f0)}
+.ph6{background:linear-gradient(170deg,#5a4a2a,#b39a5a 60%,#f2e8c8)}
+
+/* Scheda viaggio */
+.edit{display:grid;grid-template-columns:1fr 300px;gap:18px;align-items:start}
+.titlefield{font-family:var(--display);font-size:24px;font-weight:700;border:1px solid var(--line);border-radius:8px;padding:10px 14px;width:100%;background:var(--surface)}
+.slug{font-size:13px;color:var(--muted);margin:6px 2px 16px}
+.acftabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--line);padding:0 10px;background:#FAFBF9;border-radius:var(--r) var(--r) 0 0}
+.acftabs button{border:0;background:transparent;padding:14px 14px 12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;min-height:44px}
+.acftabs button[aria-selected="true"]{color:var(--brand);border-bottom-color:var(--accent)}
+.panel{display:none;padding:18px;flex-direction:column;gap:16px}
+.panel.on{display:flex}
+.hint{font-size:13px;color:var(--muted);background:var(--ground);border-radius:8px;padding:10px 12px;margin:0}
+
+.rep{display:flex;flex-direction:column;gap:8px}
+.row{border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.row.dragging{opacity:.5}
+.row.over{box-shadow:0 0 0 2px var(--accent)}
+.rowhead{display:flex;align-items:center;gap:8px;padding:6px 8px}
+.handle{cursor:grab;border:0;background:transparent;padding:8px;border-radius:6px;color:var(--muted);display:grid;place-items:center;min-width:36px;min-height:36px}
+.handle:hover{background:var(--ground)}
+.daynum{font-weight:700;color:var(--brand);font-size:13px;min-width:56px}
+.rowhead .ttl{flex:1;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rowbody{display:none;padding:4px 14px 16px 52px;gap:12px;flex-direction:column}
+.row.open .rowbody{display:flex}
+.iconbtn{border:0;background:transparent;border-radius:6px;min-width:36px;min-height:36px;display:grid;place-items:center;cursor:pointer;color:var(--muted)}
+.iconbtn:hover{background:var(--ground);color:var(--text)}
+
+.deps .row .rowhead{flex-wrap:wrap}
+.depgrid{display:grid;grid-template-columns:minmax(130px,1fr) minmax(130px,1fr) minmax(100px,.8fr) minmax(120px,.9fr);gap:8px;flex:1}
+.depgrid input,.depgrid select{min-height:36px;padding:6px 8px}
+.past{opacity:.55}
+.calc{display:flex;flex-wrap:wrap;gap:12px}
+.calc div{flex:1;min-width:160px;background:var(--ground);border-radius:8px;padding:10px 12px}
+.calc span{display:block;font-size:12px;color:var(--muted)}
+.calc b{font-size:18px}
+
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.gimg{position:relative;aspect-ratio:4/3;border-radius:8px;overflow:hidden}
+.gimg .cover{position:absolute;left:8px;top:8px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;border-radius:999px;padding:1px 8px}
+.gimg button{position:absolute;right:6px;bottom:6px;background:rgba(255,255,255,.95);border:0;border-radius:6px;font-size:12px;font-weight:600;padding:5px 9px;cursor:pointer;min-height:30px}
+.gadd{aspect-ratio:4/3;border:2px dashed var(--line);border-radius:8px;display:grid;place-items:center;color:var(--muted);font-weight:600;background:transparent;cursor:pointer}
+
+.radio{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:12px;cursor:pointer}
+.radio input{margin-top:4px}
+.radio b{display:block}
+.radio span{font-size:13px;color:var(--muted)}
+
+.pubbox .body{display:flex;flex-direction:column;gap:12px}
+.pubrow{display:flex;justify-content:space-between;gap:8px;font-size:14px}
+.pubrow span{color:var(--muted)}
+.pubbtns{display:flex;gap:8px;flex-wrap:wrap}
+.side-col{display:flex;flex-direction:column;gap:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.cbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px 16px}
+.cb{display:flex;align-items:center;gap:8px;font-size:14px;min-height:32px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:13px;cursor:pointer;background:var(--surface);min-height:32px}
+.chip[aria-pressed="true"]{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+/* Finestre */
+.modal{position:fixed;inset:0;background:rgba(12,20,19,.55);display:none;place-items:center;padding:16px;z-index:20}
+.modal.on{display:grid}
+.dialog{background:var(--surface);border-radius:14px;width:min(860px,100%);max-height:92vh;overflow:auto}
+.dialog header{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface)}
+.dialog header h2{font-size:17px}
+.dialog header .btn{margin-left:auto}
+
+/* Anteprima della scheda pubblica */
+.pv-hero{height:220px;position:relative;display:flex;align-items:flex-end;padding:20px;color:#fff}
+.pv-hero h3{font-size:30px;text-shadow:0 2px 12px rgba(0,0,0,.35)}
+.pv-tag{position:absolute;top:16px;left:20px;background:rgba(255,255,255,.92);color:var(--brand);font-weight:700;font-size:12px;border-radius:999px;padding:3px 10px}
+.pv-anchors{display:flex;gap:18px;overflow-x:auto;padding:12px 20px;border-bottom:1px solid var(--line);font-weight:600;font-size:14px;color:var(--muted)}
+.pv-anchors span:first-child{color:var(--brand);border-bottom:2px solid var(--accent)}
+.pv-body{display:grid;grid-template-columns:1fr 260px;gap:20px;padding:20px}
+.pv-body h4{font-family:var(--display);font-size:18px;margin:0 0 8px}
+.pv-day{border-bottom:1px solid var(--line);padding:10px 0;display:flex;gap:12px}
+.pv-day b{color:var(--brand);min-width:62px}
+.pv-box{border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px;align-self:start}
+.pv-box .price{font-family:var(--display);font-size:28px;font-weight:700}
+.pv-dep{display:flex;justify-content:space-between;font-size:14px;border-bottom:1px dashed var(--line);padding:6px 0}
+
+.crop{position:relative;aspect-ratio:3/2;border-radius:8px;overflow:hidden;margin:18px}
+.cropframe{position:absolute;inset:12% 18%;border:2px solid #fff;box-shadow:0 0 0 2000px rgba(0,0,0,.45)}
+.cropframe::after{content:"";position:absolute;inset:0;background:linear-gradient(#fff,#fff) 33.3% 0/1px 100% no-repeat,linear-gradient(#fff,#fff) 66.6% 0/1px 100% no-repeat,linear-gradient(#fff,#fff) 0 33.3%/100% 1px no-repeat,linear-gradient(#fff,#fff) 0 66.6%/100% 1px no-repeat;opacity:.6}
+.croptools{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 18px}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;display:none;z-index:30;max-width:90vw}
+.toast.on{display:block}
+
+@media (max-width:980px){
+  .edit,.dash,.pv-body{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .app{grid-template-columns:1fr}
+  .side{flex-direction:row;flex-wrap:wrap;padding:10px}
+  .side .logo{width:100%;padding-bottom:6px}
+  .side .foot{display:none}
+  .content{padding:20px 16px 40px}
+  .rowbody{padding-left:14px}
+  .depgrid{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="demobar">
+  <span><strong>Anteprima interattiva del pannello</strong> · agenzia e dati di esempio · nessun dato viene salvato</span>
+  <nav aria-label="Schermate della demo">
+    <a href="#login">Login</a>
+    <a href="#dashboard">Bacheca</a>
+    <a href="#viaggi">Viaggi</a>
+    <a href="#scheda">Scheda viaggio</a>
+    <a href="#richieste">Richieste</a>
+  </nav>
+</div>
+
+<!-- LOGIN -->
+<section class="screen" id="s-login" aria-label="Login">
+  <div class="login">
+    <form id="loginForm">
+      <div class="logo"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#14403D"/><path d="M7 20c4-7 9-10 18-11-5 3-8 7-9 14-2-3-5-4-9-3z" fill="#E07A3F"/></svg>Rotte Viaggi</div>
+      <label class="f" for="lu">Email<input id="lu" type="email" value="agenzia@esempio.it" autocomplete="off"></label>
+      <label class="f" for="lp">Password<input id="lp" type="password" value="demo-demo" autocomplete="off"></label>
+      <button class="btn primary" type="submit">Accedi al pannello</button>
+      <p class="note">Login con logo e colori dell'agenzia. In questa anteprima il pulsante apre la bacheca.</p>
+    </form>
+  </div>
+</section>
+
+<div class="app" id="app">
+  <aside class="side" aria-label="Menu del pannello">
+    <div class="logo"><svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#fff"/><path d="M7 20c4-7 9-10 18-11-5 3-8 7-9 14-2-3-5-4-9-3z" fill="#E07A3F"/></svg>Rotte Viaggi</div>
+    <a href="#dashboard" data-nav="dashboard"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Bacheca</a>
+    <a href="#viaggi" data-nav="viaggi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Viaggi</a>
+    <a href="#pagine" data-nav="pagine"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/></svg>Pagine</a>
+    <a href="#blog" data-nav="blog"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>Blog</a>
+    <a href="#richieste" data-nav="richieste"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg>Richieste <span class="count" id="newCount">3</span></a>
+    <a href="#impostazioni" data-nav="impostazioni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a7 7 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/></svg>Impostazioni</a>
+    <div class="foot">Supporto: assistenza tecnica inclusa nella manutenzione</div>
+  </aside>
+
+  <div class="main">
+    <div class="top">
+      <span class="crumbs" id="crumbs">Bacheca</span>
+      <a class="btn small ghost" href="#anteprima-sito" id="viewSite">Vedi il sito</a>
+      <div class="user"><span>Giulia · Agenzia</span><span class="avatar" aria-hidden="true">GB</span></div>
+    </div>
+
+    <!-- BACHECA -->
+    <section class="screen content" id="s-dashboard" aria-labelledby="h-dash">
+      <div class="head"><h1 id="h-dash">Buongiorno, Giulia</h1>
+        <div class="actions"><a class="btn primary" href="#scheda">+ Nuovo viaggio</a></div></div>
+      <div class="tiles">
+        <div class="card tile"><div class="k">Richieste questo mese</div><div class="v num">38</div><div class="d">12 dalle campagne Meta</div></div>
+        <div class="card tile"><div class="k">Da contattare</div><div class="v num" id="tileNew">3</div><div class="d">Richieste nuove</div></div>
+        <div class="card tile"><div class="k">Viaggi pubblicati</div><div class="v num">14</div><div class="d">2 in bozza</div></div>
+        <div class="card tile"><div class="k">Partenze nei prossimi 60 giorni</div><div class="v num">9</div><div class="d">Prossima: 6 dic, Islanda</div></div>
+      </div>
+      <div class="dash">
+        <div class="card"><h2>Ultime richieste</h2><div class="body"><ul class="list" id="dashReq"></ul>
+          <a class="btn small" href="#richieste" style="margin-top:10px">Tutte le richieste</a></div></div>
+        <div class="side-col">
+          <div class="card"><h2>Azioni rapide</h2><div class="body"><div class="quick">
+            <a href="#scheda"><b>Nuovo viaggio</b><span>Modulo guidato</span></a>
+            <a href="#viaggi"><b>Duplica un viaggio</b><span>Per una nuova stagione</span></a>
+            <a href="#richieste"><b>Esporta richieste</b><span>CSV per il CRM</span></a>
+            <a href="#impostazioni"><b>Brand e contatti</b><span>Logo, colori, email</span></a>
+          </div></div></div>
+          <div class="card"><h2>Da sistemare</h2><div class="body"><ul class="list">
+            <li><span class="pill warn">Partenze</span><span>Marocco: nessuna partenza futura</span></li>
+            <li><span class="pill info">Bozza</span><span>Capodanno a Lisbona aspetta la pubblicazione</span></li>
+          </ul></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIAGGI -->
+    <section class="screen content" id="s-viaggi" aria-labelledby="h-viaggi">
+      <div class="head"><h1 id="h-viaggi">Viaggi</h1>
+        <div class="actions"><a class="btn primary" href="#scheda">+ Nuovo viaggio</a></div></div>
+      <div class="tabsline" role="group" aria-label="Filtra per stato">
+        <button type="button" data-st="tutti" aria-pressed="true">Tutti</button>
+        <button type="button" data-st="Pubblicato" aria-pressed="false">Pubblicati</button>
+        <button type="button" data-st="Bozza" aria-pressed="false">Bozze</button>
+        <button type="button" data-st="Archiviato" aria-pressed="false">Archiviati</button>
+      </div>
+      <div class="card"><div class="tablewrap"><table>
+        <thead><tr><th>Viaggio</th><th>Categoria</th><th>Prossima partenza</th><th>Da</th><th>Stato</th></tr></thead>
+        <tbody id="tripRows"></tbody>
+      </table></div></div>
+    </section>
+
+    <!-- SCHEDA VIAGGIO -->
+    <section class="screen content" id="s-scheda" aria-labelledby="h-scheda">
+      <div class="head"><h1 id="h-scheda">Modifica viaggio</h1></div>
+      <div class="edit">
+        <div>
+          <label for="tripTitle" class="f" style="font-size:0">Titolo del viaggio</label>
+          <input id="tripTitle" class="titlefield" type="text" value="Islanda d'inverno: aurora boreale">
+          <div class="slug">Indirizzo: rotteviaggi.it/viaggi/<span id="slug">islanda-d-inverno-aurora-boreale</span></div>
+
+          <div class="card">
+            <div class="acftabs" role="tablist" aria-label="Sezioni della scheda">
+              <button role="tab" aria-selected="true" aria-controls="p-over" id="t-over">Panoramica</button>
+              <button role="tab" aria-selected="false" aria-controls="p-gal" id="t-gal">Galleria</button>
+              <button role="tab" aria-selected="false" aria-controls="p-itin" id="t-itin">Itinerario</button>
+              <button role="tab" aria-selected="false" aria-controls="p-dep" id="t-dep">Partenze e prezzi</button>
+              <button role="tab" aria-selected="false" aria-controls="p-info" id="t-info">Incluso e info</button>
+              <button role="tab" aria-selected="false" aria-controls="p-bro" id="t-bro">Brochure</button>
+            </div>
+
+            <div class="panel on" id="p-over" role="tabpanel" aria-labelledby="t-over">
+              <div class="grid2">
+                <label class="f" for="dur">Durata (giorni) <span class="req">*</span><input id="dur" type="number" value="8" min="1"></label>
+                <label class="f" for="dest">Destinazione <span class="req">*</span>
+                  <select id="dest"><option>Europa › Nord Europa › Islanda</option><option>Asia › Giappone</option><option>Africa › Marocco</option></select></label>
+              </div>
+              <label class="f" for="abs">Frase di lancio <small>Compare sulla card del catalogo. Massimo 140 caratteri.</small>
+                <input id="abs" type="text" value="Otto giorni tra ghiacciai, cascate e cieli verdi, con guida italiana e piccoli gruppi."></label>
+              <label class="f" for="over">Panoramica del viaggio <small>Due o tre paragrafi: per chi è, cosa si vive, il ritmo del viaggio.</small>
+                <textarea id="over">Un viaggio pensato per chi vuole vedere l'aurora boreale senza rinunciare al comfort: notti in lodge fuori dalle luci delle città, giornate tra la Penisola di Snæfellsnes, il Circolo d'Oro e la costa sud.</textarea></label>
+              <div>
+                <div style="font-weight:600;font-size:14px;margin-bottom:6px">Categorie</div>
+                <div class="cbs" id="cats"><label class="cb" for="c0"><input type="checkbox" id="c0" checked> Viaggi di gruppo</label><label class="cb" for="c1"><input type="checkbox" id="c1"> Natale e Capodanno</label><label class="cb" for="c2"><input type="checkbox" id="c2"> Viaggi di nozze</label><label class="cb" for="c3"><input type="checkbox" id="c3" checked> Natura e avventura</label><label class="cb" for="c4"><input type="checkbox" id="c4"> Welfare aziendale</label></div>
+              </div>
+            </div>
+
+            <div class="panel" id="p-gal" role="tabpanel" aria-labelledby="t-gal">
+              <p class="hint">Trascina le foto per cambiare l'ordine. La prima è la copertina. I formati per card, galleria e condivisione social si creano da soli; con "Modifica" puoi ritagliare, ruotare e scalare la foto.</p>
+              <div class="gallery" id="gallery"></div>
+            </div>
+
+            <div class="panel" id="p-itin" role="tabpanel" aria-labelledby="t-itin">
+              <p class="hint">Un blocco per giorno. Trascina dalla maniglia per cambiare l'ordine: i numeri dei giorni si aggiornano da soli.</p>
+              <div class="rep" id="days"></div>
+              <div><button class="btn" type="button" id="addDay">+ Aggiungi giorno</button></div>
+            </div>
+
+            <div class="panel deps" id="p-dep" role="tabpanel" aria-labelledby="t-dep">
+              <p class="hint">Inserisci tutte le partenze. Prezzo "a partire da", prossima partenza e filtro per mese si calcolano da qui. Le date passate spariscono dal sito da sole.</p>
+              <div class="calc" aria-live="polite">
+                <div><span>Prezzo "a partire da"</span><b class="num" id="cFrom">–</b></div>
+                <div><span>Prossima partenza</span><b class="num" id="cNext">–</b></div>
+                <div><span>Partenze visibili sul sito</span><b class="num" id="cVis">–</b></div>
+              </div>
+              <div class="rep" id="deps"></div>
+              <div><button class="btn" type="button" id="addDep">+ Aggiungi partenza</button></div>
+            </div>
+
+            <div class="panel" id="p-info" role="tabpanel" aria-labelledby="t-info">
+              <div class="grid2">
+                <label class="f" for="inc">Cosa è incluso<textarea id="inc">Volo da Milano o Roma
+7 notti in lodge e guesthouse
+Guida italiana per tutto il viaggio
+Minivan con autista
+Escursione in grotta di ghiaccio</textarea></label>
+                <label class="f" for="exc">Non incluso<textarea id="exc">Pasti non indicati
+Assicurazione annullamento
+Mance ed extra personali</textarea></label>
+              </div>
+              <label class="f" for="know">Cose da sapere<textarea id="know">L'aurora boreale è un fenomeno naturale: non è garantita, ma il programma prevede tre notti dedicate alla sua osservazione. Serve un abbigliamento a strati e scarponi impermeabili.</textarea></label>
+              <div>
+                <div style="font-weight:600;font-size:14px;margin-bottom:6px">FAQ del viaggio</div>
+                <div class="rep" id="faqs"></div>
+              </div>
+            </div>
+
+            <div class="panel" id="p-bro" role="tabpanel" aria-labelledby="t-bro">
+              <p class="hint">La brochure arriva in automatico a chi chiede un preventivo per questo viaggio.</p>
+              <label class="radio" for="b1"><input type="radio" name="bro" id="b1" checked><div><b>Generata in automatico dalla scheda</b><span>Sempre aggiornata su prezzi, partenze e itinerario, con il brand dell'agenzia.</span></div></label>
+              <label class="radio" for="b2"><input type="radio" name="bro" id="b2"><div><b>Carica un PDF dell'agenzia</b><span>Per brochure già impaginate dal tour operator.</span></div></label>
+              <div><button class="btn" type="button" id="bPrev">Vedi la brochure di esempio</button></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-col">
+          <div class="card pubbox"><h2>Pubblicazione</h2><div class="body">
+            <div class="pubrow"><span>Stato</span><b id="pubState">Bozza</b></div>
+            <div class="pubrow"><span>Ultima modifica</span><b>oggi, 15:40</b></div>
+            <label class="f" for="sched">Pubblica il<small>Lascia vuoto per pubblicare subito. Formato gg/mm/aaaa hh:mm</small><input id="sched" type="text" placeholder="gg/mm/aaaa hh:mm"></label>
+            <div class="pubbtns">
+              <button class="btn" type="button" id="saveDraft">Salva bozza</button>
+              <button class="btn" type="button" id="openPrev">Anteprima</button>
+            </div>
+            <button class="btn accent" type="button" id="publish">Pubblica</button>
+          </div></div>
+          <div class="card"><h2>Copertina</h2><div class="body">
+            <div class="gimg ph1" style="aspect-ratio:16/10"><button type="button" data-crop="ph1">Modifica</button></div>
+          </div></div>
+          <div class="card"><h2>In evidenza</h2><div class="body">
+            <label class="radio" for="feat"><input type="checkbox" id="feat" checked><div><b>Mostra in homepage</b><span>Nella sezione "Viaggi in evidenza".</span></div></label>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RICHIESTE -->
+    <section class="screen content" id="s-richieste" aria-labelledby="h-req">
+      <div class="head"><h1 id="h-req">Richieste di preventivo</h1>
+        <div class="actions"><button class="btn" type="button" id="csv">Esporta CSV</button></div></div>
+      <div class="card">
+        <div class="filters">
+          <label class="f" for="fq">Cerca<input id="fq" type="search" placeholder="Nome o email"></label>
+          <label class="f" for="ft">Viaggio<select id="ft"><option value="">Tutti i viaggi</option></select></label>
+          <label class="f" for="fs">Provenienza<select id="fs"><option value="">Tutte</option><option>meta</option><option>google</option><option>newsletter</option><option>organico</option></select></label>
+          <label class="f" for="fst">Stato<select id="fst"><option value="">Tutti</option><option>Nuova</option><option>Contattata</option><option>Preventivo inviato</option><option>Chiusa</option></select></label>
+          <label class="f" for="fp">Periodo<select id="fp"><option value="">Sempre</option><option value="7">Ultimi 7 giorni</option><option value="30">Ultimi 30 giorni</option></select></label>
+        </div>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Data</th><th>Cliente</th><th>Viaggio e partenza</th><th>Persone</th><th>Provenienza</th><th>Campagna</th><th>Stato</th></tr></thead>
+          <tbody id="reqRows"></tbody>
+        </table></div>
+      </div>
+      <p class="hint" style="margin-top:12px">Ogni richiesta arriva anche via email all'agenzia e, se attivo, al CRM tramite webhook. La provenienza viene dai parametri UTM delle campagne.</p>
+    </section>
+
+    <!-- SEGNAPOSTO -->
+    <section class="screen content" id="s-altro" aria-labelledby="h-altro">
+      <div class="head"><h1 id="h-altro">Sezione</h1></div>
+      <div class="card"><div class="body"><p style="margin:0">Questa sezione non fa parte dell'anteprima. Prova <a href="#scheda">la scheda viaggio</a> o <a href="#richieste">le richieste</a>.</p></div></div>
+    </section>
+  </div>
+</div>
+
+<!-- Anteprima scheda -->
+<div class="modal" id="mPrev" role="dialog" aria-modal="true" aria-labelledby="mPrevT">
+  <div class="dialog">
+    <header><h2 id="mPrevT">Anteprima · come apparirà sul sito</h2><span style="font-size:13px;color:var(--muted)">Nel pannello reale si apre la pagina vera in una nuova scheda</span><button class="btn small" type="button" data-close>Chiudi</button></header>
+    <div class="pv-hero ph1"><span class="pv-tag">Anteprima della bozza</span><h3 id="pvTitle"></h3></div>
+    <div class="pv-anchors" aria-hidden="true"><span>Panoramica</span><span>Itinerario</span><span>Partenze</span><span>Incluso</span><span>FAQ</span><span>Recensioni</span></div>
+    <div class="pv-body">
+      <div>
+        <h4>Panoramica</h4><p id="pvOver" style="margin-top:0"></p>
+        <h4>Itinerario</h4><div id="pvDays"></div>
+      </div>
+      <div class="pv-box">
+        <span style="font-size:13px;color:var(--muted)" id="pvDur"></span>
+        <div><span style="font-size:13px;color:var(--muted)">a partire da</span><div class="price num" id="pvFrom"></div></div>
+        <div id="pvDeps"></div>
+        <button class="btn accent" type="button">Richiedi preventivo</button>
+        <span style="font-size:12px;color:var(--muted)">Riceverai la brochure del viaggio via email.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ritaglio -->
+<div class="modal" id="mCrop" role="dialog" aria-modal="true" aria-labelledby="mCropT">
+  <div class="dialog" style="width:min(640px,100%)">
+    <header><h2 id="mCropT">Modifica immagine</h2><button class="btn small" type="button" data-close>Annulla</button></header>
+    <div class="crop" id="cropImg"><div class="cropframe"></div></div>
+    <div class="croptools">
+      <button class="btn small" type="button" id="rot">Ruota</button>
+      <button class="btn small" type="button" id="scale">Scala</button>
+      <button class="btn small primary" type="button" data-close data-msg="Ritaglio salvato">Applica</button>
+    </div>
+  </div>
+</div>
+
+<!-- Brochure -->
+<div class="modal" id="mBro" role="dialog" aria-modal="true" aria-labelledby="mBroT">
+  <div class="dialog" style="width:min(560px,100%)">
+    <header><h2 id="mBroT">Brochure generata · pagina 1</h2><button class="btn small" type="button" data-close>Chiudi</button></header>
+    <div style="padding:18px">
+      <div style="border:1px solid var(--line);border-radius:6px;aspect-ratio:1/1.414;display:flex;flex-direction:column;overflow:hidden">
+        <div class="ph1" style="height:38%;display:flex;align-items:flex-end;padding:16px;color:#fff"><b style="font-family:var(--display);font-size:22px" id="broTitle"></b></div>
+        <div style="padding:16px;display:flex;flex-direction:column;gap:8px;font-size:13px">
+          <div style="display:flex;justify-content:space-between"><b id="broDur"></b><b class="num" id="broFrom"></b></div>
+          <div id="broDays"></div>
+          <div style="margin-top:auto;color:var(--muted);font-size:11px">Rotte Viaggi · via Esempio 1, Milano · prezzi e partenze aggiornati al giorno dell'invio</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const today = new Date(); today.setHours(0,0,0,0);
+const eur = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.') + ' €';
+const fmtDate = d => new Date(d+'T00:00').toLocaleDateString('it-IT',{day:'numeric',month:'short',year:'numeric'});
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),2200);}
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const grip = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg>';
+
+/* ---------- Dati di esempio ---------- */
+const trips = [
+  {t:"Islanda d'inverno: aurora boreale",c:'Viaggi di gruppo',n:'2026-12-06',p:1690,s:'Pubblicato',ph:'ph1'},
+  {t:'Giappone classico: Tokyo, Kyoto e Hiroshima',c:'Viaggi di gruppo',n:'2027-03-21',p:2890,s:'Pubblicato',ph:'ph4'},
+  {t:'Capodanno a Lisbona',c:'Natale e Capodanno',n:'2026-12-29',p:790,s:'Bozza',ph:'ph2'},
+  {t:'Marocco: deserto e kasbah',c:'Natura e avventura',n:'',p:980,s:'Pubblicato',ph:'ph6'},
+  {t:'Polinesia in luna di miele',c:'Viaggi di nozze',n:'2027-05-10',p:4950,s:'Pubblicato',ph:'ph5'},
+  {t:'Dolomiti per team aziendali',c:'Welfare aziendale',n:'2027-06-12',p:420,s:'Bozza',ph:'ph3'}
+];
+const reqs = [
+  {d:-0,nm:'Marco Ferri',em:'marco.ferri@esempio.it',v:"Islanda d'inverno: aurora boreale",dep:'6 dic 2026',pp:2,src:'meta',med:'paid_social',cmp:'islanda-inverno-lead',st:'Nuova'},
+  {d:-1,nm:'Sara Conti',em:'sara.c@esempio.it',v:'Polinesia in luna di miele',dep:'10 mag 2027',pp:2,src:'google',med:'cpc',cmp:'viaggi-nozze-search',st:'Nuova'},
+  {d:-1,nm:'Luca Bianchi',em:'l.bianchi@esempio.it',v:'Giappone classico: Tokyo, Kyoto e Hiroshima',dep:'21 mar 2027',pp:3,src:'newsletter',med:'email',cmp:'nl-novembre',st:'Nuova'},
+  {d:-3,nm:'Elena Ricci',em:'elena.ricci@esempio.it',v:"Islanda d'inverno: aurora boreale",dep:'14 feb 2027',pp:4,src:'meta',med:'paid_social',cmp:'islanda-inverno-lead',st:'Contattata'},
+  {d:-5,nm:'Paolo Greco',em:'paolo.greco@esempio.it',v:'Capodanno a Lisbona',dep:'29 dic 2026',pp:2,src:'organico',med:'—',cmp:'—',st:'Preventivo inviato'},
+  {d:-9,nm:'Chiara Moretti',em:'chiara.m@esempio.it',v:'Giappone classico: Tokyo, Kyoto e Hiroshima',dep:'18 apr 2027',pp:2,src:'google',med:'cpc',cmp:'giappone-search',st:'Preventivo inviato'},
+  {d:-16,nm:'Andrea Gallo',em:'a.gallo@esempio.it',v:'Dolomiti per team aziendali',dep:'12 giu 2027',pp:18,src:'organico',med:'—',cmp:'—',st:'Chiusa'},
+  {d:-41,nm:'Federica Costa',em:'f.costa@esempio.it',v:'Marocco: deserto e kasbah',dep:'—',pp:2,src:'meta',med:'paid_social',cmp:'marocco-autunno',st:'Chiusa'}
+];
+let days = [
+  {t:'Arrivo a Reykjavík',a:'Accoglienza in aeroporto, cena di benvenuto e prima uscita serale alla ricerca dell\'aurora.'},
+  {t:'Il Circolo d\'Oro',a:'Parco di Þingvellir, geyser di Geysir e cascata di Gullfoss.'},
+  {t:'Costa sud e spiagge nere',a:'Seljalandsfoss, Skógafoss e la spiaggia di Reynisfjara. Notte in lodge.'},
+  {t:'Grotta di ghiaccio',a:'Escursione con guida alpina nel ghiacciaio Vatnajökull.'},
+  {t:'Laguna di Jökulsárlón',a:'Iceberg e Diamond Beach, rientro verso ovest.'},
+  {t:'Penisola di Snæfellsnes',a:'Kirkjufell, villaggi di pescatori e coste laviche.'},
+  {t:'Reykjavík e laguna termale',a:'Mattina libera in città, pomeriggio alle terme.'},
+  {t:'Rientro in Italia',a:'Trasferimento in aeroporto e volo di rientro.'}
+];
+let deps = [
+  {d:'2026-10-18',p:1590,st:'Chiusa'},
+  {d:'2026-12-06',p:1690,st:'Ultimi posti'},
+  {d:'2027-01-10',p:1750,st:'Disponibile'},
+  {d:'2027-02-14',p:1890,st:'Disponibile'},
+  {d:'2027-03-07',p:1690,st:'Disponibile'}
+];
+const faqs = [
+  {t:'Serve un\'esperienza particolare?',a:'No, il viaggio è adatto a tutti. Le escursioni sono brevi e accompagnate.'},
+  {t:'Quanti partecipanti ci sono nel gruppo?',a:'Da 8 a 16 persone, con una guida italiana.'}
+];
+let gallery = ['ph1','ph5','ph3','ph4','ph2'];
+
+/* ---------- Navigazione ---------- */
+const crumbs = {dashboard:'Bacheca',viaggi:'Viaggi',scheda:'Viaggi › Modifica viaggio',richieste:'Richieste',pagine:'Pagine',blog:'Blog',impostazioni:'Impostazioni'};
+function route(){
+  let h = location.hash.replace('#','') || 'dashboard';
+  if(h==='anteprima-sito'){ history.replaceState(null,'','#scheda'); h='scheda'; openPreview(); }
+  const isLogin = h==='login';
+  $('#s-login').classList.toggle('on', isLogin);
+  $('#app').style.display = isLogin ? 'none' : '';
+  $$('.app .screen').forEach(s=>s.classList.remove('on'));
+  if(!isLogin){
+    const known = ['dashboard','viaggi','scheda','richieste'].includes(h);
+    (known ? $('#s-'+h) : $('#s-altro')).classList.add('on');
+    if(!known){ $('#h-altro').textContent = crumbs[h] || 'Sezione'; }
+    $('#crumbs').textContent = crumbs[h] || 'Bacheca';
+    $$('.side a[data-nav]').forEach(a=>a.toggleAttribute('aria-current', a.dataset.nav===h || (h==='scheda' && a.dataset.nav==='viaggi')));
+    $$('.side a[aria-current]').forEach(a=>a.setAttribute('aria-current','page'));
+  }
+  $$('.demobar a').forEach(a=>{ if(a.getAttribute('href')==='#'+h) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', route);
+$('#loginForm').addEventListener('submit', e=>{ e.preventDefault(); location.hash='dashboard'; });
+
+/* ---------- Bacheca ---------- */
+function renderDash(){
+  $('#dashReq').innerHTML = reqs.slice(0,4).map(r=>`<li><span class="pill ${pillFor(r.st)}">${esc(r.st)}</span><div><b>${esc(r.nm)}</b><div class="meta">${esc(r.v)} · ${esc(r.src)}</div></div></li>`).join('');
+  const n = reqs.filter(r=>r.st==='Nuova').length;
+  $('#newCount').textContent = n; $('#tileNew').textContent = n;
+  $('#newCount').style.display = n ? '' : 'none';
+}
+const pillFor = st => ({'Nuova':'warn','Contattata':'info','Preventivo inviato':'info','Chiusa':'off','Pubblicato':'ok','Bozza':'info','Archiviato':'off'}[st]||'off');
+
+/* ---------- Viaggi ---------- */
+let tripFilter='tutti';
+function renderTrips(){
+  const rows = trips.map((t,i)=>({...t,i})).filter(t=>tripFilter==='tutti' ? t.s!=='Archiviato' : t.s===tripFilter);
+  $('#tripRows').innerHTML = rows.map(t=>`<tr>
+    <td><div class="tname"><span class="thumb ${t.ph}" aria-hidden="true"></span><div><b><a href="#scheda" style="color:inherit">${esc(t.t)}</a></b><div class="wpacts"><a href="#scheda">Modifica</a> | <button type="button" data-dup="${t.i}">Duplica</button> | ${t.s==='Archiviato' ? `<button type="button" data-unarc="${t.i}">Ripristina</button>` : `<button type="button" data-arc="${t.i}">Archivia</button>`}</div></div></div></td>
+    <td>${esc(t.c)}</td>
+    <td class="num">${t.n ? fmtDate(t.n) : '<span class="pill warn">Nessuna</span>'}</td>
+    <td class="num">${eur(t.p)}</td>
+    <td><span class="pill ${pillFor(t.s)}">${t.s}</span></td></tr>`).join('') || '<tr><td colspan="5" style="color:var(--muted)">Nessun viaggio in questo elenco.</td></tr>';
+}
+$('#tripRows').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  if(b.dataset.dup){ const t=trips[+b.dataset.dup]; trips.splice(+b.dataset.dup+1,0,{...t,t:t.t+' (copia)',s:'Bozza'}); toast('Viaggio duplicato come bozza: cambia date e prezzi e pubblica'); }
+  if(b.dataset.arc){ trips[+b.dataset.arc].s='Archiviato'; toast('Viaggio archiviato: non è più sul sito, ma resta qui'); }
+  if(b.dataset.unarc){ trips[+b.dataset.unarc].s='Bozza'; toast('Viaggio ripristinato come bozza'); }
+  renderTrips();
+});
+$$('.tabsline button').forEach(b=>b.addEventListener('click',()=>{
+  tripFilter=b.dataset.st; $$('.tabsline button').forEach(x=>x.setAttribute('aria-pressed', x===b)); renderTrips();
+}));
+
+/* ---------- Schede ACF ---------- */
+$$('.acftabs [role=tab]').forEach(tab=>tab.addEventListener('click',()=>{
+  $$('.acftabs [role=tab]').forEach(t=>t.setAttribute('aria-selected', t===tab));
+  $$('.panel').forEach(p=>p.classList.toggle('on', p.id===tab.getAttribute('aria-controls')));
+}));
+$('#tripTitle').addEventListener('input', e=>{
+  $('#slug').textContent = e.target.value.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+});
+
+/* ---------- Trascinamento generico ---------- */
+function makeSortable(container, list, render){
+  let from=null;
+  container.addEventListener('dragstart', e=>{ const r=e.target.closest('[data-i]'); if(!r) return; from=+r.dataset.i; r.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; try{e.dataTransfer.setData('text/plain',String(from));}catch(_){} });
+  container.addEventListener('dragend', e=>{ $$('.dragging,.over',container).forEach(x=>x.classList.remove('dragging','over')); });
+  container.addEventListener('dragover', e=>{ const r=e.target.closest('[data-i]'); if(!r||from===null) return; e.preventDefault(); $$('.over',container).forEach(x=>x.classList.remove('over')); r.classList.add('over'); });
+  container.addEventListener('drop', e=>{ const r=e.target.closest('[data-i]'); if(!r||from===null) return; e.preventDefault(); const to=+r.dataset.i; const [m]=list.splice(from,1); list.splice(to,0,m); from=null; render(); toast('Ordine aggiornato'); });
+}
+function move(list,i,dir,render){ const j=i+dir; if(j<0||j>=list.length) return; [list[i],list[j]]=[list[j],list[i]]; render(); }
+
+/* ---------- Itinerario ---------- */
+const openDays = new Set([0]);
+function renderDays(){
+  $('#days').innerHTML = days.map((d,i)=>`<div class="row ${openDays.has(i)?'open':''}" data-i="${i}" draggable="true">
+    <div class="rowhead">
+      <span class="handle" title="Trascina per spostare" aria-hidden="true">${grip}</span>
+      <span class="daynum">Giorno ${i+1}</span>
+      <span class="ttl">${esc(d.t)}</span>
+      <button class="iconbtn" type="button" data-tog="${i}" aria-expanded="${openDays.has(i)}" aria-label="Apri o chiudi il giorno ${i+1}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h16M12 4v16"/></svg></button>
+      <button class="iconbtn" type="button" data-del="${i}" aria-label="Elimina il giorno ${i+1}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></svg></button>
+    </div>
+    <div class="rowbody">
+      <label class="f" for="dt${i}">Titolo del giorno<input id="dt${i}" type="text" value="${esc(d.t)}" data-ft="${i}"></label>
+      <label class="f" for="da${i}">Attività<textarea id="da${i}" data-fa="${i}">${esc(d.a)}</textarea></label>
+      <div class="grid2">
+        <label class="f" for="di${i}">Incluso nel giorno<input id="di${i}" type="text" value="Colazione, escursione con guida"></label>
+        <label class="f" for="dn${i}">Non incluso<input id="dn${i}" type="text" value="Pranzo e cena"></label>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px"><span class="thumb ${gallery[i%gallery.length]}" aria-hidden="true"></span><button class="btn small" type="button">Cambia foto del giorno</button></div>
+    </div></div>`).join('');
+}
+$('#days').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  if(b.dataset.tog){ const i=+b.dataset.tog; openDays.has(i)?openDays.delete(i):openDays.add(i); renderDays(); }
+  if(b.dataset.del){ days.splice(+b.dataset.del,1); openDays.clear(); renderDays(); toast('Giorno eliminato'); }
+});
+$('#days').addEventListener('input', e=>{
+  if(e.target.dataset.ft){ const i=+e.target.dataset.ft; days[i].t=e.target.value; $(`#days [data-i="${i}"] .ttl`).textContent=e.target.value; }
+  if(e.target.dataset.fa){ days[+e.target.dataset.fa].a=e.target.value; }
+});
+makeSortable($('#days'), days, ()=>{ openDays.clear(); renderDays(); });
+$('#addDay').addEventListener('click',()=>{ days.push({t:'Nuovo giorno',a:''}); openDays.clear(); openDays.add(days.length-1); renderDays(); $(`#dt${days.length-1}`).focus(); });
+
+/* ---------- Partenze ---------- */
+function renderDeps(){
+  $('#deps').innerHTML = deps.map((d,i)=>{
+    const past = d.d && new Date(d.d+'T00:00') < today;
+    return `<div class="row ${past?'past':''}" data-i="${i}" draggable="true"><div class="rowhead">
+      <span class="handle" title="Trascina per spostare" aria-hidden="true">${grip}</span>
+      <div class="depgrid">
+        <label class="f" for="dd${i}" style="font-size:12px">Data partenza<input id="dd${i}" type="text" inputmode="numeric" placeholder="gg/mm/aaaa" value="${toIt(d.d)}" data-dd="${i}"></label>
+        <label class="f" for="dr${i}" style="font-size:12px">Data rientro<input id="dr${i}" type="text" value="${d.d?toIt(addDays(d.d,7)):''}" disabled></label>
+        <label class="f" for="dp${i}" style="font-size:12px">Prezzo (€)<input id="dp${i}" type="number" step="10" value="${d.p}" data-dp="${i}"></label>
+        <label class="f" for="ds${i}" style="font-size:12px">Disponibilità<select id="ds${i}" data-ds="${i}">${['Disponibile','Ultimi posti','Su richiesta','Chiusa'].map(o=>`<option ${o===d.st?'selected':''}>${o}</option>`).join('')}</select></label>
+      </div>
+      ${past?'<span class="pill off">Passata: nascosta dal sito</span>':''}
+      <button class="iconbtn" type="button" data-del="${i}" aria-label="Elimina la partenza"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></svg></button>
+    </div></div>`;}).join('');
+  calc();
+}
+function toIt(iso){ if(!iso) return ''; const [y,m,d]=iso.split('-'); return `${d}/${m}/${y}`; }
+function fromIt(t){ const m=t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/); return m?`${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`:null; }
+function addDays(iso,n){ const d=new Date(iso+'T00:00'); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); }
+function visibleDeps(){ return deps.filter(d=>d.d && new Date(d.d+'T00:00')>=today && d.st!=='Chiusa'); }
+function calc(){
+  const v = visibleDeps();
+  $('#cFrom').textContent = v.length ? eur(Math.min(...v.map(d=>+d.p||0))) : 'nessuna partenza';
+  const next = v.map(d=>d.d).sort()[0];
+  $('#cNext').textContent = next ? fmtDate(next) : '–';
+  $('#cVis').textContent = v.length;
+}
+$('#deps').addEventListener('input', e=>{
+  const t=e.target;
+  if(t.dataset.dp){ deps[+t.dataset.dp].p=+t.value; calc(); }
+  if(t.dataset.ds){ deps[+t.dataset.ds].st=t.value; calc(); }
+});
+$('#deps').addEventListener('change', e=>{ if(e.target.dataset.dd){ const iso=fromIt(e.target.value.trim()); if(!iso){ toast('Scrivi la data come gg/mm/aaaa'); return; } deps[+e.target.dataset.dd].d=iso; renderDeps(); } });
+$('#deps').addEventListener('click', e=>{ const b=e.target.closest('button[data-del]'); if(!b) return; deps.splice(+b.dataset.del,1); renderDeps(); toast('Partenza eliminata'); });
+makeSortable($('#deps'), deps, renderDeps);
+$('#addDep').addEventListener('click',()=>{ const last=deps.map(d=>d.d).sort().pop()||today.toISOString().slice(0,10); deps.push({d:addDays(last,28),p:1790,st:'Disponibile'}); renderDeps(); toast('Partenza aggiunta: controlla data e prezzo'); });
+
+/* ---------- FAQ ---------- */
+function renderFaqs(){
+  $('#faqs').innerHTML = faqs.map((f,i)=>`<div class="row" data-i="${i}" draggable="true"><div class="rowhead">
+    <span class="handle" aria-hidden="true">${grip}</span><span class="ttl">${esc(f.t)}</span></div></div>`).join('');
+}
+makeSortable($('#faqs'), faqs, renderFaqs);
+
+/* ---------- Galleria ---------- */
+function renderGallery(){
+  $('#gallery').innerHTML = gallery.map((g,i)=>`<div class="gimg ${g}" data-i="${i}" draggable="true" role="img" aria-label="Foto ${i+1}">${i===0?'<span class="cover">Copertina</span>':''}<button type="button" data-crop="${g}">Modifica</button></div>`).join('') + '<button class="gadd" type="button" id="gAdd">+ Carica foto</button>';
+}
+makeSortable($('#gallery'), gallery, renderGallery);
+
+/* ---------- Finestre ---------- */
+function openModal(id){ const m=$(id); m.classList.add('on'); const b=$('[data-close]',m); b&&b.focus(); }
+$$('.modal').forEach(m=>{
+  m.addEventListener('click', e=>{
+    const c=e.target.closest('[data-close]');
+    if(e.target===m || c){ m.classList.remove('on'); if(c&&c.dataset.msg) toast(c.dataset.msg); }
+  });
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') $$('.modal.on').forEach(m=>m.classList.remove('on')); });
+document.addEventListener('click', e=>{
+  const c=e.target.closest('[data-crop]'); if(c){ $('#cropImg').className='crop '+c.dataset.crop; openModal('#mCrop'); }
+  if(e.target.id==='gAdd') toast('Nel pannello reale si apre la libreria media di WordPress, con i colori dell\'agenzia');
+});
+$('#scale').addEventListener('click',()=>toast('Scala: imposti larghezza e altezza in pixel'));
+let rot=0; $('#rot').addEventListener('click',()=>{ rot=(rot+90)%360; $('#cropImg').style.transform=`rotate(${rot}deg)`; });
+
+function openPreview(){
+  const v=visibleDeps().sort((a,b)=>a.d<b.d?-1:1);
+  $('#pvTitle').textContent=$('#tripTitle').value;
+  $('#pvOver').textContent=$('#over').value;
+  $('#pvDur').textContent=$('#dur').value+' giorni · '+$('#dest').value.split('›').pop().trim();
+  $('#pvFrom').textContent=v.length?eur(Math.min(...v.map(d=>d.p))):'—';
+  $('#pvDeps').innerHTML=v.slice(0,4).map(d=>`<div class="pv-dep"><span>${fmtDate(d.d)}</span><b class="num">${eur(d.p)}</b></div>`).join('');
+  $('#pvDays').innerHTML=days.map((d,i)=>`<div class="pv-day"><b>Giorno ${i+1}</b><span>${esc(d.t)}</span></div>`).join('');
+  openModal('#mPrev');
+}
+$('#openPrev').addEventListener('click', openPreview);
+$('#bPrev').addEventListener('click',()=>{
+  const v=visibleDeps();
+  $('#broTitle').textContent=$('#tripTitle').value;
+  $('#broDur').textContent=$('#dur').value+' giorni';
+  $('#broFrom').textContent=v.length?'da '+eur(Math.min(...v.map(d=>d.p))):'';
+  $('#broDays').innerHTML=days.slice(0,6).map((d,i)=>`<div><b>Giorno ${i+1}</b> · ${esc(d.t)}</div>`).join('');
+  openModal('#mBro');
+});
+$('#saveDraft').addEventListener('click',()=>toast('Bozza salvata. Non è ancora visibile sul sito'));
+$('#publish').addEventListener('click',()=>{
+  const s=$('#sched').value;
+  if(s){ $('#pubState').textContent='Programmato'; toast('Pubblicazione programmata per il '+s); }
+  else { $('#pubState').textContent='Pubblicato'; toast('Viaggio pubblicato sul sito'); }
+});
+
+/* ---------- Richieste ---------- */
+const reqDate = r => { const d=new Date(today); d.setDate(d.getDate()+r.d); return d; };
+function renderReqs(){
+  const q=$('#fq').value.trim().toLowerCase(), ft=$('#ft').value, fs=$('#fs').value, fst=$('#fst').value, fp=+$('#fp').value;
+  const rows = reqs.map((r,i)=>({...r,i})).filter(r=>
+    (!q || (r.nm+' '+r.em).toLowerCase().includes(q)) && (!ft || r.v===ft) && (!fs || r.src===fs) && (!fst || r.st===fst) && (!fp || -r.d<=fp));
+  $('#reqRows').innerHTML = rows.map(r=>`<tr>
+    <td class="num" style="white-space:nowrap">${reqDate(r).toLocaleDateString('it-IT',{day:'numeric',month:'short'})}</td>
+    <td><b>${esc(r.nm)}</b><div style="font-size:13px;color:var(--muted)">${esc(r.em)}</div></td>
+    <td>${esc(r.v)}<div style="font-size:13px;color:var(--muted)">Partenza: ${esc(r.dep)}</div></td>
+    <td class="num">${r.pp}</td>
+    <td><span class="pill ${r.src==='meta'?'info':r.src==='google'?'warn':'off'}">${esc(r.src)}</span><div style="font-size:12px;color:var(--muted)">${esc(r.med)}</div></td>
+    <td style="font-size:13px">${esc(r.cmp)}</td>
+    <td><label class="f" for="rs${r.i}" style="font-size:0">Stato</label><select id="rs${r.i}" data-rs="${r.i}" style="min-width:150px">${['Nuova','Contattata','Preventivo inviato','Chiusa'].map(o=>`<option ${o===r.st?'selected':''}>${o}</option>`).join('')}</select></td>
+  </tr>`).join('') || '<tr><td colspan="7" style="color:var(--muted)">Nessuna richiesta con questi filtri.</td></tr>';
+}
+[...new Set(reqs.map(r=>r.v))].forEach(v=>{ const o=document.createElement('option'); o.textContent=v; $('#ft').appendChild(o); });
+['#fq','#ft','#fs','#fst','#fp'].forEach(s=>$(s).addEventListener('input',renderReqs));
+$('#reqRows').addEventListener('change', e=>{ if(e.target.dataset.rs){ reqs[+e.target.dataset.rs].st=e.target.value; renderDash(); toast('Stato aggiornato'); } });
+$('#csv').addEventListener('click', async ()=>{
+  const head='data;nome;email;viaggio;partenza;persone;utm_source;utm_medium;utm_campaign;stato';
+  const body=reqs.map(r=>[reqDate(r).toISOString().slice(0,10),r.nm,r.em,r.v,r.dep,r.pp,r.src,r.med,r.cmp,r.st].join(';')).join('\n');
+  try{ await navigator.clipboard.writeText(head+'\n'+body); toast('Nel pannello reale si scarica il file CSV. Qui è stato copiato negli appunti'); }
+  catch(_){ toast('Nel pannello reale si scarica il file CSV con le richieste filtrate'); }
+});
+
+/* ---------- Avvio ---------- */
+renderDash(); renderTrips(); renderDays(); renderDeps(); renderFaqs(); renderGallery(); renderReqs(); route();
+</script>
+</body>
+</html>

@@ -100,7 +100,22 @@ td.num { color:var(--navy); font-weight:700; white-space:nowrap; }
  .toc ul { padding:12px 20px; } .container { padding:0 20px; } .section { padding:56px 0; } .section-title { font-size:25px; } .section-text { font-size:17px; }
  .price-grid, .cards { grid-template-columns:1fr; } .cta-section { padding:60px 24px; } .cta-section h2 { font-size:26px; }
 }
-@media print { .toc { display:none; } .card:hover { transform:none; box-shadow:none; } .section { padding:40px 0; break-inside:avoid; } }
+@page { size:A4; margin:12mm 0; }
+@media print {
+ html, body { -webkit-print-color-adjust:exact; print-color-adjust:exact; font-size:14px; }
+ .toc { display:none; }
+ .hero { padding:56px 32px 48px; } .hero h1 { font-size:36px; } .hero-sub { font-size:17px; margin-bottom:20px; }
+ .container { padding:0 28px; } .section { padding:32px 0; }
+ .section-title { font-size:24px; margin-bottom:14px; } .section-text { font-size:14.5px; line-height:1.6; }
+ .price-grid { margin-top:24px; gap:10px; } .price-box { padding:16px 14px; box-shadow:none; } .pb-value { font-size:24px; } .pb-sub { font-size:12.5px; }
+ .cards { gap:10px; margin-top:20px; } .card { padding:16px 18px; break-inside:avoid; } .card li, .steps li { font-size:13px; } .card:hover { transform:none; box-shadow:none; }
+ .list li, .questions li { font-size:13.5px; padding-top:9px; padding-bottom:9px; break-inside:avoid; }
+ table { font-size:13px; } th, td { padding:9px 14px; } tr { break-inside:avoid; }
+ .note { font-size:13.5px; padding:14px 18px; break-inside:avoid; }
+ .cta-section { padding:40px 28px; break-inside:avoid; } .cta-section h2 { font-size:24px; }
+ .footer { display:none; } #tempi, #investimento { break-before:page; }
+ .sub-title { font-size:16px; } .eyebrow, h2, .sub-title, .section-title + .section-text { break-after:avoid; page-break-after:avoid; }
+}
 </style>
 </head>
 <body>
@@ -116,7 +131,9 @@ td.num { color:var(--navy); font-weight:700; white-space:nowrap; }
  <li><a href="#premessa">Premessa</a></li>
  <li><a href="#perimetro">Cosa comprende</a></li>
  <li><a href="#fuori">Cosa resta fuori</a></li>
+ <li><a href="#moduli">Moduli evolutivi</a></li>
  <li><a href="#tecnologia">Tecnologia</a></li>
+ <li><a href="#gestione">Gestione</a></li>
  <li><a href="#tempi">Tempi</a></li>
  <li><a href="#investimento">Investimento</a></li>
  <li><a href="#condizioni">Condizioni</a></li>
@@ -163,7 +180,7 @@ td.num { color:var(--navy); font-weight:700; white-space:nowrap; }
    <li>FAQ del viaggio</li>
    <li>Recensioni da Google Business Profile</li>
    <li>Pulsante "Richiedi preventivo" ripetuto nella pagina e fisso su mobile</li>
-   <li>Form di preventivo con invio automatico della brochure PDF del viaggio</li>
+   <li>Form di preventivo con invio automatico della brochure PDF del viaggio: generata in automatico dai dati della scheda e sempre aggiornata su prezzi e partenze, oppure caricata dall'agenzia</li>
    <li>Viaggi correlati</li>
   </ul></div>
   <div class="card"><div class="sub-title">CMS</div><ul>
@@ -177,6 +194,7 @@ td.num { color:var(--navy); font-weight:700; white-space:nowrap; }
   <div class="card"><div class="sub-title">Altre pagine e migrazione</div><ul>
    <li>Chi siamo, contatti, blog e pagine legali</li>
    <li>Migrazione dei contenuti attuali nei limiti indicati nelle condizioni</li>
+   <li>Seconda lingua inclusa: attivazione, struttura e selettore della lingua. La SEO si fa sulla lingua principale, l'italiano; traduzione dei contenuti e SEO della seconda lingua si quotano a parte</li>
   </ul></div>
   <div class="card"><div class="sub-title">Requisiti tecnici</div><ul>
    <li>Responsive e progettato prima per mobile, con obiettivo Core Web Vitals "buoni" su mobile</li>
@@ -197,7 +215,7 @@ td.num { color:var(--navy); font-weight:700; white-space:nowrap; }
   <li>Area riservata e login utenti</li>
   <li>Recensioni per singolo viaggio</li>
   <li>Chat AI, calendario partenze interattivo e mappe interattive per tappa</li>
-  <li>Versioni in più lingue</li>
+  <li>Traduzione dei contenuti e SEO della seconda lingua (quotate a parte); lingue successive alla seconda</li>
   <li>Redazione di testi, servizi fotografici e video</li>
   <li>Testi di privacy e cookie policy</li>
   <li>Dominio e caselle email; hosting, se resta intestato al cliente</li>
@@ -205,7 +223,28 @@ td.num { color:var(--navy); font-weight:700; white-space:nowrap; }
  </ul>
 </div></div></section>
 
-<section class="band paper" id="tecnologia"><div class="container"><div class="section">
+<section class="band paper" id="moduli"><div class="container"><div class="section">
+ <div class="eyebrow">Evoluzione</div>
+ <h2 class="section-title">Un modello che cresce: moduli evolutivi.</h2>
+ <p class="section-text">Il modello nasce <strong>modulare</strong>: molte funzioni escluse oggi si aggiungono in seguito come moduli, senza rifare il sito e solo sui clienti che le vogliono.</p>
+ <div class="table-wrap"><table>
+  <thead><tr><th>Modulo</th><th>Cosa aggiunge</th></tr></thead>
+  <tbody>
+   <tr><td class="key">Prenotazione e acconto online</td><td>Scelta della partenza e dei viaggiatori, pagamento dell'acconto, posti disponibili aggiornati</td></tr>
+   <tr><td class="key">Traduzioni e lingue aggiuntive</td><td>Traduzione e SEO della seconda lingua; attivazione, traduzione e SEO della terza lingua e successive</td></tr>
+   <tr><td class="key">Integrazione CRM</td><td>Le richieste arrivano direttamente nel CRM dell'agenzia</td></tr>
+   <tr><td class="key">Regala un viaggio</td><td>Buono regalo con importo libero o legato a un viaggio</td></tr>
+   <tr><td class="key">Welfare aziendale</td><td>Pagina e richiesta dedicate alle aziende, con catalogo riservato</td></tr>
+   <tr><td class="key">Area riservata clienti</td><td>Documenti di viaggio, pagamenti e dati dei partecipanti</td></tr>
+   <tr><td class="key">Recensioni per viaggio</td><td>Raccolta e pubblicazione delle recensioni sulla singola scheda</td></tr>
+   <tr><td class="key">Calendario partenze e mappe</td><td>Calendario interattivo delle partenze e mappa dell'itinerario</td></tr>
+   <tr><td class="key">Ricerca guidata con AI</td><td>Il cliente descrive il viaggio che cerca e il sito propone le schede adatte</td></tr>
+  </tbody>
+ </table></div>
+ <div class="note">Ogni modulo si sviluppa una volta, alla prima richiesta, e da lì diventa una voce fissa di listino per tutti i vostri clienti. Il modello base è già predisposto per accoglierli. Quotazione su richiesta.</div>
+</div></div></section>
+
+<section class="band" id="tecnologia"><div class="container"><div class="section">
  <div class="eyebrow">Tecnologia</div>
  <h2 class="section-title">Piattaforma leggera e proprietaria.</h2>
  <p class="section-text">Propongo WordPress con un tema proprietario sviluppato su misura, senza page builder, e contenuti gestiti con campi strutturati.</p>
@@ -217,6 +256,25 @@ td.num { color:var(--navy); font-weight:700; white-space:nowrap; }
   <li><span><strong>Autonomia e continuità.</strong> Il CMS più diffuso al mondo, noto a molte agenzie, con hosting facile da trovare e nessun vincolo verso fornitori chiusi.</span></li>
  </ul>
  <div class="note">Ho scartato due alternative. Un sito fatto con page builder si costruisce prima, ma è più lento e lascia all'agenzia troppa libertà sulla grafica. Un'architettura headless è ottima ma costa molto di più da costruire e mantenere: non sta nel budget.</div>
+</div></div></section>
+
+<section class="band paper" id="gestione"><div class="container"><div class="section">
+ <div class="eyebrow">Gestione</div>
+ <h2 class="section-title">Come l'agenzia gestisce il sito.</h2>
+ <p class="section-text">L'agenzia modifica solo <strong>contenuti e moduli</strong>: il layout è protetto, e ogni pagina resta coerente con il brand chiunque la aggiorni.</p>
+ <div class="table-wrap"><table>
+  <thead><tr><th>Cosa</th><th>Come si gestisce</th></tr></thead>
+  <tbody>
+   <tr><td class="key">Schede viaggio</td><td>Un modulo guidato a schede: panoramica, galleria, itinerario giorno per giorno, partenze con date e prezzi, incluso e non incluso, cose da sapere, FAQ, brochure. Campi obbligatori e istruzioni accanto a ogni campo</td></tr>
+   <tr><td class="key">Prezzi e date</td><td>Prezzo "a partire da", prossima partenza e filtri si aggiornano da soli dalle partenze inserite. Le partenze passate spariscono dal sito</td></tr>
+   <tr><td class="key">Catalogo, destinazioni, categorie</td><td>Pagine generate in automatico dai viaggi, già impaginate</td></tr>
+   <tr><td class="key">Homepage e pagine libere</td><td>Composte con moduli predefiniti (hero con ricerca, viaggi in evidenza, categorie, perché noi, recensioni, testo e immagine, FAQ, CTA, newsletter) da aggiungere, riordinare e compilare, con anteprima reale</td></tr>
+   <tr><td class="key">Brand e contatti</td><td>Una sola pagina di impostazioni: logo, colori, contatti, testi ricorrenti, destinatari delle richieste</td></tr>
+   <tr><td class="key">Richieste di preventivo</td><td>Archivio nel pannello, oltre all'email, con il viaggio richiesto e la provenienza della campagna</td></tr>
+   <tr><td class="key">Viaggi da riproporre o chiudere</td><td>Duplica con un clic, archivia senza cancellare</td></tr>
+  </tbody>
+ </table></div>
+ <div class="note">Il pannello è su misura: l'agenzia vede solo Viaggi, Pagine, Blog, Richieste e Impostazioni. Le parti tecniche restano nascoste, così non si rompe nulla per errore.</div>
 </div></div></section>
 
 <section class="band" id="tempi"><div class="container"><div class="section">
@@ -241,7 +299,7 @@ td.num { color:var(--navy); font-weight:700; white-space:nowrap; }
 <section class="band paper" id="investimento"><div class="container"><div class="section">
  <div class="eyebrow">Investimento</div>
  <h2 class="section-title">Il lancio rientra nei 2.500 € richiesti.</h2>
- <p class="section-text">Il cliente di lancio rientra nei 2.500 € richiesti. Le repliche successive costano 2.200 € ciascuna.</p>
+ <p class="section-text">Il cliente di lancio rientra nei 2.500 € richiesti. Le repliche successive costano 2.200 € ciascuna. Il prezzo di lancio non copre per intero lo sviluppo del modello: la differenza è un <strong>investimento iniziale</strong> che faccio io, e che rientra con le repliche.</p>
  <div class="table-wrap"><table>
   <thead><tr><th>Voce</th><th>Importo</th><th>Cosa comprende</th></tr></thead>
   <tbody>
@@ -249,14 +307,13 @@ td.num { color:var(--navy); font-weight:700; white-space:nowrap; }
    <tr><td class="key">Replica su nuovo cliente</td><td class="num">2.200 €</td><td>Branding, configurazione, migrazione fino a 20 viaggi e 10 pagine, formazione</td></tr>
    <tr><td class="key">Viaggio o pagina extra da migrare</td><td class="num">30 € l'uno</td><td>Oltre le soglie incluse</td></tr>
    <tr><td class="key">Manutenzione</td><td class="num">70 € al mese per sito<br>(840 € l'anno)</td><td>Aggiornamenti, backup, monitoraggio sicurezza e uptime, fino a 3 ore di piccoli interventi. Licenze escluse</td></tr>
-   <tr><td class="key">Opzione: brochure PDF generata in automatico dai dati del viaggio</td><td class="num">400 € una tantum</td><td>Si sviluppa una volta sul modello e vale per tutti i clienti</td></tr>
   </tbody>
  </table></div>
  <div class="note"><strong>Licenze software</strong>: a parte, annuali e per singolo sito, fatturate al costo di listino.
   <ul>
    <li><strong>ACF PRO</strong> (circa 49 $/anno): il plugin che crea i tipi di contenuto personalizzati e i loro campi, cioè schede viaggio, partenze con date e prezzi, itinerari giorno per giorno, blocchi della homepage e impostazioni brand. È la base del pannello guidato con cui l'agenzia aggiorna il sito da sola.</li>
    <li><strong>Gestione del consenso cookie</strong> (circa 59 €/anno).</li>
-   <li>Solo se servono: plugin di traduzione per i siti multilingua (circa 99 €/anno) e cache premium se l'hosting non ne offre una (circa 59 $/anno).</li>
+   <li>Solo se servono: plugin di traduzione, quando si attiva la seconda lingua (circa 99 €/anno), e cache premium se l'hosting non ne offre una (circa 59 $/anno).</li>
   </ul>
  </div>
  <ul class="list">
@@ -268,12 +325,12 @@ td.num { color:var(--navy); font-weight:700; white-space:nowrap; }
 <section class="band" id="condizioni"><div class="container"><div class="section">
  <div class="eyebrow">Condizioni</div>
  <h2 class="section-title">Le condizioni del modello.</h2>
- <p class="section-text">Il prezzo di lancio è sostenibile solo perché il modello si riusa: per questo le condizioni sotto ne fanno parte.</p>
+ <p class="section-text">Costruire il modello richiede un <strong>investimento iniziale</strong> che faccio io: il prezzo di lancio copre il sito del primo cliente, non lo sviluppo completo del prodotto. Quell'investimento rientra con le repliche. Per questo le condizioni sotto fanno parte dell'accordo.</p>
  <ul class="list">
   <li><span><strong>Proprietà.</strong> Il modello (codice, struttura, componenti) resta di mia proprietà. Ogni cliente riceve una licenza d'uso perpetua per il proprio sito; testi, foto e dati restano del cliente.</span></li>
   <li><span><strong>Rapporto con voi.</strong> Non propongo il modello direttamente ai vostri clienti.</span></li>
   <li><span><strong>Perimetro del lancio.</strong> Il design parte dal modello con il branding del cliente, non da una grafica da zero. Sono previsti due giri di revisione e la migrazione di fino a 20 viaggi e 10 pagine.</span></li>
-  <li><span><strong>Materiali.</strong> Testi, foto, brochure e loghi li fornisce il cliente in formato digitale.</span></li>
+  <li><span><strong>Materiali.</strong> Testi, foto, loghi ed eventuali brochure personalizzate li fornisce il cliente in formato digitale.</span></li>
   <li><span><strong>Validità.</strong> Il prezzo delle repliche vale per tutti i progetti avviati entro il 31 dicembre 2027.</span></li>
  </ul>
 </div></div></section>
@@ -283,10 +340,9 @@ td.num { color:var(--navy); font-weight:700; white-space:nowrap; }
  <h2 class="section-title">Punti da confermare.</h2>
  <p class="section-text">Per chiudere l'offerta mi servono alcune conferme. Le vediamo in una call breve prima di martedì.</p>
  <ol class="questions">
-  <li><strong>Brochure:</strong> PDF caricato dall'agenzia o generato in automatico (opzione a 400 €)?</li>
   <li><strong>Partenze:</strong> ogni viaggio ha più date con prezzi diversi?</li>
   <li><strong>Cliente di lancio:</strong> quanti viaggi e pagine ha oggi, e su che piattaforma?</li>
-  <li><strong>Lingue:</strong> il sito è solo in italiano?</li>
+  <li><strong>Lingue:</strong> al cliente di lancio serve da subito una seconda lingua, e quale? La traduzione dei contenuti la curate voi, o la quotiamo?</li>
   <li><strong>Lead:</strong> oltre all'email, dove devono arrivare (CRM, foglio, altro)?</li>
   <li><strong>Hosting:</strong> preferite che lo gestisca io, su un'infrastruttura ottimizzata per il modello con canone mensile per sito, oppure resta intestato al cliente? Nel secondo caso indichiamo noi cosa acquistare: cache lato server, accesso SSH e strumenti da riga di comando, ambiente di staging, backup giornalieri, data center in UE.</li>
   <li><strong>Volumi:</strong> quanti clienti prevedete di proporre nel 2027?</li>
