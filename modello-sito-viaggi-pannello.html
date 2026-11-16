@@ -85,11 +85,54 @@ button,input,select,textarea{font:inherit;color:inherit}
 .screen{display:none}
 .screen.on{display:block}
 
-/* Login */
-.login{min-height:calc(100vh - 40px);display:grid;place-items:center;background:linear-gradient(160deg,var(--brand) 0 45%,var(--ground) 45%);padding:24px 16px}
-.login form{width:min(400px,100%);background:var(--surface);border-radius:14px;padding:32px;box-shadow:0 20px 50px rgba(12,43,41,.18);display:flex;flex-direction:column;gap:14px}
-.login .logo{color:var(--brand);padding:0 0 8px;justify-content:center;font-size:24px}
-.login p.note{font-size:13px;color:var(--muted);margin:0;text-align:center}
+/* Login (realizzabile con la personalizzazione della pagina di accesso di WordPress: CSS + markup iniettato con gli hook del login) */
+#s-login{min-height:calc(100vh - 40px);position:relative}
+.lvars{position:absolute;z-index:5;top:12px;left:50%;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;align-items:center;background:rgba(255,255,255,.95);border-radius:999px;padding:6px 8px 6px 14px;box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:13px;width:max-content;max-width:calc(100% - 24px)}
+.lvars button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;cursor:pointer;font-weight:600;font-size:13px;min-height:32px}
+.lvars button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.lv{display:none;min-height:calc(100vh - 40px)}
+.lv.on{display:grid}
+.scene{position:absolute;inset:0;width:100%;height:100%}
+.lform{width:min(380px,100%);display:flex;flex-direction:column;gap:14px}
+.lform .logo{color:var(--brand);padding:0;font-size:24px}
+.lsub{margin:-6px 0 6px;color:var(--muted)}
+.lrow{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px}
+.lnk{color:var(--brand);font-weight:600;font-size:14px}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#9BFFD0}
+#s-login .note{font-size:12px;color:var(--muted);margin:0}
+/* 1 */
+.lv1{grid-template-columns:1.25fr 1fr}
+.lv1-img{position:relative;overflow:hidden}
+.lv1-cap{position:absolute;left:40px;bottom:40px;right:40px;color:#fff;display:flex;flex-direction:column;gap:6px;max-width:460px}
+.lv1-cap b{font-family:var(--display);font-size:34px;line-height:1.1}
+.lv1-cap span:last-child{opacity:.8}
+.lv1-form{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:80px 32px 32px;background:var(--surface)}
+/* 2 */
+.lv2{position:relative;overflow:hidden;place-items:center;padding:80px 16px 40px}
+.lv2 .glass{position:relative;background:rgba(255,255,255,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.6);border-radius:18px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.lv2-cap{position:absolute;left:40px;bottom:40px;color:#fff;display:flex;flex-direction:column;gap:6px;max-width:420px}
+.lv2-cap b{font-family:var(--display);font-size:30px;line-height:1.15}
+.lv2-note{position:absolute;right:24px;bottom:20px;color:rgba(255,255,255,.75)!important;max-width:320px;text-align:right}
+/* 3 */
+.lv3{position:relative;overflow:hidden;place-items:center;padding:80px 16px 40px;background:#0C2B29}
+.mosaic{position:absolute;inset:-80px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;transform:rotate(-6deg) scale(1.15);opacity:.55}
+.tilep{border-radius:14px;min-height:170px;position:relative}
+.tilep span{position:absolute;left:14px;bottom:12px;color:#fff;font-weight:700;font-size:15px;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+.lv3-card{position:relative;background:var(--surface);border-radius:18px;width:min(440px,100%);box-shadow:0 24px 60px rgba(0,0,0,.4);overflow:hidden}
+.pass-top{display:flex;justify-content:space-between;background:var(--brand);color:#fff;font-size:11px;font-weight:700;letter-spacing:.12em;padding:12px 24px}
+.pass-route{display:flex;align-items:center;justify-content:center;gap:14px;padding:18px 24px 14px;color:var(--brand);border-bottom:2px dashed var(--line);position:relative}
+.pass-route b{font-family:var(--display);font-size:30px}
+.pass-route::before,.pass-route::after{content:"";position:absolute;bottom:-12px;width:22px;height:22px;border-radius:50%;background:#0C2B29}
+.pass-route::before{left:-11px}.pass-route::after{right:-11px}
+.lv3-card .lform{padding:22px 28px 10px;width:100%}
+.lv3-card .note{padding:0 28px 22px}
+@media (max-width:860px){
+  .lv1{grid-template-columns:1fr}
+  .lv1-img{min-height:260px}
+  .lv1-cap{left:20px;bottom:20px}
+  .lv1-cap b{font-size:26px}
+  .lv2-cap,.lv2-note{display:none}
+}
 
 /* Campi */
 label.f{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
@@ -298,16 +341,89 @@ a.cname:hover{color:var(--brand);text-decoration:underline}
   </nav>
 </div>
 
-<!-- LOGIN -->
+<!-- LOGIN: tre varianti -->
 <section class="screen" id="s-login" aria-label="Login">
-  <div class="login">
-    <form id="loginForm">
-      <div class="logo"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#14403D"/><path d="M7 20c4-7 9-10 18-11-5 3-8 7-9 14-2-3-5-4-9-3z" fill="#E07A3F"/></svg>Rotte Viaggi</div>
-      <label class="f" for="lu">Email<input id="lu" type="email" value="agenzia@esempio.it" autocomplete="off"></label>
-      <label class="f" for="lp">Password<input id="lp" type="password" value="demo-demo" autocomplete="off"></label>
-      <button class="btn primary" type="submit">Accedi al pannello</button>
-      <p class="note">Login con logo e colori dell'agenzia. In questa anteprima il pulsante apre la bacheca.</p>
-    </form>
+  <div class="lvars" role="group" aria-label="Varianti del login">
+    <span>Varianti del login:</span>
+    <button type="button" data-lv="1" aria-pressed="true">1 · Immagine e pannello</button>
+    <button type="button" data-lv="2" aria-pressed="false">2 · Immagine a tutto schermo</button>
+    <button type="button" data-lv="3" aria-pressed="false">3 · Mosaico dei viaggi</button>
+  </div>
+
+  <div class="lv lv1 on" data-v="1">
+    <div class="lv1-img">
+      <svg class="scene" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#06121F"/><stop offset=".55" stop-color="#0E2A3B"/><stop offset="1" stop-color="#1C4A52"/></linearGradient>
+    <filter id="blur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <linearGradient id="aur" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7CF5B5" stop-opacity="0"/><stop offset=".45" stop-color="#5BE8A0" stop-opacity=".85"/><stop offset="1" stop-color="#2BB3A0" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sky)"/>
+  <g fill="#fff" opacity=".7"><circle cx="90" cy="70" r="1.6"/><circle cx="260" cy="140" r="1.2"/><circle cx="410" cy="60" r="1.5"/><circle cx="640" cy="110" r="1.1"/><circle cx="820" cy="50" r="1.6"/><circle cx="980" cy="130" r="1.2"/><circle cx="1120" cy="80" r="1.4"/><circle cx="150" cy="220" r="1"/><circle cx="1040" cy="240" r="1"/><circle cx="560" cy="200" r="1.2"/></g>
+  <path d="M-50 330 C 200 180, 380 360, 600 230 S 1000 120, 1260 260 L1260 420 C 1000 300, 800 420, 600 380 S 200 360, -50 470Z" fill="url(#aur)" filter="url(#blur)"/>
+  <path d="M100 260 C 300 160, 500 300, 760 170 S 1100 160, 1260 120" stroke="#9BFFD0" stroke-width="40" fill="none" opacity=".35" filter="url(#blur)"/>
+  <path d="M0 600 L140 470 L230 540 L380 400 L520 560 L640 480 L760 590 L900 430 L1040 560 L1200 470 L1200 800 L0 800Z" fill="#0A2228"/>
+  <path d="M0 680 L180 590 L330 650 L520 570 L700 660 L880 600 L1050 670 L1200 620 L1200 800 L0 800Z" fill="#06171B"/>
+</svg>
+      <div class="lv1-cap">
+        <span class="kicker">Prossima partenza · 6 dicembre</span>
+        <b>Islanda d'inverno: aurora boreale</b>
+        <span>3 viaggi partono nelle prossime 4 settimane</span>
+      </div>
+    </div>
+    <div class="lv1-form"><form id="lf1" class="lform ">
+        <div class="logo"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#14403D"/><path d="M7 20c4-7 9-10 18-11-5 3-8 7-9 14-2-3-5-4-9-3z" fill="#E07A3F"/></svg>Rotte Viaggi</div>
+        <p class="lsub">Accedi al pannello dell'agenzia</p>
+        <label class="f" for="lf1u">Email<input id="lf1u" type="email" value="agenzia@esempio.it" autocomplete="off"></label>
+        <label class="f" for="lf1p">Password<input id="lf1p" type="password" value="demo-demo" autocomplete="off"></label>
+        <div class="lrow"><label class="cb" for="lf1r"><input type="checkbox" id="lf1r" checked> Ricordami</label><a href="#login" class="lnk">Password dimenticata?</a></div>
+        <button class="btn primary" type="submit">Accedi</button>
+      </form>
+      <p class="note">Immagine: la copertina del prossimo viaggio in partenza, scelta in automatico.</p>
+    </div>
+  </div>
+
+  <div class="lv lv2" data-v="2">
+    <svg class="scene" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#06121F"/><stop offset=".55" stop-color="#0E2A3B"/><stop offset="1" stop-color="#1C4A52"/></linearGradient>
+    <filter id="blur2" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <linearGradient id="aur2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7CF5B5" stop-opacity="0"/><stop offset=".45" stop-color="#5BE8A0" stop-opacity=".85"/><stop offset="1" stop-color="#2BB3A0" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sky2)"/>
+  <g fill="#fff" opacity=".7"><circle cx="90" cy="70" r="1.6"/><circle cx="260" cy="140" r="1.2"/><circle cx="410" cy="60" r="1.5"/><circle cx="640" cy="110" r="1.1"/><circle cx="820" cy="50" r="1.6"/><circle cx="980" cy="130" r="1.2"/><circle cx="1120" cy="80" r="1.4"/><circle cx="150" cy="220" r="1"/><circle cx="1040" cy="240" r="1"/><circle cx="560" cy="200" r="1.2"/></g>
+  <path d="M-50 330 C 200 180, 380 360, 600 230 S 1000 120, 1260 260 L1260 420 C 1000 300, 800 420, 600 380 S 200 360, -50 470Z" fill="url(#aur2)" filter="url(#blur2)"/>
+  <path d="M100 260 C 300 160, 500 300, 760 170 S 1100 160, 1260 120" stroke="#9BFFD0" stroke-width="40" fill="none" opacity=".35" filter="url(#blur2)"/>
+  <path d="M0 600 L140 470 L230 540 L380 400 L520 560 L640 480 L760 590 L900 430 L1040 560 L1200 470 L1200 800 L0 800Z" fill="#0A2228"/>
+  <path d="M0 680 L180 590 L330 650 L520 570 L700 660 L880 600 L1050 670 L1200 620 L1200 800 L0 800Z" fill="#06171B"/>
+</svg>
+    <div class="lv2-cap"><span class="kicker">Islanda · partenza 6 dicembre</span><b>Il prossimo viaggio parte da qui.</b></div>
+    <form id="lf2" class="lform glass">
+        <div class="logo"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#14403D"/><path d="M7 20c4-7 9-10 18-11-5 3-8 7-9 14-2-3-5-4-9-3z" fill="#E07A3F"/></svg>Rotte Viaggi</div>
+        <p class="lsub">Accedi al pannello dell'agenzia</p>
+        <label class="f" for="lf2u">Email<input id="lf2u" type="email" value="agenzia@esempio.it" autocomplete="off"></label>
+        <label class="f" for="lf2p">Password<input id="lf2p" type="password" value="demo-demo" autocomplete="off"></label>
+        <div class="lrow"><label class="cb" for="lf2r"><input type="checkbox" id="lf2r" checked> Ricordami</label><a href="#login" class="lnk">Password dimenticata?</a></div>
+        <button class="btn primary" type="submit">Accedi</button>
+      </form>
+    <p class="note lv2-note">Immagine di sfondo scelta dall'agenzia nelle Impostazioni, o a rotazione tra le copertine dei viaggi.</p>
+  </div>
+
+  <div class="lv lv3" data-v="3">
+    <div class="mosaic" aria-hidden="true"><div class="tilep ph1"><span>Islanda</span></div><div class="tilep ph4"><span>Giappone</span></div><div class="tilep ph6"><span>Marocco</span></div><div class="tilep ph5"><span>Polinesia</span></div><div class="tilep ph2"><span>Lisbona</span></div><div class="tilep ph3"><span>Dolomiti</span></div><div class="tilep ph5"><span>Maldive</span></div><div class="tilep ph1"><span>Norvegia</span></div><div class="tilep ph6"><span>Giordania</span></div><div class="tilep ph4"><span>Vietnam</span></div><div class="tilep ph3"><span>Scozia</span></div><div class="tilep ph2"><span>Andalusia</span></div><div class="tilep ph5"><span>Grecia</span></div><div class="tilep ph1"><span>Lapponia</span></div><div class="tilep ph6"><span>Egitto</span></div><div class="tilep ph4"><span>Corea</span></div><div class="tilep ph3"><span>Irlanda</span></div></div>
+    <div class="lv3-card">
+      <div class="pass-top"><span>ROTTE VIAGGI</span><span>PANNELLO AGENZIA</span></div>
+      <div class="pass-route" aria-hidden="true"><b>MIL</b><svg width="90" height="20" viewBox="0 0 90 20"><path d="M2 10h80" stroke="currentColor" stroke-dasharray="4 4"/><path d="M76 4l8 6-8 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><b>KEF</b></div>
+      <form id="lf3" class="lform pass">
+        <div class="logo"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#14403D"/><path d="M7 20c4-7 9-10 18-11-5 3-8 7-9 14-2-3-5-4-9-3z" fill="#E07A3F"/></svg>Rotte Viaggi</div>
+        <p class="lsub">Accedi al pannello dell'agenzia</p>
+        <label class="f" for="lf3u">Email<input id="lf3u" type="email" value="agenzia@esempio.it" autocomplete="off"></label>
+        <label class="f" for="lf3p">Password<input id="lf3p" type="password" value="demo-demo" autocomplete="off"></label>
+        <div class="lrow"><label class="cb" for="lf3r"><input type="checkbox" id="lf3r" checked> Ricordami</label><a href="#login" class="lnk">Password dimenticata?</a></div>
+        <button class="btn primary" type="submit">Accedi</button>
+      </form>
+      <p class="note">Mosaico con le copertine dei viaggi pubblicati.</p>
+    </div>
   </div>
 </section>
 
@@ -688,7 +804,12 @@ function route(){
   window.scrollTo(0,0);
 }
 window.addEventListener('hashchange', route);
-$('#loginForm').addEventListener('submit', e=>{ e.preventDefault(); location.hash='dashboard'; });
+$$('.lform').forEach(f=>f.addEventListener('submit', e=>{ e.preventDefault(); location.hash='dashboard'; }));
+$$('.lvars button').forEach(b=>b.addEventListener('click',()=>{
+  $$('.lvars button').forEach(x=>x.setAttribute('aria-pressed', x===b));
+  $$('.lv').forEach(v=>v.classList.toggle('on', v.dataset.v===b.dataset.lv));
+}));
+$$('.lnk').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); toast('Recupero password standard di WordPress, con la stessa grafica'); }));
 
 /* ---------- Bacheca ---------- */
 function renderDash(){
