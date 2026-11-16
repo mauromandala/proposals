@@ -144,11 +144,11 @@ tr:last-child td{border-bottom:0}
 .ph6{background:linear-gradient(170deg,#5a4a2a,#b39a5a 60%,#f2e8c8)}
 
 /* Scheda viaggio */
-.edit{display:grid;grid-template-columns:1fr 300px;gap:18px;align-items:start}
+.edit{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}
 .titlefield{font-family:var(--display);font-size:24px;font-weight:700;border:1px solid var(--line);border-radius:8px;padding:10px 14px;width:100%;background:var(--surface)}
 .slug{font-size:13px;color:var(--muted);margin:6px 2px 16px}
 .acftabs{display:flex;gap:2px;overflow-x:auto;border-bottom:1px solid var(--line);padding:0 10px;background:#FAFBF9;border-radius:var(--r) var(--r) 0 0}
-.acftabs button{border:0;background:transparent;padding:14px 14px 12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;min-height:44px}
+.acftabs button{border:0;background:transparent;padding:14px 10px 12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;min-height:44px}
 .acftabs button[aria-selected="true"]{color:var(--brand);border-bottom-color:var(--accent)}
 .panel{display:none;padding:18px;flex-direction:column;gap:16px}
 .panel.on{display:flex}
@@ -199,6 +199,46 @@ tr:last-child td{border-bottom:0}
 .cb{display:flex;align-items:center;gap:8px;font-size:14px;min-height:32px}
 .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:13px;cursor:pointer;background:var(--surface);min-height:32px}
 .chip[aria-pressed="true"]{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+/* Miglioramenti UX */
+.edit .side-col{position:sticky;top:16px}
+.acftabs .badge{display:inline-block;margin-left:6px;font-size:11px;font-weight:700;background:var(--off-bg);color:var(--muted);border-radius:999px;padding:0 7px;min-width:20px;text-align:center}
+.acftabs .badge.warn{background:var(--warn-bg);color:var(--warn)}
+.counter{font-size:12px;color:var(--muted);text-align:right;font-weight:400}
+.counter.over{color:#B3261E;font-weight:600}
+.progress{height:8px;background:var(--off-bg);border-radius:999px;overflow:hidden}
+.progress span{display:block;height:100%;background:var(--ok);border-radius:999px;transition:width .3s}
+.check{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.check button{display:flex;gap:8px;align-items:flex-start;width:100%;text-align:left;border:0;background:transparent;padding:6px 4px;border-radius:6px;cursor:pointer;font-size:14px;line-height:1.35}
+.check button:hover{background:var(--ground)}
+.check .ic{flex:none;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;margin-top:1px}
+.check .ok .ic{background:var(--ok-bg);color:var(--ok)}
+.check .no .ic{background:var(--warn-bg);color:var(--warn)}
+.check .no span:last-child{font-weight:600}
+.notice{display:flex;gap:10px;align-items:center;border-radius:8px;padding:10px 12px;font-size:14px;background:var(--warn-bg);color:var(--warn)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.toolbar .sp{flex:1}
+.gen{display:none;border:1px dashed var(--brand);border-radius:8px;padding:14px;gap:12px;flex-direction:column;background:#F8FAF8}
+.gen.on{display:flex}
+.listbar{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:12px}
+.listbar .tabsline{margin:0}
+.listbar .sp{flex:1}
+.listbar label.f{font-size:12px;min-width:180px}
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar{display:grid;grid-template-columns:90px 1fr 34px;gap:10px;align-items:center;font-size:14px}
+.bar .tr{height:10px;background:var(--off-bg);border-radius:999px;overflow:hidden}
+.bar .tr span{display:block;height:100%;background:var(--brand);border-radius:999px}
+.reqgrid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start}
+.kv{display:grid;grid-template-columns:140px 1fr;gap:8px 12px;font-size:14px;margin:0}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-weight:600}
+.msg{background:var(--ground);border-radius:8px;padding:12px 14px;margin:0;white-space:pre-line}
+.timeline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px}
+.timeline li{display:grid;grid-template-columns:96px 1fr;gap:10px}
+.timeline time{color:var(--muted);font-size:13px}
+a.cname{color:var(--text);font-weight:700;text-decoration:none}
+a.cname:hover{color:var(--brand);text-decoration:underline}
+@media (max-width:980px){.reqgrid{grid-template-columns:1fr}.edit .side-col{position:static}}
 
 /* Finestre */
 .modal{position:fixed;inset:0;background:rgba(12,20,19,.55);display:none;place-items:center;padding:16px;z-index:20}
@@ -310,6 +350,12 @@ tr:last-child td{border-bottom:0}
             <a href="#richieste"><b>Esporta richieste</b><span>CSV per il CRM</span></a>
             <a href="#impostazioni"><b>Brand e contatti</b><span>Logo, colori, email</span></a>
           </div></div></div>
+          <div class="card"><h2>Da dove arrivano le richieste <span style="font-weight:400;color:var(--muted);font-size:13px">ultimi 30 giorni</span></h2><div class="body"><div class="bars">
+            <div class="bar"><span>Meta</span><div class="tr"><span style="width:100%"></span></div><b class="num">14</b></div>
+            <div class="bar"><span>Google</span><div class="tr"><span style="width:71%"></span></div><b class="num">10</b></div>
+            <div class="bar"><span>Organico</span><div class="tr"><span style="width:57%"></span></div><b class="num">8</b></div>
+            <div class="bar"><span>Newsletter</span><div class="tr"><span style="width:43%"></span></div><b class="num">6</b></div>
+          </div></div></div>
           <div class="card"><h2>Da sistemare</h2><div class="body"><ul class="list">
             <li><span class="pill warn">Partenze</span><span>Marocco: nessuna partenza futura</span></li>
             <li><span class="pill info">Bozza</span><span>Capodanno a Lisbona aspetta la pubblicazione</span></li>
@@ -322,11 +368,16 @@ tr:last-child td{border-bottom:0}
     <section class="screen content" id="s-viaggi" aria-labelledby="h-viaggi">
       <div class="head"><h1 id="h-viaggi">Viaggi</h1>
         <div class="actions"><a class="btn primary" href="#scheda">+ Nuovo viaggio</a></div></div>
+      <div class="listbar">
       <div class="tabsline" role="group" aria-label="Filtra per stato">
         <button type="button" data-st="tutti" aria-pressed="true">Tutti</button>
         <button type="button" data-st="Pubblicato" aria-pressed="false">Pubblicati</button>
         <button type="button" data-st="Bozza" aria-pressed="false">Bozze</button>
         <button type="button" data-st="Archiviato" aria-pressed="false">Archiviati</button>
+      </div>
+      <span class="sp"></span>
+      <label class="f" for="vc">Categoria<select id="vc"><option value="">Tutte le categorie</option><option>Viaggi di gruppo</option><option>Natale e Capodanno</option><option>Viaggi di nozze</option><option>Natura e avventura</option><option>Welfare aziendale</option></select></label>
+      <label class="f" for="vq">Cerca<input id="vq" type="search" placeholder="Titolo del viaggio"></label>
       </div>
       <div class="card"><div class="tablewrap"><table>
         <thead><tr><th>Viaggio</th><th>Categoria</th><th>Prossima partenza</th><th>Da</th><th>Stato</th></tr></thead>
@@ -346,21 +397,21 @@ tr:last-child td{border-bottom:0}
           <div class="card">
             <div class="acftabs" role="tablist" aria-label="Sezioni della scheda">
               <button role="tab" aria-selected="true" aria-controls="p-over" id="t-over">Panoramica</button>
-              <button role="tab" aria-selected="false" aria-controls="p-gal" id="t-gal">Galleria</button>
-              <button role="tab" aria-selected="false" aria-controls="p-itin" id="t-itin">Itinerario</button>
-              <button role="tab" aria-selected="false" aria-controls="p-dep" id="t-dep">Partenze e prezzi</button>
-              <button role="tab" aria-selected="false" aria-controls="p-info" id="t-info">Incluso e info</button>
+              <button role="tab" aria-selected="false" aria-controls="p-gal" id="t-gal">Galleria<span class="badge" id="bGal"></span></button>
+              <button role="tab" aria-selected="false" aria-controls="p-itin" id="t-itin">Itinerario<span class="badge" id="bItin"></span></button>
+              <button role="tab" aria-selected="false" aria-controls="p-dep" id="t-dep">Partenze e prezzi<span class="badge" id="bDep"></span></button>
+              <button role="tab" aria-selected="false" aria-controls="p-info" id="t-info">Incluso e info<span class="badge" id="bInfo"></span></button>
               <button role="tab" aria-selected="false" aria-controls="p-bro" id="t-bro">Brochure</button>
             </div>
 
             <div class="panel on" id="p-over" role="tabpanel" aria-labelledby="t-over">
               <div class="grid2">
-                <label class="f" for="dur">Durata (giorni) <span class="req">*</span><input id="dur" type="number" value="8" min="1"></label>
-                <label class="f" for="dest">Destinazione <span class="req">*</span>
+                <label class="f" for="dur"><span>Durata (giorni) <span class="req">*</span></span><input id="dur" type="number" value="8" min="1"></label>
+                <label class="f" for="dest"><span>Destinazione <span class="req">*</span></span>
                   <select id="dest"><option>Europa › Nord Europa › Islanda</option><option>Asia › Giappone</option><option>Africa › Marocco</option></select></label>
               </div>
               <label class="f" for="abs">Frase di lancio <small>Compare sulla card del catalogo. Massimo 140 caratteri.</small>
-                <input id="abs" type="text" value="Otto giorni tra ghiacciai, cascate e cieli verdi, con guida italiana e piccoli gruppi."></label>
+                <input id="abs" type="text" value="Otto giorni tra ghiacciai, cascate e cieli verdi, con guida italiana e piccoli gruppi."><span class="counter" id="absCount" aria-live="polite"></span></label>
               <label class="f" for="over">Panoramica del viaggio <small>Due o tre paragrafi: per chi è, cosa si vive, il ritmo del viaggio.</small>
                 <textarea id="over">Un viaggio pensato per chi vuole vedere l'aurora boreale senza rinunciare al comfort: notti in lodge fuori dalle luci delle città, giornate tra la Penisola di Snæfellsnes, il Circolo d'Oro e la costa sud.</textarea></label>
               <div>
@@ -376,6 +427,8 @@ tr:last-child td{border-bottom:0}
 
             <div class="panel" id="p-itin" role="tabpanel" aria-labelledby="t-itin">
               <p class="hint">Un blocco per giorno. Trascina dalla maniglia per cambiare l'ordine: i numeri dei giorni si aggiornano da soli.</p>
+              <div class="notice" id="dayWarn" hidden></div>
+              <div class="toolbar"><span class="sp"></span><button class="btn small ghost" type="button" id="openAll">Espandi tutti</button><button class="btn small ghost" type="button" id="closeAll">Comprimi tutti</button></div>
               <div class="rep" id="days"></div>
               <div><button class="btn" type="button" id="addDay">+ Aggiungi giorno</button></div>
             </div>
@@ -388,7 +441,17 @@ tr:last-child td{border-bottom:0}
                 <div><span>Partenze visibili sul sito</span><b class="num" id="cVis">–</b></div>
               </div>
               <div class="rep" id="deps"></div>
-              <div><button class="btn" type="button" id="addDep">+ Aggiungi partenza</button></div>
+              <div class="toolbar"><button class="btn" type="button" id="addDep">+ Aggiungi partenza</button><button class="btn" type="button" id="genOpen" aria-expanded="false" aria-controls="gen">+ Aggiungi più partenze</button></div>
+              <div class="gen" id="gen">
+                <b>Crea partenze a intervalli regolari</b>
+                <div class="grid2">
+                  <label class="f" for="gFrom">Prima partenza<input id="gFrom" type="text" placeholder="gg/mm/aaaa" value="04/04/2027"></label>
+                  <label class="f" for="gEvery">Ogni<select id="gEvery"><option value="7">settimana</option><option value="14" selected>2 settimane</option><option value="28">4 settimane</option></select></label>
+                  <label class="f" for="gTo">Fino al<input id="gTo" type="text" placeholder="gg/mm/aaaa" value="30/05/2027"></label>
+                  <label class="f" for="gPrice">Prezzo (€)<input id="gPrice" type="number" step="10" value="1790"></label>
+                </div>
+                <div class="toolbar"><button class="btn primary" type="button" id="genGo">Crea partenze</button><button class="btn ghost" type="button" id="genClose">Annulla</button><span id="genHint" style="font-size:13px;color:var(--muted)"></span></div>
+              </div>
             </div>
 
             <div class="panel" id="p-info" role="tabpanel" aria-labelledby="t-info">
@@ -421,13 +484,18 @@ Mance ed extra personali</textarea></label>
         <div class="side-col">
           <div class="card pubbox"><h2>Pubblicazione</h2><div class="body">
             <div class="pubrow"><span>Stato</span><b id="pubState">Bozza</b></div>
-            <div class="pubrow"><span>Ultima modifica</span><b>oggi, 15:40</b></div>
+            <div class="pubrow"><span>Ultima modifica</span><b id="lastSave">oggi, 15:40</b></div>
             <label class="f" for="sched">Pubblica il<small>Lascia vuoto per pubblicare subito. Formato gg/mm/aaaa hh:mm</small><input id="sched" type="text" placeholder="gg/mm/aaaa hh:mm"></label>
             <div class="pubbtns">
               <button class="btn" type="button" id="saveDraft">Salva bozza</button>
               <button class="btn" type="button" id="openPrev">Anteprima</button>
             </div>
             <button class="btn accent" type="button" id="publish">Pubblica</button>
+          </div></div>
+          <div class="card"><h2>Completezza della scheda</h2><div class="body" style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;justify-content:space-between;font-size:14px"><span id="compLabel"></span><b class="num" id="compPct"></b></div>
+            <div class="progress" aria-hidden="true"><span id="compBar"></span></div>
+            <ul class="check" id="compList"></ul>
           </div></div>
           <div class="card"><h2>Copertina</h2><div class="body">
             <div class="gimg ph1" style="aspect-ratio:16/10"><button type="button" data-crop="ph1">Modifica</button></div>
@@ -457,6 +525,31 @@ Mance ed extra personali</textarea></label>
         </table></div>
       </div>
       <p class="hint" style="margin-top:12px">Ogni richiesta arriva anche via email all'agenzia e, se attivo, al CRM tramite webhook. La provenienza viene dai parametri UTM delle campagne.</p>
+    </section>
+
+    <!-- DETTAGLIO RICHIESTA -->
+    <section class="screen content" id="s-richiesta" aria-labelledby="h-rq">
+      <div class="head"><h1 id="h-rq">Richiesta</h1><div class="actions"><a class="btn" href="#richieste">← Tutte le richieste</a></div></div>
+      <div class="reqgrid">
+        <div class="side-col" style="position:static">
+          <div class="card"><h2>Cliente e viaggio</h2><div class="body"><dl class="kv" id="rqKv"></dl></div></div>
+          <div class="card"><h2>Messaggio</h2><div class="body"><p class="msg" id="rqMsg"></p></div></div>
+          <div class="card"><h2>Note interne</h2><div class="body" style="display:flex;flex-direction:column;gap:10px">
+            <label class="f" for="rqNote" style="font-size:0">Note interne</label>
+            <textarea id="rqNote" placeholder="Visibili solo all'agenzia: esito della telefonata, richieste particolari, preventivo inviato…"></textarea>
+            <div><button class="btn" type="button" id="rqSave">Salva nota</button></div>
+          </div></div>
+        </div>
+        <div class="side-col" style="position:static">
+          <div class="card"><h2>Stato</h2><div class="body" style="display:flex;flex-direction:column;gap:10px">
+            <label class="f" for="rqSt" style="font-size:0">Stato della richiesta</label>
+            <select id="rqSt"><option>Nuova</option><option>Contattata</option><option>Preventivo inviato</option><option>Chiusa</option></select>
+            <div style="font-size:13px;color:var(--muted)">Rispondi a: <b id="rqMail" style="color:var(--text)"></b></div>
+          </div></div>
+          <div class="card"><h2>Provenienza</h2><div class="body"><dl class="kv" id="rqUtm" style="grid-template-columns:110px 1fr"></dl></div></div>
+          <div class="card"><h2>Cronologia</h2><div class="body"><ul class="timeline" id="rqTl"></ul></div></div>
+        </div>
+      </div>
     </section>
 
     <!-- SEGNAPOSTO -->
@@ -541,14 +634,14 @@ const trips = [
   {t:'Dolomiti per team aziendali',c:'Welfare aziendale',n:'2027-06-12',p:420,s:'Bozza',ph:'ph3'}
 ];
 const reqs = [
-  {d:-0,nm:'Marco Ferri',em:'marco.ferri@esempio.it',v:"Islanda d'inverno: aurora boreale",dep:'6 dic 2026',pp:2,src:'meta',med:'paid_social',cmp:'islanda-inverno-lead',st:'Nuova'},
-  {d:-1,nm:'Sara Conti',em:'sara.c@esempio.it',v:'Polinesia in luna di miele',dep:'10 mag 2027',pp:2,src:'google',med:'cpc',cmp:'viaggi-nozze-search',st:'Nuova'},
-  {d:-1,nm:'Luca Bianchi',em:'l.bianchi@esempio.it',v:'Giappone classico: Tokyo, Kyoto e Hiroshima',dep:'21 mar 2027',pp:3,src:'newsletter',med:'email',cmp:'nl-novembre',st:'Nuova'},
-  {d:-3,nm:'Elena Ricci',em:'elena.ricci@esempio.it',v:"Islanda d'inverno: aurora boreale",dep:'14 feb 2027',pp:4,src:'meta',med:'paid_social',cmp:'islanda-inverno-lead',st:'Contattata'},
-  {d:-5,nm:'Paolo Greco',em:'paolo.greco@esempio.it',v:'Capodanno a Lisbona',dep:'29 dic 2026',pp:2,src:'organico',med:'—',cmp:'—',st:'Preventivo inviato'},
-  {d:-9,nm:'Chiara Moretti',em:'chiara.m@esempio.it',v:'Giappone classico: Tokyo, Kyoto e Hiroshima',dep:'18 apr 2027',pp:2,src:'google',med:'cpc',cmp:'giappone-search',st:'Preventivo inviato'},
-  {d:-16,nm:'Andrea Gallo',em:'a.gallo@esempio.it',v:'Dolomiti per team aziendali',dep:'12 giu 2027',pp:18,src:'organico',med:'—',cmp:'—',st:'Chiusa'},
-  {d:-41,nm:'Federica Costa',em:'f.costa@esempio.it',v:'Marocco: deserto e kasbah',dep:'—',pp:2,src:'meta',med:'paid_social',cmp:'marocco-autunno',st:'Chiusa'}
+  {d:-0,nm:'Marco Ferri',em:'marco.ferri@esempio.it',v:"Islanda d'inverno: aurora boreale",dep:'6 dic 2026',pp:2,src:'meta',med:'paid_social',cmp:'islanda-inverno-lead',msg:"Buongiorno, siamo una coppia e vorremmo vedere l'aurora. La partenza del 6 dicembre ha ancora posti? Si può avere la camera matrimoniale?",st:'Nuova'},
+  {d:-1,nm:'Sara Conti',em:'sara.c@esempio.it',v:'Polinesia in luna di miele',dep:'10 mag 2027',pp:2,src:'google',med:'cpc',cmp:'viaggi-nozze-search',msg:'Ciao! Stiamo organizzando il viaggio di nozze per maggio. Vorremmo capire se si può aggiungere qualche notte a Bora Bora.',st:'Nuova'},
+  {d:-1,nm:'Luca Bianchi',em:'l.bianchi@esempio.it',v:'Giappone classico: Tokyo, Kyoto e Hiroshima',dep:'21 mar 2027',pp:3,src:'newsletter',med:'email',cmp:'nl-novembre',msg:'Siamo in tre, due adulti e un ragazzo di 15 anni. Ci sono riduzioni?',st:'Nuova'},
+  {d:-3,nm:'Elena Ricci',em:'elena.ricci@esempio.it',v:"Islanda d'inverno: aurora boreale",dep:'14 feb 2027',pp:4,src:'meta',med:'paid_social',cmp:'islanda-inverno-lead',msg:'Vorremmo partire in quattro amiche a febbraio. Serve esperienza per la grotta di ghiaccio?',st:'Contattata'},
+  {d:-5,nm:'Paolo Greco',em:'paolo.greco@esempio.it',v:'Capodanno a Lisbona',dep:'29 dic 2026',pp:2,src:'organico',med:'—',cmp:'—',msg:'Capodanno a Lisbona per due: è possibile partire da Napoli?',st:'Preventivo inviato'},
+  {d:-9,nm:'Chiara Moretti',em:'chiara.m@esempio.it',v:'Giappone classico: Tokyo, Kyoto e Hiroshima',dep:'18 apr 2027',pp:2,src:'google',med:'cpc',cmp:'giappone-search',msg:'Mi interessa la partenza di aprile, quanto costa il supplemento singola?',st:'Preventivo inviato'},
+  {d:-16,nm:'Andrea Gallo',em:'a.gallo@esempio.it',v:'Dolomiti per team aziendali',dep:'12 giu 2027',pp:18,src:'organico',med:'—',cmp:'—',msg:"Siamo un'azienda di 18 persone, cerchiamo un'esperienza di team building a giugno.",st:'Chiusa'},
+  {d:-41,nm:'Federica Costa',em:'f.costa@esempio.it',v:'Marocco: deserto e kasbah',dep:'—',pp:2,src:'meta',med:'paid_social',cmp:'marocco-autunno',msg:'Avete altre date in primavera per il Marocco?',st:'Chiusa'}
 ];
 let days = [
   {t:'Arrivo a Reykjavík',a:'Accoglienza in aeroporto, cena di benvenuto e prima uscita serale alla ricerca dell\'aurora.'},
@@ -574,7 +667,7 @@ const faqs = [
 let gallery = ['ph1','ph5','ph3','ph4','ph2'];
 
 /* ---------- Navigazione ---------- */
-const crumbs = {dashboard:'Bacheca',viaggi:'Viaggi',scheda:'Viaggi › Modifica viaggio',richieste:'Richieste',pagine:'Pagine',blog:'Blog',impostazioni:'Impostazioni'};
+const crumbs = {richiesta:'Richieste › Dettaglio',dashboard:'Bacheca',viaggi:'Viaggi',scheda:'Viaggi › Modifica viaggio',richieste:'Richieste',pagine:'Pagine',blog:'Blog',impostazioni:'Impostazioni'};
 function route(){
   let h = location.hash.replace('#','') || 'dashboard';
   if(h==='anteprima-sito'){ history.replaceState(null,'','#scheda'); h='scheda'; openPreview(); }
@@ -583,11 +676,12 @@ function route(){
   $('#app').style.display = isLogin ? 'none' : '';
   $$('.app .screen').forEach(s=>s.classList.remove('on'));
   if(!isLogin){
-    const known = ['dashboard','viaggi','scheda','richieste'].includes(h);
+    const known = ['dashboard','viaggi','scheda','richieste','richiesta'].includes(h);
+    if(h==='richiesta') renderReq();
     (known ? $('#s-'+h) : $('#s-altro')).classList.add('on');
     if(!known){ $('#h-altro').textContent = crumbs[h] || 'Sezione'; }
     $('#crumbs').textContent = crumbs[h] || 'Bacheca';
-    $$('.side a[data-nav]').forEach(a=>a.toggleAttribute('aria-current', a.dataset.nav===h || (h==='scheda' && a.dataset.nav==='viaggi')));
+    $$('.side a[data-nav]').forEach(a=>a.toggleAttribute('aria-current', a.dataset.nav===h || (h==='scheda' && a.dataset.nav==='viaggi') || (h==='richiesta' && a.dataset.nav==='richieste')));
     $$('.side a[aria-current]').forEach(a=>a.setAttribute('aria-current','page'));
   }
   $$('.demobar a').forEach(a=>{ if(a.getAttribute('href')==='#'+h) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
@@ -598,7 +692,7 @@ $('#loginForm').addEventListener('submit', e=>{ e.preventDefault(); location.has
 
 /* ---------- Bacheca ---------- */
 function renderDash(){
-  $('#dashReq').innerHTML = reqs.slice(0,4).map(r=>`<li><span class="pill ${pillFor(r.st)}">${esc(r.st)}</span><div><b>${esc(r.nm)}</b><div class="meta">${esc(r.v)} · ${esc(r.src)}</div></div></li>`).join('');
+  $('#dashReq').innerHTML = reqs.slice(0,4).map(r=>`<li><span class="pill ${pillFor(r.st)}">${esc(r.st)}</span><div><a class="cname" href="#richiesta" data-open="${reqs.indexOf(r)}">${esc(r.nm)}</a><div class="meta">${esc(r.v)} · ${esc(r.src)}</div></div></li>`).join('');
   const n = reqs.filter(r=>r.st==='Nuova').length;
   $('#newCount').textContent = n; $('#tileNew').textContent = n;
   $('#newCount').style.display = n ? '' : 'none';
@@ -608,7 +702,8 @@ const pillFor = st => ({'Nuova':'warn','Contattata':'info','Preventivo inviato':
 /* ---------- Viaggi ---------- */
 let tripFilter='tutti';
 function renderTrips(){
-  const rows = trips.map((t,i)=>({...t,i})).filter(t=>tripFilter==='tutti' ? t.s!=='Archiviato' : t.s===tripFilter);
+  const vq=$('#vq').value.trim().toLowerCase(), vc=$('#vc').value;
+  const rows = trips.map((t,i)=>({...t,i})).filter(t=>(tripFilter==='tutti' ? t.s!=='Archiviato' : t.s===tripFilter) && (!vq || t.t.toLowerCase().includes(vq)) && (!vc || t.c===vc));
   $('#tripRows').innerHTML = rows.map(t=>`<tr>
     <td><div class="tname"><span class="thumb ${t.ph}" aria-hidden="true"></span><div><b><a href="#scheda" style="color:inherit">${esc(t.t)}</a></b><div class="wpacts"><a href="#scheda">Modifica</a> | <button type="button" data-dup="${t.i}">Duplica</button> | ${t.s==='Archiviato' ? `<button type="button" data-unarc="${t.i}">Ripristina</button>` : `<button type="button" data-arc="${t.i}">Archivia</button>`}</div></div></div></td>
     <td>${esc(t.c)}</td>
@@ -714,7 +809,7 @@ $('#deps').addEventListener('input', e=>{
 });
 $('#deps').addEventListener('change', e=>{ if(e.target.dataset.dd){ const iso=fromIt(e.target.value.trim()); if(!iso){ toast('Scrivi la data come gg/mm/aaaa'); return; } deps[+e.target.dataset.dd].d=iso; renderDeps(); } });
 $('#deps').addEventListener('click', e=>{ const b=e.target.closest('button[data-del]'); if(!b) return; deps.splice(+b.dataset.del,1); renderDeps(); toast('Partenza eliminata'); });
-makeSortable($('#deps'), deps, renderDeps);
+makeSortable($('#deps'), deps, ()=>renderDeps());
 $('#addDep').addEventListener('click',()=>{ const last=deps.map(d=>d.d).sort().pop()||today.toISOString().slice(0,10); deps.push({d:addDays(last,28),p:1790,st:'Disponibile'}); renderDeps(); toast('Partenza aggiunta: controlla data e prezzo'); });
 
 /* ---------- FAQ ---------- */
@@ -722,13 +817,13 @@ function renderFaqs(){
   $('#faqs').innerHTML = faqs.map((f,i)=>`<div class="row" data-i="${i}" draggable="true"><div class="rowhead">
     <span class="handle" aria-hidden="true">${grip}</span><span class="ttl">${esc(f.t)}</span></div></div>`).join('');
 }
-makeSortable($('#faqs'), faqs, renderFaqs);
+makeSortable($('#faqs'), faqs, ()=>renderFaqs());
 
 /* ---------- Galleria ---------- */
 function renderGallery(){
   $('#gallery').innerHTML = gallery.map((g,i)=>`<div class="gimg ${g}" data-i="${i}" draggable="true" role="img" aria-label="Foto ${i+1}">${i===0?'<span class="cover">Copertina</span>':''}<button type="button" data-crop="${g}">Modifica</button></div>`).join('') + '<button class="gadd" type="button" id="gAdd">+ Carica foto</button>';
 }
-makeSortable($('#gallery'), gallery, renderGallery);
+makeSortable($('#gallery'), gallery, ()=>renderGallery());
 
 /* ---------- Finestre ---------- */
 function openModal(id){ const m=$(id); m.classList.add('on'); const b=$('[data-close]',m); b&&b.focus(); }
@@ -780,7 +875,7 @@ function renderReqs(){
     (!q || (r.nm+' '+r.em).toLowerCase().includes(q)) && (!ft || r.v===ft) && (!fs || r.src===fs) && (!fst || r.st===fst) && (!fp || -r.d<=fp));
   $('#reqRows').innerHTML = rows.map(r=>`<tr>
     <td class="num" style="white-space:nowrap">${reqDate(r).toLocaleDateString('it-IT',{day:'numeric',month:'short'})}</td>
-    <td><b>${esc(r.nm)}</b><div style="font-size:13px;color:var(--muted)">${esc(r.em)}</div></td>
+    <td><a class="cname" href="#richiesta" data-open="${r.i}">${esc(r.nm)}</a><div style="font-size:13px;color:var(--muted)">${esc(r.em)}</div></td>
     <td>${esc(r.v)}<div style="font-size:13px;color:var(--muted)">Partenza: ${esc(r.dep)}</div></td>
     <td class="num">${r.pp}</td>
     <td><span class="pill ${r.src==='meta'?'info':r.src==='google'?'warn':'off'}">${esc(r.src)}</span><div style="font-size:12px;color:var(--muted)">${esc(r.med)}</div></td>
@@ -799,7 +894,101 @@ $('#csv').addEventListener('click', async ()=>{
 });
 
 /* ---------- Avvio ---------- */
-renderDash(); renderTrips(); renderDays(); renderDeps(); renderFaqs(); renderGallery(); renderReqs(); route();
+/* ---------- Miglioramenti UX ---------- */
+['#vq','#vc'].forEach(x=>$(x).addEventListener('input',renderTrips));
+
+function absCount(){ const n=$('#abs').value.length, c=$('#absCount'); c.textContent=n+' / 140'; c.classList.toggle('over', n>140); }
+$('#abs').addEventListener('input', ()=>{ absCount(); comp(); });
+['#tripTitle','#over','#dur','#inc'].forEach(x=>$(x).addEventListener('input', ()=>{ updDays(); comp(); }));
+$$('#cats input').forEach(c=>c.addEventListener('change', comp));
+
+function updDays(){
+  const dur=+$('#dur').value||0, w=$('#dayWarn');
+  if(dur && dur!==days.length){ w.hidden=false; w.textContent=`La durata indicata è di ${dur} giorni, l'itinerario ne ha ${days.length}.`; }
+  else w.hidden=true;
+}
+$('#openAll').addEventListener('click',()=>{ days.forEach((_,i)=>openDays.add(i)); renderDays(); });
+$('#closeAll').addEventListener('click',()=>{ openDays.clear(); renderDays(); });
+
+function badges(){
+  const dur=+$('#dur').value||0;
+  $('#bGal').textContent=gallery.length;
+  const bi=$('#bItin'); bi.textContent=days.length; bi.classList.toggle('warn', dur && dur!==days.length);
+  const v=visibleDeps().length, bd=$('#bDep'); bd.textContent=v; bd.classList.toggle('warn', v===0);
+  const bf=$('#bInfo'); bf.textContent=faqs.length+' FAQ'; bf.classList.toggle('warn', faqs.length<3);
+}
+
+const checks = () => {
+  const dur=+$('#dur').value||0, abs=$('#abs').value.trim();
+  return [
+    {ok:$('#tripTitle').value.trim().length>5, t:'Titolo del viaggio', tab:'t-over'},
+    {ok:abs.length>0 && abs.length<=140, t:'Frase di lancio entro 140 caratteri', tab:'t-over'},
+    {ok:$('#over').value.trim().length>80, t:'Panoramica del viaggio', tab:'t-over'},
+    {ok:$$('#cats input:checked').length>0, t:'Almeno una categoria', tab:'t-over'},
+    {ok:gallery.length>=4, t:'Almeno 4 foto in galleria', tab:'t-gal'},
+    {ok:dur>0 && dur===days.length, t:'Un giorno di itinerario per ogni giorno di durata', tab:'t-itin'},
+    {ok:visibleDeps().length>0, t:'Almeno una partenza futura', tab:'t-dep'},
+    {ok:$('#inc').value.trim().length>0, t:'Cosa è incluso', tab:'t-info'},
+    {ok:faqs.length>=3, t:'Almeno 3 FAQ (consigliato)', tab:'t-info'}
+  ];
+};
+function comp(){
+  badges();
+  const c=checks(), done=c.filter(x=>x.ok).length, pct=Math.round(done/c.length*100);
+  $('#compPct').textContent=pct+'%';
+  $('#compBar').style.width=pct+'%';
+  const m=c.length-done; $('#compLabel').textContent = !m ? 'Pronta per la pubblicazione' : (m===1 ? 'Manca 1 punto' : `Mancano ${m} punti`);
+  $('#compList').innerHTML = c.sort((a,b)=>a.ok-b.ok).map(x=>`<li><button type="button" class="${x.ok?'ok':'no'}" data-go="${x.tab}"><span class="ic" aria-hidden="true">${x.ok?'✓':'!'}</span><span>${esc(x.t)}</span></button></li>`).join('');
+}
+$('#compList').addEventListener('click', e=>{ const b=e.target.closest('[data-go]'); if(b) $('#'+b.dataset.go).click(); });
+
+// ricalcolo dopo ogni modifica di giorni, partenze, galleria, FAQ
+const _rd=renderDays; renderDays=function(){ _rd(); updDays(); comp(); };
+const _rp=renderDeps; renderDeps=function(){ _rp(); comp(); };
+const _rg=renderGallery; renderGallery=function(){ _rg(); comp(); };
+const _rf=renderFaqs; renderFaqs=function(){ _rf(); comp(); };
+$('#deps').addEventListener('input', comp);
+
+// partenze ricorrenti
+$('#genOpen').addEventListener('click',()=>{ const g=$('#gen'), on=!g.classList.contains('on'); g.classList.toggle('on',on); $('#genOpen').setAttribute('aria-expanded',on); genHint(); });
+$('#genClose').addEventListener('click',()=>{ $('#gen').classList.remove('on'); $('#genOpen').setAttribute('aria-expanded','false'); });
+function genList(){ const a=fromIt($('#gFrom').value.trim()), b=fromIt($('#gTo').value.trim()), n=+$('#gEvery').value; if(!a||!b||a>b) return []; const out=[]; let d=a; while(d<=b && out.length<52){ out.push(d); d=addDays(d,n); } return out; }
+function genHint(){ const l=genList(); $('#genHint').textContent = l.length ? `Verranno create ${l.length} partenze` : 'Controlla le date (gg/mm/aaaa)'; }
+['#gFrom','#gTo','#gEvery'].forEach(x=>$(x).addEventListener('input',genHint));
+$('#genGo').addEventListener('click',()=>{ const l=genList(); if(!l.length){ genHint(); return; } const pr=+$('#gPrice').value||0; l.forEach(d=>deps.push({d,p:pr,st:'Disponibile'})); deps.sort((x,y)=>x.d<y.d?-1:1); renderDeps(); $('#gen').classList.remove('on'); toast(`${l.length} partenze create: puoi modificare prezzo e disponibilità di ognuna`); });
+
+// salvataggio automatico (come l'autosalvataggio di WordPress)
+let autoT; ['#tripTitle','#abs','#over'].forEach(x=>$(x).addEventListener('input',()=>{ clearTimeout(autoT); autoT=setTimeout(()=>{ const n=new Date(); $('#lastSave').textContent='salvata in automatico alle '+n.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'}); },1200); }));
+
+// pubblica: blocca se mancano campi obbligatori
+const _pub=$('#publish'); const pubClone=_pub.cloneNode(true); _pub.replaceWith(pubClone);
+pubClone.addEventListener('click',()=>{
+  const miss=checks().filter(x=>!x.ok && !x.t.includes('consigliato'));
+  if(miss.length){ toast('Per pubblicare completa: '+miss.map(x=>x.t.toLowerCase()).join(', ')); $('#'+miss[0].tab).click(); return; }
+  const s=$('#sched').value;
+  if(s){ $('#pubState').textContent='Programmato'; toast('Pubblicazione programmata per il '+s); }
+  else { $('#pubState').textContent='Pubblicato'; toast('Viaggio pubblicato sul sito'); }
+});
+
+// dettaglio richiesta
+let curReq=0;
+$('#reqRows').addEventListener('click', e=>{ const a=e.target.closest('[data-open]'); if(a) curReq=+a.dataset.open; });
+$('#dashReq').addEventListener('click', e=>{ const a=e.target.closest('[data-open]'); if(a) curReq=+a.dataset.open; });
+function renderReq(){
+  const r=reqs[curReq], d=reqDate(r);
+  $('#h-rq').textContent='Richiesta di '+r.nm;
+  $('#rqKv').innerHTML=`<dt>Cliente</dt><dd>${esc(r.nm)}</dd><dt>Email</dt><dd>${esc(r.em)}</dd><dt>Viaggio</dt><dd>${esc(r.v)}</dd><dt>Partenza</dt><dd>${esc(r.dep)}</dd><dt>Persone</dt><dd class="num">${r.pp}</dd><dt>Ricevuta</dt><dd>${d.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'})}</dd>`;
+  $('#rqMsg').textContent=r.msg||'';
+  $('#rqSt').value=r.st; $('#rqMail').textContent=r.em;
+  $('#rqNote').value=r.note||'';
+  $('#rqUtm').innerHTML=`<dt>Sorgente</dt><dd>${esc(r.src)}</dd><dt>Mezzo</dt><dd>${esc(r.med)}</dd><dt>Campagna</dt><dd>${esc(r.cmp)}</dd><dt>Pagina</dt><dd style="font-weight:400">/viaggi/${esc(r.v.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}</dd>`;
+  const t=d.toLocaleDateString('it-IT',{day:'numeric',month:'short'});
+  $('#rqTl').innerHTML=`<li><time>${t}, 10:42</time><span>Richiesta ricevuta dal sito</span></li><li><time>${t}, 10:42</time><span>Brochure inviata in automatico al cliente</span></li><li><time>${t}, 10:42</time><span>Notifica email all'agenzia</span></li>`+(r.st!=='Nuova'?`<li><time>—</time><span>Stato cambiato in "${esc(r.st)}"</span></li>`:'');
+}
+$('#rqSt').addEventListener('change',e=>{ reqs[curReq].st=e.target.value; renderReq(); renderReqs(); renderDash(); toast('Stato aggiornato'); });
+$('#rqSave').addEventListener('click',()=>{ reqs[curReq].note=$('#rqNote').value; toast('Nota salvata'); });
+
+renderDash(); renderTrips(); renderDays(); renderDeps(); renderFaqs(); renderGallery(); renderReqs(); absCount(); route();
 </script>
 </body>
 </html>
