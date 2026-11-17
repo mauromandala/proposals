@@ -301,6 +301,29 @@ tbody tr:hover td{background:#F7F9F6}
 @media (max-width:980px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}}
 @media (max-width:560px){.stats{grid-template-columns:1fr}.stat + .stat{border-left:0;border-top:1px solid var(--line)}}
 
+/* Provenienza delle richieste */
+.src-body{display:flex;flex-direction:column;gap:14px}
+.src-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.src-head b{font-size:24px;letter-spacing:-.02em}
+.src-head span{color:var(--muted);font-size:13px}
+.stack{display:flex;gap:3px;height:10px}
+.stack span{border-radius:3px}
+.srcs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.src{display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.src-ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center}
+.src-t{display:flex;flex-direction:column;min-width:0}
+.src-t b{font-size:14px}
+.src-t span{font-size:12px;color:var(--muted)}
+.src-n{display:flex;flex-direction:column;align-items:flex-end}
+.src-n b{font-size:15px}
+.src-n span{font-size:12px;color:var(--muted)}
+.s-meta{--c:#3B5BDB;--bg:#E8EDFD}
+.s-google{--c:#C9721D;--bg:#FCEFDF}
+.s-org{--c:#2F7D4F;--bg:#E3F2E8}
+.s-nl{--c:#7A4FB5;--bg:#F0E9F9}
+.stack span{background:var(--c)}
+.src-ic{background:var(--bg);color:var(--c)}
+
 /* Miglioramenti UX */
 .edit .side-col{position:sticky;top:16px}
 .acftabs .badge{display:inline-block;margin-left:6px;font-size:11px;font-weight:700;background:var(--off-bg);color:var(--muted);border-radius:999px;padding:0 7px;min-width:20px;text-align:center}
@@ -474,12 +497,11 @@ a.cname:hover{color:var(--brand);text-decoration:underline}
             <a href="#richieste"><b>Esporta richieste</b><span>CSV per il CRM</span></a>
             <a href="#impostazioni"><b>Brand e contatti</b><span>Logo, colori, email</span></a>
           </div></div></div>
-          <div class="card"><h2>Da dove arrivano le richieste <span style="font-weight:400;color:var(--muted);font-size:13px">ultimi 30 giorni</span></h2><div class="body"><div class="bars">
-            <div class="bar"><span>Meta</span><div class="tr"><span style="width:100%"></span></div><b class="num">14</b></div>
-            <div class="bar"><span>Google</span><div class="tr"><span style="width:71%"></span></div><b class="num">10</b></div>
-            <div class="bar"><span>Organico</span><div class="tr"><span style="width:57%"></span></div><b class="num">8</b></div>
-            <div class="bar"><span>Newsletter</span><div class="tr"><span style="width:43%"></span></div><b class="num">6</b></div>
-          </div></div></div>
+          <div class="card"><h2>Da dove arrivano le richieste</h2><div class="body src-body">
+            <div class="src-head"><div><b class="num">38</b> <span>richieste negli ultimi 30 giorni</span></div><span class="delta up num">+18%</span></div>
+            <div class="stack" aria-hidden="true"><span class="s-meta" style="flex:14"></span><span class="s-google" style="flex:10"></span><span class="s-org" style="flex:8"></span><span class="s-nl" style="flex:6"></span></div>
+            <ul class="srcs"><li class="src s-meta"><span class="src-ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15 9a4 4 0 0 1 0 6M18 6a8 8 0 0 1 0 12"/></svg></span><div class="src-t"><b>Campagne Meta</b><span>Facebook e Instagram</span></div><div class="src-n"><b class="num">14</b><span class="num">37%</span></div></li><li class="src s-google"><span class="src-ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><div class="src-t"><b>Google Ads</b><span>Ricerca a pagamento</span></div><div class="src-n"><b class="num">10</b><span class="num">26%</span></div></li><li class="src s-org"><span class="src-ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 6-13 14-14-1 8-6 14-14 14z"/><path d="M5 19l7-7"/></svg></span><div class="src-t"><b>Organico</b><span>Ricerca e visite dirette</span></div><div class="src-n"><b class="num">8</b><span class="num">21%</span></div></li><li class="src s-nl"><span class="src-ic" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg></span><div class="src-t"><b>Newsletter</b><span>Email all'elenco iscritti</span></div><div class="src-n"><b class="num">6</b><span class="num">16%</span></div></li></ul>
+          </div></div>
           <div class="card"><h2>Da sistemare</h2><div class="body"><ul class="list">
             <li><span class="pill warn">Partenze</span><span>Marocco: nessuna partenza futura</span></li>
             <li><span class="pill info">Bozza</span><span>Capodanno a Lisbona aspetta la pubblicazione</span></li>
