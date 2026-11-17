@@ -278,6 +278,29 @@ tbody tr:hover td{background:#F7F9F6}
 .quick a{border-radius:12px;transition:border-color .15s,box-shadow .15s}
 .quick a:hover{box-shadow:var(--shadow)}
 
+/* Riepilogo bacheca: una sola card divisa in colonne, come nelle dashboard di prodotto */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:20px;overflow:hidden}
+.stat{padding:18px 22px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.stat + .stat{border-left:1px solid var(--line)}
+.st-k{font-size:13px;color:var(--muted);font-weight:500}
+.st-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.st-v{font-family:var(--body);font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1}
+.delta{font-size:12px;font-weight:600;color:var(--muted)}
+.delta span{font-weight:400}
+.delta.up{color:var(--ok)}
+.delta.warn{color:var(--warn)}
+.st-foot{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);margin-top:auto;min-height:32px}
+.spark{color:var(--brand);flex:none}
+.st-link{color:var(--brand);font-weight:600;font-size:13px;text-decoration:none}
+.st-link:hover{text-decoration:underline}
+.seg{display:flex;gap:2px;width:96px;height:6px;flex:none}
+.seg span{background:var(--brand);border-radius:2px}
+.seg .b{background:#9DB7B3}.seg .o{background:var(--accent)}
+.st-next{list-style:none;margin:2px 0 0;padding:0;font-size:13px;display:flex;flex-direction:column;gap:3px}
+.st-next b{display:inline-block;min-width:48px;color:var(--text)}
+@media (max-width:980px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:560px){.stats{grid-template-columns:1fr}.stat + .stat{border-left:0;border-top:1px solid var(--line)}}
+
 /* Miglioramenti UX */
 .edit .side-col{position:sticky;top:16px}
 .acftabs .badge{display:inline-block;margin-left:6px;font-size:11px;font-weight:700;background:var(--off-bg);color:var(--muted);border-radius:999px;padding:0 7px;min-width:20px;text-align:center}
@@ -419,11 +442,27 @@ a.cname:hover{color:var(--brand);text-decoration:underline}
     <section class="screen content" id="s-dashboard" aria-labelledby="h-dash">
       <div class="head"><h1 id="h-dash">Buongiorno, Giulia</h1><p class="sub">Oggi hai 3 richieste nuove da contattare e una partenza tra meno di tre settimane.</p>
         <div class="actions"><a class="btn primary" href="#scheda">+ Nuovo viaggio</a></div></div>
-      <div class="tiles">
-        <div class="card tile"><span class="ico" aria-hidden="true"><svg class="duo" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="f" d="M3 7l9 6 9-6"/><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg></span><div class="k">Richieste questo mese</div><div class="v num">38</div><div class="d">12 dalle campagne Meta</div></div>
-        <div class="card tile"><span class="ico acc" aria-hidden="true"><svg class="duo" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="f" d="M4 5h16v10H9l-5 4z"/><path d="M4 5h16v10H9l-5 4z"/><circle cx="9" cy="10" r=".7" fill="currentColor"/><circle cx="12" cy="10" r=".7" fill="currentColor"/><circle cx="15" cy="10" r=".7" fill="currentColor"/></svg></span><div class="k">Da contattare</div><div class="v num" id="tileNew">3</div><div class="d">Richieste nuove</div></div>
-        <div class="card tile"><span class="ico" aria-hidden="true"><svg class="duo" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect class="f" x="3" y="8" width="18" height="12" rx="3"/><rect x="3" y="8" width="18" height="12" rx="3"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M8 8v12M16 8v12"/></svg></span><div class="k">Viaggi pubblicati</div><div class="v num">14</div><div class="d">2 in bozza</div></div>
-        <div class="card tile"><span class="ico" aria-hidden="true"><svg class="duo" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path class="f" d="M4 15l15-6c1.5-.6 2.5.9 1.2 1.9L9 17H5z"/><path d="M4 15l15-6c1.5-.6 2.5.9 1.2 1.9L9 17H5zM8 13l-2-5 2-.6 4 3.6"/></svg></span><div class="k">Partenze nei prossimi 60 giorni</div><div class="v num">9</div><div class="d">Prossima: 6 dic, Islanda</div></div>
+      <div class="card stats" role="group" aria-label="Riepilogo">
+        <div class="stat">
+          <div class="st-k">Richieste questo mese</div>
+          <div class="st-row"><span class="st-v num">38</span><span class="delta up num">+18% <span>vs ottobre</span></span></div>
+          <div class="st-foot"><svg class="spark" viewBox="0 0 120 32" width="120" height="32" aria-hidden="true"><path d="M0.0 29.0 L17.1 24.2 L34.3 27.8 L51.4 19.4 L68.6 21.8 L85.7 15.8 L102.9 13.4 L120.0 5.0 L120 32 L0 32Z" fill="currentColor" opacity=".08"/><path d="M0.0 29.0 L17.1 24.2 L34.3 27.8 L51.4 19.4 L68.6 21.8 L85.7 15.8 L102.9 13.4 L120.0 5.0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="120.0" cy="5.0" r="2.6" fill="currentColor"/></svg><span>12 Meta · 10 Google</span></div>
+        </div>
+        <div class="stat">
+          <div class="st-k">Da contattare</div>
+          <div class="st-row"><span class="st-v num" id="tileNew">3</span><span class="delta warn">la più vecchia: ieri</span></div>
+          <div class="st-foot"><a href="#richieste" class="st-link">Apri le richieste nuove →</a></div>
+        </div>
+        <div class="stat">
+          <div class="st-k">Viaggi pubblicati</div>
+          <div class="st-row"><span class="st-v num">14</span><span class="delta num">2 bozze</span></div>
+          <div class="st-foot"><div class="seg" aria-hidden="true"><span style="flex:14"></span><span class="b" style="flex:2"></span><span class="o" style="flex:1"></span></div><span>1 senza date</span></div>
+        </div>
+        <div class="stat">
+          <div class="st-k">Partenze nei prossimi 60 giorni</div>
+          <div class="st-row"><span class="st-v num">9</span></div>
+          <ul class="st-next"><li><b class="num">6 dic</b> Islanda d'inverno</li><li><b class="num">29 dic</b> Capodanno a Lisbona</li></ul>
+        </div>
       </div>
       <div class="dash">
         <div class="card"><h2>Ultime richieste</h2><div class="body"><ul class="list" id="dashReq"></ul>
