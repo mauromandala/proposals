@@ -326,13 +326,11 @@ tbody tr:hover td{background:#F7F9F6}
 .src-ic{background:var(--bg);color:var(--c)}
 
 /* Logo dell'agenzia in testa alla sidebar: riquadro chiaro, così il logo a colori resta leggibile */
-.side a.brandbox{display:flex;align-items:center;gap:12px;background:#fff;color:var(--brand);border-radius:14px;padding:12px 14px;margin:0 0 14px;box-shadow:0 6px 18px rgba(0,0,0,.18);text-decoration:none;opacity:1}
-.side a.brandbox:hover{background:#fff;color:var(--brand)}
-.side a.brandbox svg{width:38px;height:38px;padding:0;background:none;border-radius:0}
+.brandbox{display:flex;align-items:center;gap:12px;background:#fff;color:var(--brand);margin:-18px -12px 28px;padding:0 22px;height:67px;box-sizing:border-box;border-bottom:1px solid var(--line)}
+.brandbox svg{width:34px;height:34px;flex:none}
 .brandbox span{display:flex;flex-direction:column;line-height:1.15;min-width:0}
-.brandbox b{font-family:var(--display);font-size:19px;letter-spacing:-.01em}
-.brandbox small{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:3px}
-.side a.brandbox::before{display:none}
+.brandbox b{font-family:var(--display);font-size:18px;letter-spacing:-.01em}
+.brandbox small{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:2px}
 
 /* Miglioramenti UX */
 .edit .side-col{position:sticky;top:16px}
@@ -413,7 +411,7 @@ a.cname:hover{color:var(--brand);text-decoration:underline}
   .app{grid-template-columns:1fr}
   .side{flex-direction:row;flex-wrap:wrap;padding:10px}
   .side .logo{width:100%;padding-bottom:6px}
-  .side a.brandbox{width:100%;margin-bottom:6px}
+  .brandbox{width:calc(100% + 20px);margin:-10px -10px 6px}
   .side .foot{display:none}
   .content{padding:20px 16px 40px}
   .rowbody{padding-left:14px}
@@ -454,10 +452,10 @@ a.cname:hover{color:var(--brand);text-decoration:underline}
 
 <div class="app" id="app">
   <aside class="side" aria-label="Menu del pannello">
-    <a class="brandbox" href="#dashboard" aria-label="Rotte Viaggi, vai alla bacheca">
+    <div class="brandbox">
       <svg width="38" height="38" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#14403D"/><path d="M7 20c4-7 9-10 18-11-5 3-8 7-9 14-2-3-5-4-9-3z" fill="#E07A3F"/></svg>
       <span><b>Rotte Viaggi</b><small>Pannello agenzia</small></span>
-    </a>
+    </div>
     <a href="#dashboard" data-nav="dashboard"><svg class="duo" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path class="f" d="M15.5 8.5l-2 5-5 2 2-5z"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/><circle cx="12" cy="12" r=".6" fill="currentColor"/></svg>Bacheca</a>
     <div class="grp">Contenuti</div>
     <a href="#viaggi" data-nav="viaggi"><svg class="duo" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect class="f" x="3" y="8" width="18" height="12" rx="3"/><rect x="3" y="8" width="18" height="12" rx="3"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M8 8v12M16 8v12"/></svg>Viaggi</a>
