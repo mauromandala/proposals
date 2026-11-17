@@ -48,6 +48,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 /* Struttura del pannello */
 .app{display:grid;grid-template-columns:232px 1fr;min-height:calc(100% - 40px)}
 .side{background:var(--brand);color:#fff;display:flex;flex-direction:column;padding:18px 12px;gap:4px}
+.side{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto}
 .logo{display:flex;align-items:center;gap:10px;padding:4px 10px 18px;font-family:var(--display);font-size:20px;font-weight:700;letter-spacing:-.01em}
 .logo svg{flex:none}
 .side a{position:relative;display:flex;align-items:center;gap:12px;color:rgba(255,255,255,.78);text-decoration:none;padding:10px 12px 10px 14px;border-radius:10px;font-weight:500;transition:background .15s,color .15s}
@@ -398,6 +399,7 @@ a.cname:hover{color:var(--brand);text-decoration:underline}
   .edit,.dash,.pv-body{grid-template-columns:1fr}
 }
 @media (max-width:760px){
+  .side{position:static;height:auto}
   .side .grp{display:none}
   .app{grid-template-columns:1fr}
   .side{flex-direction:row;flex-wrap:wrap;padding:10px}
